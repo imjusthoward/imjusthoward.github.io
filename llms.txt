@@ -1,6 +1,6 @@
 # Think College Level
 
-Think College Level is a personal blog and portfolio with a small, editable surface area.
+Howard Chan's personal blog and portfolio. The site focuses on systems, research, service, product work, and public writing.
 
 ## Pages
 - Home: https://thinkcollegelevel.com/
@@ -13,3 +13,11 @@ Think College Level is a personal blog and portfolio with a small, editable surf
 - Starting from clarity: https://thinkcollegelevel.com/blog/starting-from-clarity/
 - Keeping the edit path short: https://thinkcollegelevel.com/blog/keeping-the-edit-path-short/
 - Publishing notes instead of noise: https://thinkcollegelevel.com/blog/publishing-notes-instead-of-noise/
+
+## Topics
+- ElevateOS
+- Kiwanis Voice Club of Nippon
+- Pulse Manila 2026
+- Katalyst
+- OpenClaw
+- research, service, and public writing
