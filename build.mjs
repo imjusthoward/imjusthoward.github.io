@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { site } from './site-data.mjs';
 
@@ -850,5 +850,15 @@ async function writeOutput(relativePath, content) {
   const target = path.join(root, relativePath);
   const normalized = String(content).replace(/[ \t]+$/gm, '');
   await mkdir(path.dirname(target), { recursive: true });
+  try {
+    const existing = await readFile(target, 'utf8');
+    if (existing === normalized) {
+      return;
+    }
+  } catch (error) {
+    if (error?.code !== 'ENOENT') {
+      throw error;
+    }
+  }
   await writeFile(target, normalized, 'utf8');
 }
