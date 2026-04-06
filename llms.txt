@@ -1,0 +1,15 @@
+# Think College Level
+
+Think College Level is a personal blog and portfolio with a small, editable surface area.
+
+## Pages
+- Home: https://thinkcollegelevel.com/
+- Portfolio: https://thinkcollegelevel.com/portfolio/
+- Writing: https://thinkcollegelevel.com/blog/
+- About: https://thinkcollegelevel.com/about/
+- Contact: https://thinkcollegelevel.com/contact/
+
+## Writing
+- Starting from clarity: https://thinkcollegelevel.com/blog/starting-from-clarity/
+- Keeping the edit path short: https://thinkcollegelevel.com/blog/keeping-the-edit-path-short/
+- Publishing notes instead of noise: https://thinkcollegelevel.com/blog/publishing-notes-instead-of-noise/

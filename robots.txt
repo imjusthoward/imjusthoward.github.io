@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://thinkcollegelevel.com/sitemap.xml
