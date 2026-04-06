@@ -170,9 +170,10 @@ function renderPage({
   <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
 </head>
 <body class="${attr(bodyClass)}">
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="page-shell">
     ${renderTopbar(canonicalPath)}
-    <main class="page-main">
+    <main id="main-content" class="page-main">
 ${content}
     </main>
     ${renderFooter()}
@@ -185,13 +186,21 @@ ${content}
 function renderHeroRail() {
   return `
     <aside class="hero-rail">
-      <section class="panel panel-soft">
+      <section class="panel hero-visual">
+        <p class="label hero-visual-label">Current signal</p>
+        <div class="hero-monogram">HC</div>
+        <div class="hero-visual-copy">
+          <p>${esc(site.identityLine)}</p>
+          <p>${esc(site.location)}</p>
+        </div>
+      </section>
+      <section class="panel panel-soft compact-panel">
         <p class="label">At a glance</p>
         <ul class="fact-list">
-          ${site.atAGlance.map((item) => `<li>${esc(item)}</li>`).join('')}
+          ${site.heroNotes.map((item) => `<li>${esc(item)}</li>`).join('')}
         </ul>
       </section>
-      <section class="panel panel-soft">
+      <section class="panel panel-soft compact-panel">
         <p class="label">Current builds</p>
         <ul class="stack-list">
           <li><a href="/portfolio/">ElevateOS, Pulse, Katalyst, and the rest of the build stack</a></li>
@@ -215,8 +224,29 @@ function renderHero() {
             .map((action, index) => `<a class="button ${index === 0 ? 'primary' : 'secondary'}" href="${attr(action.href)}">${esc(action.label)}</a>`)
             .join('')}
         </div>
+        <div class="hero-tags">
+          ${site.heroNotes.map((item) => `<span class="tag tag-dark">${esc(item)}</span>`).join('')}
+        </div>
       </div>
       ${renderHeroRail()}
+    </section>
+  `;
+}
+
+function renderMetricStrip() {
+  return `
+    <section class="metric-strip">
+      ${site.metrics
+        .map(
+          (metric) => `
+            <article class="metric">
+              <p class="metric-value">${esc(metric.value)}</p>
+              <p class="metric-label">${esc(metric.label)}</p>
+              <p class="metric-detail">${esc(metric.detail)}</p>
+            </article>
+          `
+        )
+        .join('')}
     </section>
   `;
 }
@@ -240,7 +270,7 @@ function renderFeatureList(items) {
       ${items
         .map(
           (item) => `
-            <article class="feature-row">
+            <article class="feature-row ${item.label === 'Main build' ? 'feature-lead' : ''}">
               <div class="feature-meta">
                 <p class="label">${esc(item.label || 'Focus')}</p>
                 <h3>${esc(item.name)}</h3>
@@ -348,6 +378,7 @@ function renderPostsPreview(posts) {
 function renderHome() {
   const content = joinLines([
     renderHero(),
+    renderMetricStrip(),
     `
       <section class="section">
         ${renderSectionIntro('Core identity', 'The shape of the work', site.coreIdentity[0])}

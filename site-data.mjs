@@ -22,10 +22,43 @@ export const site = {
     'Howard Chan builds systems that turn fragmented work into something you can actually run.',
   heroLede:
     'Incoming HSPS offer holder at Cambridge, president of Kiwanis Voice Club of Nippon, CEO of ElevateOS, and a Lumiere Scholar. This site is the public front door for writing, research, service, and product work that needs structure more than noise.',
+  heroNotes: [
+    'Cambridge HSPS offer holder',
+    'Tokyo based',
+    'Built around ElevateOS',
+    'Edited from git',
+  ],
   heroActions: [
     { label: 'Portfolio', href: '/portfolio/' },
     { label: 'Writing', href: '/blog/' },
     { label: 'About', href: '/about/' },
+  ],
+  metrics: [
+    {
+      value: '10K+',
+      label: 'Pulse users',
+      detail: 'Mobile-first convention companion built for ASPAC Manila 2026.',
+    },
+    {
+      value: '500+',
+      label: 'Walkathon participants',
+      detail: 'Japan Cancer Society, KIST event coordination and outreach.',
+    },
+    {
+      value: '40%',
+      label: 'Efficiency gain',
+      detail: 'Quality Inspector roles improved recycling oversight.',
+    },
+    {
+      value: '¥200K+',
+      label: 'Raised',
+      detail: 'Service and fundraising across KIST initiatives.',
+    },
+    {
+      value: 'Top 5%',
+      label: 'Lumiere research',
+      detail: 'Cross-cultural emoji semiotics proposal.',
+    },
   ],
   atAGlance: [
     'Incoming HSPS student at the University of Cambridge',
