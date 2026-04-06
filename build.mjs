@@ -212,6 +212,53 @@ function renderHeroRail() {
   `;
 }
 
+function renderSignalBoard() {
+  const latestPost = site.posts[0];
+
+  return `
+    <section class="section">
+      ${renderSectionIntro(
+        'Current signal',
+        'A few widgets that explain the site at a glance',
+        'The home page works better as a board than as a wall of paragraphs. These widgets keep the current story visible without making the layout feel busy.'
+      )}
+      <div class="widget-grid">
+        <article class="widget widget-featured">
+          <p class="label">Working thesis</p>
+          <p class="widget-quote">${esc(site.thesis)}</p>
+          <p>${esc(site.coreIdentity[0])}</p>
+          <p>${esc(site.coreIdentity[1])}</p>
+          <p class="widget-link"><a href="/about/">Read the full background</a></p>
+        </article>
+        <article class="widget">
+          <p class="label">Now</p>
+          <h3>${esc(site.identityLine)}</h3>
+          <p>${esc(site.location)}</p>
+          <ul class="widget-list">
+            ${site.heroNotes.map((note) => `<li>${esc(note)}</li>`).join('')}
+          </ul>
+        </article>
+        <article class="widget widget-muted">
+          <p class="label">Latest note</p>
+          <h3><a href="/blog/${attr(latestPost.slug)}/">${esc(latestPost.title)}</a></h3>
+          <p>${esc(latestPost.summary)}</p>
+          <p class="widget-meta">${esc(latestPost.date)} · ${esc(latestPost.readTime)}</p>
+          <p class="widget-link"><a href="/blog/${attr(latestPost.slug)}/">Open essay</a></p>
+        </article>
+        <article class="widget widget-accent">
+          <p class="label">Start here</p>
+          <ul class="widget-list">
+            <li><a href="/portfolio/">Portfolio</a> for the work.</li>
+            <li><a href="/blog/">Writing</a> for the thinking.</li>
+            <li><a href="/contact/">Contact</a> if you need a reply.</li>
+          </ul>
+          <p class="widget-link"><a href="https://elevateos.org">Open ElevateOS</a></p>
+        </article>
+      </div>
+    </section>
+  `;
+}
+
 function renderHero() {
   return `
     <section class="hero">
@@ -353,9 +400,34 @@ function renderNotes(items) {
 }
 
 function renderPostsPreview(posts) {
+  if (!posts.length) {
+    return `
+      <div class="panel">
+        <p class="label">Writing</p>
+        <p>No posts yet.</p>
+      </div>
+    `;
+  }
+
+  const [featured, ...rest] = posts;
+
   return `
-    <div class="post-list">
-      ${posts
+    <div class="post-stack">
+      <article class="post-feature">
+        <div class="post-feature-copy">
+          <p class="label">${esc(featured.meta)}</p>
+          <h3><a href="/blog/${attr(featured.slug)}/">${esc(featured.title)}</a></h3>
+          <p>${esc(featured.summary)}</p>
+          <p class="post-feature-meta">${esc(featured.date)} · ${esc(featured.readTime)}</p>
+        </div>
+        <div class="post-feature-aside">
+          <p class="label">Featured</p>
+          <p>This note explains why the site stays small enough to revise quickly.</p>
+          <p class="feature-link"><a href="/blog/${attr(featured.slug)}/">Open the essay</a></p>
+        </div>
+      </article>
+      <div class="post-list">
+        ${rest
         .map(
           (post) => `
             <article class="post-row">
@@ -371,6 +443,7 @@ function renderPostsPreview(posts) {
           `
         )
         .join('')}
+      </div>
     </div>
   `;
 }
@@ -379,20 +452,7 @@ function renderHome() {
   const content = joinLines([
     renderHero(),
     renderMetricStrip(),
-    `
-      <section class="section">
-        ${renderSectionIntro('Core identity', 'The shape of the work', site.coreIdentity[0])}
-        <div class="quote-block">
-          <p>${esc(site.thesis)}</p>
-        </div>
-        <div class="bullet-columns">
-          ${site.coreIdentity
-            .slice(1)
-            .map((line) => `<p>${esc(line)}</p>`)
-            .join('')}
-        </div>
-      </section>
-    `,
+    renderSignalBoard(),
     `
       <section class="section">
         ${renderSectionIntro('Current focus', 'The main story', site.focusIntro, `<a class="button secondary" href="/about/">Read the full background</a>`)}
@@ -788,6 +848,7 @@ ${entries
 
 async function writeOutput(relativePath, content) {
   const target = path.join(root, relativePath);
+  const normalized = String(content).replace(/[ \t]+$/gm, '');
   await mkdir(path.dirname(target), { recursive: true });
-  await writeFile(target, content, 'utf8');
+  await writeFile(target, normalized, 'utf8');
 }
