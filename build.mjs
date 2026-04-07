@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { site } from './site-data.mjs';
 
@@ -34,7 +34,7 @@ const pages = [
     path: '/blog/',
     file: path.join('blog', 'index.html'),
     title: `Writing · ${site.name}`,
-    description: site.tagline,
+    description: 'Project notes on ElevateOS, Pulse, Katalyst, and service work.',
     bodyClass: 'page-blog',
     render: renderBlogIndex,
   },
@@ -42,7 +42,7 @@ const pages = [
     path: '/contact/',
     file: path.join('contact', 'index.html'),
     title: `Contact · ${site.name}`,
-    description: site.tagline,
+    description: 'Reach out on LinkedIn, WhatsApp, GitHub, Wantedly, and project links.',
     bodyClass: 'page-contact',
     render: renderContact,
   },
@@ -76,6 +76,7 @@ async function main() {
   await writeOutput('llms.txt', renderLlms());
   await writeOutput('sitemap.xml', renderSitemap());
   await writeOutput('CNAME', 'thinkcollegelevel.com\n');
+  await cleanupLegacyPostPages();
 }
 
 function esc(input = '') {
@@ -97,6 +98,10 @@ function urlFor(route) {
   }
 
   return `${site.url}${route}`;
+}
+
+function sameAsLinks() {
+  return site.contactLinks.map((link) => link.href);
 }
 
 function joinLines(lines) {
@@ -158,7 +163,34 @@ function renderLink(label, href, currentPath) {
 }
 
 function renderBrandMark() {
+  if (site.brandMark?.src) {
+    return `
+      <span class="brand-mark brand-mark--image" aria-hidden="true">
+        <img src="${attr(site.brandMark.src)}" alt="" width="40" height="40" loading="eager" decoding="async">
+      </span>
+    `;
+  }
+
   return `<span class="brand-mark brand-mark--glyph" aria-hidden="true">HC</span>`;
+}
+
+function renderLinkGroups(groups) {
+  return `
+    <div class="link-groups">
+      ${groups
+        .map(
+          (group) => `
+            <article class="panel link-group">
+              <p class="label">${esc(group.group)}</p>
+              <div class="footer-links link-grid">
+                ${group.items.map((item) => `<a href="${attr(item.href)}">${esc(item.label)}</a>`).join('')}
+              </div>
+            </article>
+          `
+        )
+        .join('')}
+    </div>
+  `;
 }
 
 function renderTopbar(currentPath) {
@@ -217,8 +249,9 @@ function renderPage({
   <meta name="theme-color" content="#f4f1ea">
   <link rel="canonical" href="${attr(urlFor(canonicalPath))}">
   <link rel="stylesheet" href="/assets/styles.css">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="shortcut icon" href="/favicon.svg">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="shortcut icon" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
   ${metaRobots ? `<meta name="robots" content="${attr(metaRobots)}">` : ''}
   <meta property="og:type" content="${attr(ogType)}">
   <meta property="og:title" content="${attr(title)}">
@@ -266,9 +299,9 @@ function renderHeroRail() {
       </article>
       <article class="hero-card hero-links">
         <p class="label">Links</p>
-        <ul class="stack-list">
-          ${site.contactLinks.map((link) => `<li><a href="${attr(link.href)}">${esc(link.label)}</a></li>`).join('')}
-        </ul>
+        <div class="footer-links hero-link-cloud">
+          ${site.contactLinks.map((link) => `<a href="${attr(link.href)}">${esc(link.label)}</a>`).join('')}
+        </div>
       </article>
     </aside>
   `;
@@ -472,7 +505,7 @@ function renderHome() {
             ${renderFeatureList(site.focusItems)}
           </section>
           <section class="section">
-            ${renderSectionIntro('Writing', 'Recent notes', 'Recent writing.', `<a class="button secondary" href="/blog/">Open the archive</a>`)}
+            ${renderSectionIntro('Writing', 'Project notes', 'Notes on the work.', `<a class="button secondary" href="/blog/">Open the archive</a>`)}
             ${renderPostsPreview(site.posts)}
           </section>
           <section class="section">
@@ -480,7 +513,7 @@ function renderHome() {
               <div>
                 <p class="eyebrow">Links</p>
                 <h2>Elsewhere</h2>
-                <p class="section-lead">LinkedIn, GitHub, ElevateOS, and Crystal Century.</p>
+                <p class="section-lead">Professional, personal, and project links.</p>
               </div>
               <div class="panel">
                 <p class="label">Links</p>
@@ -508,7 +541,7 @@ function renderHome() {
       '@type': 'Person',
       name: site.author,
       url: site.url,
-      sameAs: [site.linkedin, site.github],
+      sameAs: sameAsLinks(),
       alumniOf: ['University of Cambridge', 'K. International School Tokyo'],
       description: site.thesis,
     },
@@ -576,7 +609,7 @@ function renderAbout() {
       mainEntity: {
         '@type': 'Person',
         name: site.author,
-        sameAs: [site.linkedin, site.github],
+        sameAs: sameAsLinks(),
         description: site.thesis,
       },
     },
@@ -647,7 +680,7 @@ function renderBlogIndex() {
   const content = joinLines([
     `
       <section class="section">
-        ${renderSectionIntro('Writing', 'Notes', 'Recent notes.', `<a class="button secondary" href="/contact/">Contact</a>`)}
+        ${renderSectionIntro('Writing', 'Project notes', 'Notes on the work.', `<a class="button secondary" href="/contact/">Contact</a>`)}
         ${renderPostsPreview(site.posts)}
       </section>
     `,
@@ -664,7 +697,7 @@ function renderBlogIndex() {
       '@context': 'https://schema.org',
       '@type': 'Blog',
       name: `${site.name} Writing`,
-      description: `${site.author}'s writing on clarity and process.`,
+      description: `${site.author}'s notes on projects, service, and systems.`,
     },
   });
 }
@@ -678,7 +711,7 @@ function renderPost(post) {
       <div class="article-body">
         ${body}
       </div>
-      <p class="article-back"><a class="button secondary" href="/blog/">Back to writing</a></p>
+      <p class="article-back"><a class="button secondary" href="/blog/">Back to project notes</a></p>
     </article>
   `;
 
@@ -708,15 +741,13 @@ function renderContact() {
       <div class="split-section">
         <div class="panel">
           <p class="label">Best channel</p>
-          <p>LinkedIn is the fastest route. Mention what you are building or need.</p>
-          <p><a class="button primary" href="${attr(site.linkedin)}">Open LinkedIn</a></p>
+          <p>LinkedIn or WhatsApp is the fastest route.</p>
+          <div class="actions">
+            <a class="button primary" href="${attr(site.linkedin)}">Open LinkedIn</a>
+            <a class="button secondary" href="${attr(site.whatsapp)}">Message on WhatsApp</a>
+          </div>
         </div>
-        <div class="panel">
-          <p class="label">Links</p>
-          <ul class="stack-list">
-            ${site.contactLinks.map((link) => `<li><a href="${attr(link.href)}">${esc(link.label)}</a></li>`).join('')}
-          </ul>
-        </div>
+        ${renderLinkGroups(site.linkGroups)}
       </div>
     </section>
   `;
@@ -734,7 +765,7 @@ function renderContact() {
       mainEntity: {
         '@type': 'Person',
         name: site.author,
-        sameAs: [site.linkedin, site.github],
+        sameAs: sameAsLinks(),
       },
     },
   });
@@ -800,13 +831,16 @@ return `# ${site.name}
 
 ${site.tagline}
 
-${site.name} is a personal blog and portfolio.
+${site.name} is a personal site for projects, notes, and links.
 
 ## Pages
 ${pagesList.map(([label, route]) => `- ${label}: ${site.url}${route === '/' ? '/' : route}`).join('\n')}
 
 ## Writing
 ${posts.join('\n')}
+
+## Links
+${site.contactLinks.map((link) => `- ${link.label}: ${link.href}`).join('\n')}
 
 ## Topics
 - ElevateOS
@@ -869,4 +903,25 @@ async function writeOutput(relativePath, content) {
     }
   }
   await writeFile(target, normalized, 'utf8');
+}
+
+async function cleanupLegacyPostPages() {
+  const blogRoot = path.join(root, 'blog');
+  const keep = new Set(['index.html', ...site.posts.map((post) => post.slug)]);
+
+  let entries;
+  try {
+    entries = await readdir(blogRoot, { withFileTypes: true });
+  } catch (error) {
+    if (error?.code === 'ENOENT') {
+      return;
+    }
+    throw error;
+  }
+
+  await Promise.all(
+    entries
+      .filter((entry) => entry.isDirectory() && !keep.has(entry.name))
+      .map((entry) => rm(path.join(blogRoot, entry.name), { recursive: true, force: true }))
+  );
 }

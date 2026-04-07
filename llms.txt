@@ -2,7 +2,7 @@
 
 Cambridge (HSPS) Offer Holder | President of Kiwanis Voice Club of Nippon | CEO of ElevateOS | Lumiere Scholar
 
-Think College Level is a personal blog and portfolio.
+Think College Level is a personal site for projects, notes, and links.
 
 ## Pages
 - Home: https://thinkcollegelevel.com/
@@ -12,9 +12,20 @@ Think College Level is a personal blog and portfolio.
 - Contact: https://thinkcollegelevel.com/contact/
 
 ## Writing
-- Starting from clarity: https://thinkcollegelevel.com/blog/starting-from-clarity/
-- Keeping the edit path short: https://thinkcollegelevel.com/blog/keeping-the-edit-path-short/
-- Notes worth keeping: https://thinkcollegelevel.com/blog/publishing-notes-instead-of-noise/
+- ElevateOS: https://thinkcollegelevel.com/blog/elevateos/
+- Pulse Manila 2026: https://thinkcollegelevel.com/blog/pulse-manila-2026/
+- Katalyst: https://thinkcollegelevel.com/blog/katalyst/
+
+## Links
+- Think College Level: https://thinkcollegelevel.com
+- GitHub: https://github.com/imjusthoward/
+- LinkedIn: https://www.linkedin.com/in/chakhanghoward-chan
+- Wantedly: https://www.wantedly.com/id/chakhang_chan
+- Facebook: https://www.facebook.com/imjusthoward
+- Instagram: https://www.instagram.com/imjusthoward/
+- ElevateOS: https://elevateos.org
+- Crystal Century: https://crystalcentury.com
+- WhatsApp: https://wa.me/85293442294
 
 ## Topics
 - ElevateOS

@@ -1,12 +1,17 @@
+const siteUrl = 'https://thinkcollegelevel.com';
 const elevateosUrl = 'https://elevateos.org';
 const crystalcenturyUrl = 'https://crystalcentury.com';
-const linkedinUrl = 'https://www.linkedin.com/in/howardchan2008/';
-const githubUrl = 'https://github.com/imjusthoward';
+const linkedinUrl = 'https://www.linkedin.com/in/chakhanghoward-chan';
+const githubUrl = 'https://github.com/imjusthoward/';
+const wantedlyUrl = 'https://www.wantedly.com/id/chakhang_chan';
+const facebookUrl = 'https://www.facebook.com/imjusthoward';
+const instagramUrl = 'https://www.instagram.com/imjusthoward/';
+const whatsappUrl = 'https://wa.me/85293442294';
 
 export const site = {
   name: 'Think College Level',
   author: 'Howard Chan',
-  url: 'https://thinkcollegelevel.com',
+  url: siteUrl,
   title: 'Think College Level',
   tagline:
     'Cambridge (HSPS) Offer Holder | President of Kiwanis Voice Club of Nippon | CEO of ElevateOS | Lumiere Scholar',
@@ -16,8 +21,16 @@ export const site = {
   location: 'Sumida-ku, Tokyo, Japan',
   linkedin: linkedinUrl,
   github: githubUrl,
+  wantedly: wantedlyUrl,
+  facebook: facebookUrl,
+  instagram: instagramUrl,
   elevateos: elevateosUrl,
   crystalcentury: crystalcenturyUrl,
+  whatsapp: whatsappUrl,
+  brandMark: {
+    src: '/assets/media/hc-logo.png',
+    alt: 'HC logo',
+  },
   heroHeadline:
     'Howard Chan',
   heroLede:
@@ -26,7 +39,7 @@ export const site = {
     'Cambridge HSPS',
     'Tokyo',
     'Service',
-    'Writing',
+    'Projects',
   ],
   heroActions: [
     { label: 'Portfolio', href: '/portfolio/' },
@@ -152,7 +165,7 @@ export const site = {
       label: 'Research',
       image: 'portraitAlt',
       summary:
-        'Lumiere research on emoji semiotics and cognitive aging, plus writing on clarity and systems.',
+        'Lumiere research on emoji semiotics and cognitive aging, plus project notes.',
       bullets: [
         'Cross-cultural communication and interpretation.',
         'Research written for readers.',
@@ -284,7 +297,7 @@ export const site = {
       role: 'Publisher',
       dates: 'Jun 2024 - Present',
       summary:
-        'Maintains a personal site for writing and project notes.',
+        'Maintains the site for project notes and links.',
     },
     {
       org: 'Japan Cancer Society, KIST',
@@ -438,54 +451,85 @@ export const site = {
   ],
   posts: [
     {
-      slug: 'starting-from-clarity',
-      title: 'Starting from clarity',
+      slug: 'elevateos',
+      title: 'ElevateOS',
       date: 'April 6, 2026',
       dateIso: '2026-04-06',
       readTime: '4 min read',
       summary:
-        'Clear writing makes the first read count.',
+        'An education platform for tutoring, worksheets, and admissions support.',
       body: [
-        'Clarity is not decoration. It is the difference between a reader finding the point or leaving before it lands.',
-        'A strong opening sentence gives the piece a job. Every later line should sharpen the claim, add evidence, or move the reader forward.',
-        'If a draft starts repeating itself, the idea is already there. Cut the extra sentences and let the remaining ones do more work.',
+        'ElevateOS keeps tutoring work, worksheet generation, and admissions support in one place.',
+        'It is built to stay useful in real sessions: fast to open, clear to use, and simple enough for students, parents, and tutors to follow without extra explanation.',
+        'The point is to reduce handoff friction and keep the work organized enough that it can actually move.',
       ],
     },
     {
-      slug: 'keeping-the-edit-path-short',
-      title: 'Keeping the edit path short',
+      slug: 'pulse-manila-2026',
+      title: 'Pulse Manila 2026',
       date: 'April 6, 2026',
       dateIso: '2026-04-06',
       readTime: '4 min read',
       summary:
-        'Fast edit paths keep good ideas alive.',
+        'A mobile event companion for schedules, venues, and updates.',
       body: [
-        'The shorter the path from thought to published page, the more often the thought survives.',
-        'Long workflows make good ideas stale. Short workflows make revision routine.',
-        'Publish quickly, revise cleanly, and keep the next change close enough that it can actually happen.',
+        'Pulse gives attendees a fast way to see schedules, sessions, venues, and updates at a live convention.',
+        'It is designed for low-friction mobile use when people need information quickly and do not want to dig through a busy event page.',
+        'The goal is to support the official event flow and make the convention easier to navigate in practice.',
       ],
     },
     {
-      slug: 'publishing-notes-instead-of-noise',
-      title: 'Notes worth keeping',
+      slug: 'katalyst',
+      title: 'Katalyst',
       date: 'April 6, 2026',
       dateIso: '2026-04-06',
       readTime: '4 min read',
       summary:
-        'An archive should still make sense later.',
+        'A coordination layer for Kiwanis projects and continuity.',
       body: [
-        'Publish only what adds information.',
-        'Use clear titles and short notes so the archive stays readable.',
-        'A page is worth keeping when it adds something the title does not already say.',
+        'Katalyst keeps youth service work, project handoffs, and continuity in one place.',
+        'It is meant to make transitions cleaner, keep tasks visible, and reduce the amount of context that gets lost between one round of work and the next.',
+        'The focus is practical coordination for Kiwanis and related service work rather than another layer of overhead.',
       ],
     },
   ],
   contactIntro:
-    'LinkedIn is the fastest route.',
+    'Reach out on LinkedIn or WhatsApp.',
   contactLinks: [
-    { label: 'LinkedIn', href: linkedinUrl },
+    { label: 'Think College Level', href: siteUrl },
     { label: 'GitHub', href: githubUrl },
+    { label: 'LinkedIn', href: linkedinUrl },
+    { label: 'Wantedly', href: wantedlyUrl },
+    { label: 'Facebook', href: facebookUrl },
+    { label: 'Instagram', href: instagramUrl },
     { label: 'ElevateOS', href: elevateosUrl },
     { label: 'Crystal Century', href: crystalcenturyUrl },
+    { label: 'WhatsApp', href: whatsappUrl },
+  ],
+  linkGroups: [
+    {
+      group: 'Core / Professional',
+      items: [
+        { label: 'Think College Level', href: siteUrl },
+        { label: 'GitHub', href: githubUrl },
+        { label: 'LinkedIn', href: linkedinUrl },
+        { label: 'Wantedly', href: wantedlyUrl },
+      ],
+    },
+    {
+      group: 'Social / Personal',
+      items: [
+        { label: 'Facebook', href: facebookUrl },
+        { label: 'Instagram', href: instagramUrl },
+      ],
+    },
+    {
+      group: 'Ventures / Projects',
+      items: [
+        { label: 'ElevateOS', href: elevateosUrl },
+        { label: 'Crystal Century', href: crystalcenturyUrl },
+        { label: 'WhatsApp', href: whatsappUrl },
+      ],
+    },
   ],
 };
