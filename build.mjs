@@ -317,7 +317,6 @@ function renderHeroIntro() {
           ${site.heroNotes.map((item) => `<span class="tag tag-dark">${esc(item)}</span>`).join('')}
         </div>
       </div>
-      ${renderHeroRail()}
     </section>
   `;
 }
