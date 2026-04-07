@@ -8,10 +8,11 @@ export const site = {
   author: 'Howard Chan',
   url: 'https://thinkcollegelevel.com',
   title: 'Think College Level',
-  tagline: 'A personal blog and portfolio.',
-  description: 'A personal blog and portfolio.',
-  identityLine:
-    'Cambridge HSPS offer holder | Tokyo',
+  tagline:
+    'Cambridge (HSPS) Offer Holder | President of Kiwanis Voice Club of Nippon | CEO of ElevateOS | Lumiere Scholar',
+  description:
+    'Cambridge (HSPS) Offer Holder | President of Kiwanis Voice Club of Nippon | CEO of ElevateOS | Lumiere Scholar',
+  identityLine: 'Cambridge HSPS offer holder',
   location: 'Sumida-ku, Tokyo, Japan',
   linkedin: linkedinUrl,
   github: githubUrl,
@@ -20,7 +21,7 @@ export const site = {
   heroHeadline:
     'Howard Chan',
   heroLede:
-    'Cambridge HSPS offer holder in Tokyo.',
+    'Cambridge (HSPS) Offer Holder | President of Kiwanis Voice Club of Nippon | CEO of ElevateOS | Lumiere Scholar',
   heroNotes: [
     'Cambridge HSPS',
     'Tokyo',
@@ -119,7 +120,7 @@ export const site = {
   thesis:
     'Reduce friction, keep handoffs clear, and make systems easier to run.',
   focusIntro:
-    'ElevateOS is the main project.',
+    'ElevateOS anchors the work.',
   focusItems: [
     {
       name: 'ElevateOS',
@@ -160,7 +161,7 @@ export const site = {
     },
   ],
   projectsIntro:
-    'Products, systems, and collaborations.',
+    'Other projects and collaborations.',
   projects: [
     {
       name: 'Pulse Manila 2026',

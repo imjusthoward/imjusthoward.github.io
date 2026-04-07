@@ -9,7 +9,7 @@ const pages = [
   {
     path: '/',
     file: 'index.html',
-    title: `${site.name} - ${site.tagline}`,
+    title: `${site.name}`,
     description: site.description,
     bodyClass: 'page-home',
     render: renderHome,
@@ -17,39 +17,39 @@ const pages = [
   {
     path: '/about/',
     file: path.join('about', 'index.html'),
-    title: `${site.name} - About`,
-    description: `${site.author}'s background and studies.`,
+    title: `About · ${site.name}`,
+    description: site.tagline,
     bodyClass: 'page-about',
     render: renderAbout,
   },
   {
     path: '/portfolio/',
     file: path.join('portfolio', 'index.html'),
-    title: `${site.name} - Portfolio`,
-    description: `${site.author}'s projects in product, service, research, and writing.`,
+    title: `Portfolio · ${site.name}`,
+    description: site.tagline,
     bodyClass: 'page-portfolio',
     render: renderPortfolio,
   },
   {
     path: '/blog/',
     file: path.join('blog', 'index.html'),
-    title: `${site.name} - Writing`,
-    description: `${site.author}'s writing on clarity and process.`,
+    title: `Writing · ${site.name}`,
+    description: site.tagline,
     bodyClass: 'page-blog',
     render: renderBlogIndex,
   },
   {
     path: '/contact/',
     file: path.join('contact', 'index.html'),
-    title: `${site.name} - Contact`,
-    description: `Contact details for ${site.author}.`,
+    title: `Contact · ${site.name}`,
+    description: site.tagline,
     bodyClass: 'page-contact',
     render: renderContact,
   },
   {
     path: '/404/',
     file: '404.html',
-    title: `Not found - ${site.name}`,
+    title: `Not found · ${site.name}`,
     description: 'The page you were looking for is not here.',
     bodyClass: 'page-404',
     render: renderNotFound,
@@ -59,7 +59,7 @@ const pages = [
 const postPages = site.posts.map((post) => ({
   path: `/blog/${post.slug}/`,
   file: path.join('blog', post.slug, 'index.html'),
-  title: `${site.name} - ${post.title}`,
+  title: `${post.title} · ${site.name}`,
   description: post.summary,
   bodyClass: 'page-post',
   render: () => renderPost(post),
@@ -223,7 +223,7 @@ function renderPage({
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="${attr(description)}">
-  <meta name="theme-color" content="#f3eadf">
+  <meta name="theme-color" content="#f4f1ea">
   <link rel="canonical" href="${attr(urlFor(canonicalPath))}">
   <link rel="stylesheet" href="/assets/styles.css">
   ${metaRobots ? `<meta name="robots" content="${attr(metaRobots)}">` : ''}
@@ -259,18 +259,16 @@ function renderHeroRail() {
           <p>${esc(site.identityLine)}</p>
         </div>
       </article>
-      <article class="hero-card hero-card-project">
-        ${renderMediaFigure('elevateos', 'eager')}
+      <article class="hero-card hero-card-note">
+        <p class="label">Current focus</p>
         <div class="hero-card-copy">
-          <p class="label">ElevateOS</p>
-          <p>Education platform.</p>
-        </div>
-      </article>
-      <article class="hero-card hero-card-project">
-        ${renderMediaFigure('pulse')}
-        <div class="hero-card-copy">
-          <p class="label">Pulse Manila 2026</p>
-          <p>Convention companion.</p>
+          <p>${esc(site.focusIntro)}</p>
+          <ul class="stack-list">
+            <li>ElevateOS</li>
+            <li>Kiwanis Voice Club of Nippon</li>
+            <li>Lumiere research</li>
+            <li>Writing</li>
+          </ul>
         </div>
       </article>
       <article class="hero-card hero-links">
@@ -280,68 +278,6 @@ function renderHeroRail() {
         </ul>
       </article>
     </aside>
-  `;
-}
-
-function renderSignalBoard() {
-  return `
-    <section class="section">
-      ${renderSectionIntro(
-        'Photos',
-        'Service and events',
-        'Service and school moments.'
-      )}
-      <div class="media-grid">
-        <a class="media-card span-4" href="/about/">
-          ${renderMediaFigure('kiwanis')}
-          <div class="media-copy">
-            <p class="label">Service</p>
-            <h3>Kiwanis Voice Club</h3>
-            <p>Charter ceremony and launch.</p>
-          </div>
-        </a>
-        <a class="media-card span-4" href="/about/">
-          ${renderMediaFigure('keyclub')}
-          <div class="media-copy">
-            <p class="label">Service</p>
-            <h3>KIST Key Club</h3>
-            <p>Event coordination and service work.</p>
-          </div>
-        </a>
-        <a class="media-card span-4" href="/about/">
-          ${renderMediaFigure('charter1')}
-          <div class="media-copy">
-            <p class="label">Service</p>
-            <h3>Charter Ceremony #1</h3>
-            <p>Founding moment.</p>
-          </div>
-        </a>
-        <a class="media-card span-6" href="/about/">
-          ${renderMediaFigure('charter2')}
-          <div class="media-copy">
-            <p class="label">Service</p>
-            <h3>Charter Ceremony #2</h3>
-            <p>Founding moment.</p>
-          </div>
-        </a>
-        <a class="media-card span-3" href="/portfolio/">
-          ${renderMediaFigure('mural')}
-          <div class="media-copy">
-            <p class="label">Community</p>
-            <h3>Mural Project</h3>
-            <p>Collaborative mural build.</p>
-          </div>
-        </a>
-        <a class="media-card span-3" href="/portfolio/">
-          ${renderMediaFigure('ashinaga')}
-          <div class="media-copy">
-            <p class="label">Community</p>
-            <h3>Ashinaga collaboration</h3>
-            <p>Service partnership.</p>
-          </div>
-        </a>
-      </div>
-    </section>
   `;
 }
 
@@ -509,22 +445,15 @@ function renderHome() {
   const content = joinLines([
     renderHero(),
     renderMetricStrip(),
-    renderSignalBoard(),
     `
       <section class="section">
-        ${renderSectionIntro('Work', 'ElevateOS', site.focusIntro, `<a class="button secondary" href="/about/">Background</a>`)}
+        ${renderSectionIntro('Work', 'Featured work', site.focusIntro, `<a class="button secondary" href="/about/">Background</a>`)}
         ${renderFeatureList(site.focusItems)}
       </section>
     `,
     `
       <section class="section">
-        ${renderSectionIntro('Projects', 'Other work', site.projectsIntro, `<a class="button secondary" href="/portfolio/">Portfolio</a>`)}
-        ${renderFeatureList(site.projects)}
-      </section>
-    `,
-    `
-      <section class="section">
-        ${renderSectionIntro('Writing', 'Essays', 'Recent essays.', `<a class="button secondary" href="/blog/">Open the archive</a>`)}
+        ${renderSectionIntro('Writing', 'Recent notes', 'Recent writing.', `<a class="button secondary" href="/blog/">Open the archive</a>`)}
         ${renderPostsPreview(site.posts)}
       </section>
     `,
@@ -548,7 +477,7 @@ function renderHome() {
   ]);
 
   return renderPage({
-    title: `${site.name} - ${site.tagline}`,
+    title: `${site.name}`,
     description: site.description,
     canonicalPath: '/',
     bodyClass: 'page-home',
@@ -641,8 +570,8 @@ function renderAbout() {
   ]);
 
   return renderPage({
-    title: `${site.name} - About`,
-    description: `${site.author}'s background and studies.`,
+    title: `About · ${site.name}`,
+    description: site.tagline,
     canonicalPath: '/about/',
     bodyClass: 'page-about',
     content,
@@ -705,8 +634,8 @@ function renderPortfolio() {
   ]);
 
   return renderPage({
-    title: `${site.name} - Portfolio`,
-    description: `${site.author}'s projects in product, service, research, and writing.`,
+    title: `Portfolio · ${site.name}`,
+    description: site.tagline,
     canonicalPath: '/portfolio/',
     bodyClass: 'page-portfolio',
     content,
@@ -724,15 +653,15 @@ function renderBlogIndex() {
   const content = joinLines([
     `
       <section class="section">
-        ${renderSectionIntro('Writing', 'Essays', 'Recent essays.', `<a class="button secondary" href="/contact/">Contact</a>`)}
+        ${renderSectionIntro('Writing', 'Notes', 'Recent notes.', `<a class="button secondary" href="/contact/">Contact</a>`)}
         ${renderPostsPreview(site.posts)}
       </section>
     `,
   ]);
 
   return renderPage({
-    title: `${site.name} - Writing`,
-    description: `${site.author}'s writing on clarity and process.`,
+    title: `Writing · ${site.name}`,
+    description: site.tagline,
     canonicalPath: '/blog/',
     bodyClass: 'page-blog',
     content,
@@ -760,7 +689,7 @@ function renderPost(post) {
   `;
 
   return renderPage({
-    title: `${site.name} - ${post.title}`,
+    title: `${post.title} · ${site.name}`,
     description: post.summary,
     canonicalPath: `/blog/${post.slug}/`,
     bodyClass: 'page-post',
@@ -799,8 +728,8 @@ function renderContact() {
   `;
 
   return renderPage({
-    title: `${site.name} - Contact`,
-    description: `Contact details for ${site.author}.`,
+    title: `Contact · ${site.name}`,
+    description: site.tagline,
     canonicalPath: '/contact/',
     bodyClass: 'page-contact',
     content,
@@ -840,7 +769,7 @@ function renderNotFound() {
   `;
 
   return renderPage({
-    title: `Not found - ${site.name}`,
+    title: `Not found · ${site.name}`,
     description: 'The page you were looking for is not here.',
     canonicalPath: '/404/',
     bodyClass: 'page-404',
@@ -874,6 +803,8 @@ function renderLlms() {
   const posts = site.posts.map((post) => `- ${post.title}: ${site.url}/blog/${post.slug}/`);
 
 return `# ${site.name}
+
+${site.tagline}
 
 ${site.name} is a personal blog and portfolio.
 
