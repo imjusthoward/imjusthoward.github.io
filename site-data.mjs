@@ -9,30 +9,86 @@ export const site = {
   url: 'https://thinkcollegelevel.com',
   title: 'Think College Level',
   tagline: 'A personal blog and portfolio.',
-  description:
-    "Howard Chan's personal blog and portfolio for systems, research, service, and product work.",
+  description: 'A personal blog and portfolio.',
   identityLine:
-    'Cambridge (HSPS) Offer Holder | President of Kiwanis Voice Club of Nippon | CEO of ElevateOS | Lumiere Scholar',
+    'Cambridge HSPS offer holder | Tokyo',
   location: 'Sumida-ku, Tokyo, Japan',
   linkedin: linkedinUrl,
   github: githubUrl,
-  elevatos: elevateosUrl,
+  elevateos: elevateosUrl,
   crystalcentury: crystalcenturyUrl,
   heroHeadline:
-    'Howard Chan builds systems that turn fragmented work into something you can actually run.',
+    'Howard Chan',
   heroLede:
-    'Incoming HSPS offer holder at Cambridge, president of Kiwanis Voice Club of Nippon, CEO of ElevateOS, and a Lumiere Scholar. This site is the public front door for writing, research, service, and product work that needs structure more than noise.',
+    'Cambridge HSPS offer holder in Tokyo.',
   heroNotes: [
-    'Cambridge HSPS offer holder',
-    'Tokyo based',
-    'Built around ElevateOS',
-    'Edited from git',
+    'Cambridge HSPS',
+    'Tokyo',
+    'Service',
+    'Writing',
   ],
   heroActions: [
     { label: 'Portfolio', href: '/portfolio/' },
     { label: 'Writing', href: '/blog/' },
     { label: 'About', href: '/about/' },
   ],
+  media: {
+    portrait: {
+      src: '/assets/media/portrait.jpg',
+      alt: 'Howard Chan portrait at night',
+      frame: 'portrait',
+    },
+    portraitAlt: {
+      src: '/assets/media/portrait-alt.png',
+      alt: 'Howard Chan portrait in a white shirt and tie',
+      frame: 'portrait',
+    },
+    elevateos: {
+      src: '/assets/media/elevateos-landing.jpg',
+      alt: 'ElevateOS landing page mockup',
+      frame: 'tall',
+    },
+    pulse: {
+      src: '/assets/media/pulse-app.jpg',
+      alt: 'Pulse event companion app mockup',
+      frame: 'square',
+    },
+    katalyst: {
+      src: '/assets/media/katalyst-app.jpg',
+      alt: 'Katalyst app mockup for Kiwanis projects',
+      frame: 'wide',
+    },
+    kiwanis: {
+      src: '/assets/media/kiwanis-ceremony.jpg',
+      alt: 'Kiwanis ceremony group photo',
+      frame: 'wide',
+    },
+    keyclub: {
+      src: '/assets/media/keyclub-event.jpg',
+      alt: 'KIST Key Club event group photo',
+      frame: 'wide',
+    },
+    charter1: {
+      src: '/assets/media/charter-ceremony-1.jpg',
+      alt: 'KIST Key Club charter ceremony photo one',
+      frame: 'wide',
+    },
+    charter2: {
+      src: '/assets/media/charter-ceremony-2.jpg',
+      alt: 'KIST Key Club charter ceremony photo two',
+      frame: 'wide',
+    },
+    mural: {
+      src: '/assets/media/mural-project.jpg',
+      alt: 'Mural Project group photo',
+      frame: 'wide',
+    },
+    ashinaga: {
+      src: '/assets/media/ashinaga-collaboration.jpg',
+      alt: 'Collaboration with Ashinaga Africa Initiative group photo',
+      frame: 'wide',
+    },
+  },
   metrics: [
     {
       value: '10K+',
@@ -60,74 +116,66 @@ export const site = {
       detail: 'Cross-cultural emoji semiotics proposal.',
     },
   ],
-  atAGlance: [
-    'Incoming HSPS student at the University of Cambridge',
-    'President of Kiwanis Voice Club of Nippon',
-    'CEO of ElevateOS',
-    'Lumiere Scholar',
-    'Based in Sumida-ku, Tokyo, Japan',
-  ],
-  coreIdentity: [
-    'I care about politics, international systems, AI, service, and entrepreneurship.',
-    'I build at the intersection of technology and real-world coordination.',
-    'My research spans cross-cultural communication, cognitive systems, and publication-ready work.',
-    'Long term, I want to build technology that works in real social and international settings.',
-  ],
   thesis:
-    'I build systems that turn fragmented, human-heavy processes into structured, scalable infrastructure across education, organizations, and real-world operations.',
+    'Reduce friction, keep handoffs clear, and make systems easier to run.',
   focusIntro:
-    'ElevateOS is the main build. The rest of the work supports it by proving the same pattern in public, research, service, and infrastructure.',
+    'ElevateOS is the main project.',
   focusItems: [
     {
       name: 'ElevateOS',
-      label: 'Main build',
+      label: 'Work',
+      image: 'elevateos',
       summary:
-        'AI-enabled education platform for IB, AP, SAT, and admissions workflows. Leading product direction across tutoring operations, worksheet generation, past-paper simulation, admissions support, and execution infrastructure using Next.js, TypeScript, PostgreSQL, and AI integrations. The business model pairs a freemium AI platform with premium tutoring services for IB students in Japan and China.',
+        'AI-enabled education platform for IB, AP, SAT, and admissions workflows. Focused on tutoring operations, worksheet generation, past-paper simulation, admissions support, and execution tools.',
       bullets: [
-        'Manage execution, not just content.',
-        'Use a freemium platform to scale and tutoring to monetize.',
-        'Build for students, parents, and tutors who need clarity under pressure.',
+        'Keep execution visible.',
+        'Make study materials faster to produce.',
+        'Build for students, parents, and tutors.',
       ],
       href: elevateosUrl,
     },
     {
       name: 'Kiwanis Voice Club of Nippon',
-      label: 'Network layer',
+      label: 'Service',
+      image: 'kiwanis',
       summary:
-        'Founded the first Voice Club representing Japan within the Kiwanis network. Leading youth service, continuity, and stakeholder coordination across health, education, caregiving, and community resilience.',
+        'Founded the first Voice Club representing Japan within the Kiwanis network. Focused on youth service, continuity, and event coordination across health, education, caregiving, and community work.',
       bullets: [
-        'Build legitimacy and distribution through service networks.',
-        'Treat continuity as infrastructure, not an afterthought.',
-        'Connect student leadership to real community coordination.',
+        'Make service repeatable.',
+        'Treat continuity as a system.',
+        'Keep coordination practical.',
       ],
     },
     {
       name: 'Research and writing',
-      label: 'Public reasoning',
+      label: 'Research',
+      image: 'portraitAlt',
       summary:
-        'Lumiere research on ambiguous emoji semiotics, publication work on cognitive aging, and essays on clarity, systems, and infrastructure.',
+        'Lumiere research on emoji semiotics and cognitive aging, plus writing on clarity and systems.',
       bullets: [
-        'Cross-cultural communication and generational interpretation.',
-        'Research that is meant to be published, not just drafted.',
-        'Writing that keeps the work legible to people outside the project.',
+        'Cross-cultural communication and interpretation.',
+        'Research written for readers.',
+        'Writing that stays clear on a second pass.',
       ],
     },
   ],
   projectsIntro:
-    'The same operating pattern shows up across event tools, continuity layers, agent systems, public writing, and infrastructure recovery.',
+    'Products, systems, and collaborations.',
   projects: [
     {
       name: 'Pulse Manila 2026',
+      image: 'pulse',
       summary:
-        'Public, mobile-first convention companion for ASPAC Manila 2026. Designed to improve access to schedules, sessions, venues, and updates under real event conditions, especially for seniors, non-technical attendees, and users with limited English. Over 10K+ users.',
+        'Mobile-first convention companion for ASPAC Manila 2026. Built to keep schedules, venues, and updates easy to check on the move. Over 10K+ users.',
       bullets: [
-        'Built for speed, clarity, and low-friction mobile use.',
+        'Built for speed and low-friction mobile use.',
         'Complement official communication instead of replacing it.',
         'Tested under real convention conditions in Manila.',
       ],
     },
     {
       name: 'Katalyst',
+      image: 'katalyst',
       summary:
         'Long-term systems layer for continuity, coordination, and information flow across youth-led organizations. Built to strengthen institutional memory, cleaner handovers, and more durable operating structure.',
       bullets: [
@@ -149,11 +197,11 @@ export const site = {
     {
       name: 'thinkcollegelevel.com',
       summary:
-        'Personal portfolio, writing platform, and project hub. It acts as the narrative and credibility layer for the rest of the work.',
+        'Personal site for writing and projects.',
       bullets: [
-        'Git-published, editable, and intentionally small.',
-        'Acts as the public front door for the rest of the stack.',
-        'Holds the writing trail and the portfolio in one place.',
+        'Writing, portfolio, and links in one place.',
+        'Simple to read on mobile and desktop.',
+        'Keeps writing and projects together.',
       ],
     },
     {
@@ -167,23 +215,47 @@ export const site = {
       ],
       href: crystalcenturyUrl,
     },
+    {
+      name: 'Mural Project',
+      label: 'Community',
+      image: 'mural',
+      summary:
+        'A collaborative mural project that brought students together around one shared visual build.',
+      bullets: [
+        'Make the work visible.',
+        'Treat collaboration as the point.',
+        'Turn a blank wall into a shared outcome.',
+      ],
+    },
+    {
+      name: 'Collaboration with Ashinaga Africa Initiative',
+      label: 'Community',
+      image: 'ashinaga',
+      summary:
+        'A cross-group collaboration centered on service, exchange, and a shared public moment.',
+      bullets: [
+        'Work across organizations.',
+        'Keep the collaboration concrete.',
+        'Build relationships that last beyond the event.',
+      ],
+    },
   ],
   experienceIntro:
-    'These roles show the same pattern from different angles: education, service, research, publishing, and operational leadership.',
+    'Recent roles.',
   experience: [
     {
       org: 'Kiwanis International',
       role: 'Founder and President of Kiwanis Voice Club of Nippon',
       dates: 'Jan 2026 - Present',
       summary:
-        'Founded the first Voice Club representing Japan within the Kiwanis network. Leading youth service, continuity, and stakeholder coordination across initiatives focused on health, education, caregiving, and community resilience.',
+        'Founded the first Voice Club representing Japan within the Kiwanis network. Focused on youth service, continuity, and stakeholder coordination across health, education, caregiving, and community resilience.',
     },
     {
       org: 'ElevateOS',
-      role: 'Chief Executive Officer',
+      role: 'Founder',
       dates: 'Jan 2026 - Present',
       summary:
-        'Building an AI-enabled education platform for IB, AP, SAT, and admissions workflows. Leading product direction across tutoring operations, worksheet generation, past-paper simulation, admissions support, and execution infrastructure using Next.js, TypeScript, PostgreSQL, and AI integrations.',
+        'Building an AI-enabled education platform for IB, AP, SAT, and admissions workflows. Focused on tutoring operations, worksheet generation, past-paper simulation, admissions support, and execution infrastructure.',
     },
     {
       org: 'Key Club International',
@@ -197,28 +269,28 @@ export const site = {
       role: 'Researcher',
       dates: 'Jun 2025 - Present',
       summary:
-        'Selected for the Lumiere Research Inclusion Foundation with full scholarship support. Authored a top 5% research proposal on culturally and generationally mediated interpretation of ambiguous emojis in Japan and China.',
+        'Selected for the Lumiere Research Inclusion Foundation with full scholarship support. Authored a research proposal on culturally and generationally mediated interpretation of ambiguous emojis in Japan and China.',
     },
     {
       org: 'Independent and collaborative research',
-      role: 'Publications Specialist',
+      role: 'Research writer',
       dates: 'Jul 2024 - Present',
       summary:
-        'Authored work on emoji semiotics and cognitive aging, and drafted a concept paper on semiconductor supply-chain resilience using big data analytics and quantum-enhanced blockchain.',
+        'Authored work on emoji semiotics and cognitive aging, and drafted a concept paper on semiconductor supply-chain resilience using big data analytics and blockchain.',
     },
     {
       org: 'Think College Level',
-      role: 'Chief Executive Officer',
+      role: 'Publisher',
       dates: 'Jun 2024 - Present',
       summary:
-        'Built and curates a personal portfolio and writing platform consolidating work across engineering, research, and service leadership.',
+        'Maintains a personal site for writing and project notes.',
     },
     {
       org: 'Japan Cancer Society, KIST',
       role: 'President',
       dates: 'Sep 2024 - Present',
       summary:
-        'Organized a 10-kilometer interschool walkathon with 500+ participants, raising more than Y50,000 for awareness and support.',
+        'Organized a 10-kilometer interschool walkathon with 500+ participants and raised more than Y50,000 for awareness and support.',
     },
     {
       org: 'Recycling Initiative, KIST',
@@ -229,7 +301,7 @@ export const site = {
     },
   ],
   educationIntro:
-    'Education gives the work context: Cambridge for politics and systems thinking, KIST for the execution background that made the current stack possible.',
+    'Academic record.',
   education: [
     {
       school: 'University of Cambridge',
@@ -255,7 +327,7 @@ export const site = {
   ],
   skillsGroups: [
     {
-      group: 'Top skills',
+      group: 'Skills',
       items: [
         'Nonprofit Leadership',
         'AI Product Design',
@@ -313,7 +385,6 @@ export const site = {
         'Circular Economy',
         'Chemistry',
         'Biochemistry',
-        'High Achiever',
         'Competitive Analysis',
       ],
     },
@@ -359,7 +430,7 @@ export const site = {
         'Organized a 10-kilometer interschool walkathon with 500+ participants and raised more than Y50,000 for awareness and support.',
       bullets: [
         'Large-scale coordination with visible public impact.',
-        'Shows the service side of the same operating style.',
+        'Community service at event scale.',
         'Careful event planning and community outreach matter.',
       ],
     },
@@ -367,55 +438,53 @@ export const site = {
   posts: [
     {
       slug: 'starting-from-clarity',
-      meta: 'Essay',
       title: 'Starting from clarity',
       date: 'April 6, 2026',
       dateIso: '2026-04-06',
       readTime: '4 min read',
       summary:
-        'A personal site works best when the structure is obvious and the work stays easy to revise.',
+        'Clear writing makes the first read count.',
       body: [
-        'Think College Level started as a simple question: what if the public front door for my work was small enough to understand at a glance?',
-        'That led to a site with a narrow purpose. It does not need a dashboard, a database, or a complicated publishing stack to be useful. It needs a clear title, a good hierarchy, and a place to put the pieces that matter.',
-        'The result is a site that can hold writing, projects, and a practical record of how the work connects. If the page can be scanned in seconds, the structure is doing its job.',
+        'Clarity is not decoration. It is the difference between a reader finding the point or leaving before it lands.',
+        'A strong opening sentence gives the piece a job. Every later line should sharpen the claim, add evidence, or move the reader forward.',
+        'If a draft starts repeating itself, the idea is already there. Cut the extra sentences and let the remaining ones do more work.',
       ],
     },
     {
       slug: 'keeping-the-edit-path-short',
-      meta: 'Essay',
       title: 'Keeping the edit path short',
       date: 'April 6, 2026',
       dateIso: '2026-04-06',
       readTime: '4 min read',
       summary:
-        'The best publishing workflow is the one that gets out of the way before the idea cools off.',
+        'Fast edit paths keep good ideas alive.',
       body: [
-        'A site becomes more usable when the path from idea to published page is short. The longer the path, the more likely the note turns into a draft that never leaves the machine.',
-        'That is why I prefer simple publishing systems. When the workflow is light, I can keep the writing current, fix mistakes quickly, and add new material without negotiating with a separate content system.',
-        'The editing path should be obvious enough that the next change feels like a continuation, not a ceremony. That is what keeps a site alive after the first launch.',
+        'The shorter the path from thought to published page, the more often the thought survives.',
+        'Long workflows make good ideas stale. Short workflows make revision routine.',
+        'Publish quickly, revise cleanly, and keep the next change close enough that it can actually happen.',
       ],
     },
     {
       slug: 'publishing-notes-instead-of-noise',
-      meta: 'Essay',
-      title: 'Publishing notes instead of noise',
+      title: 'Notes worth keeping',
       date: 'April 6, 2026',
       dateIso: '2026-04-06',
       readTime: '4 min read',
       summary:
-        'A blog becomes useful when each post earns its place and the archive reads like a map.',
+        'An archive should still make sense later.',
       body: [
-        'The point of publishing is not to make a lot of pages. It is to leave a record that still makes sense later.',
-        'Short entries, clear titles, and clean routes are usually enough. If the archive can tell a story about how the thinking developed, then it is doing more than filling space.',
-        'That is the standard I want for this site: notes that are precise enough to keep, simple enough to revisit, and organized enough to support the rest of the work.',
+        'Publish only what adds information.',
+        'Use clear titles and short notes so the archive stays readable.',
+        'A page is worth keeping when it adds something the title does not already say.',
       ],
     },
   ],
   contactIntro:
-    'If the conversation is about collaboration, research, product, or writing, reach out on LinkedIn with enough context to respond usefully.',
+    'LinkedIn is the fastest route.',
   contactLinks: [
     { label: 'LinkedIn', href: linkedinUrl },
     { label: 'GitHub', href: githubUrl },
     { label: 'ElevateOS', href: elevateosUrl },
+    { label: 'Crystal Century', href: crystalcenturyUrl },
   ],
 };

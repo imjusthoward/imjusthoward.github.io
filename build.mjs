@@ -3,7 +3,7 @@ import path from 'node:path';
 import { site } from './site-data.mjs';
 
 const root = process.cwd();
-const today = '2026-04-06';
+const today = '2026-04-07';
 
 const pages = [
   {
@@ -18,7 +18,7 @@ const pages = [
     path: '/about/',
     file: path.join('about', 'index.html'),
     title: `${site.name} - About`,
-    description: `${site.author}'s background, thesis, and current direction.`,
+    description: `${site.author}'s background and studies.`,
     bodyClass: 'page-about',
     render: renderAbout,
   },
@@ -26,7 +26,7 @@ const pages = [
     path: '/portfolio/',
     file: path.join('portfolio', 'index.html'),
     title: `${site.name} - Portfolio`,
-    description: `${site.author}'s portfolio of systems, products, research, and service work.`,
+    description: `${site.author}'s projects in product, service, research, and writing.`,
     bodyClass: 'page-portfolio',
     render: renderPortfolio,
   },
@@ -34,7 +34,7 @@ const pages = [
     path: '/blog/',
     file: path.join('blog', 'index.html'),
     title: `${site.name} - Writing`,
-    description: `${site.author}'s essays about clarity, publishing, and systems.`,
+    description: `${site.author}'s writing on clarity and process.`,
     bodyClass: 'page-blog',
     render: renderBlogIndex,
   },
@@ -103,9 +103,71 @@ function joinLines(lines) {
   return lines.filter(Boolean).join('\n');
 }
 
+function getMedia(key) {
+  return site.media?.[key];
+}
+
+function renderMediaFigure(key, loading = 'lazy') {
+  const media = getMedia(key);
+  if (!media) {
+    return '';
+  }
+
+  const frameClass = media.frame ? ` media-frame--${media.frame}` : '';
+
+  return `
+    <figure class="media-frame${frameClass}">
+      <img src="${attr(media.src)}" alt="${attr(media.alt)}" loading="${attr(loading)}" decoding="async">
+    </figure>
+  `;
+}
+
+function renderMediaCard({ image, label, title, summary, href, span = '', loading = 'lazy' }) {
+  const classes = ['media-card'];
+  if (span) {
+    classes.push(span);
+  }
+
+  const inner = `
+    ${image ? renderMediaFigure(image, loading) : ''}
+    <div class="media-copy">
+      ${label ? `<p class="label">${esc(label)}</p>` : ''}
+      <h3>${esc(title)}</h3>
+      ${summary ? `<p>${esc(summary)}</p>` : ''}
+    </div>
+  `;
+
+  if (href) {
+    return `<a class="${classes.join(' ')}" href="${attr(href)}">${inner}</a>`;
+  }
+
+  return `<article class="${classes.join(' ')}">${inner}</article>`;
+}
+
+function renderMediaBoard(items) {
+  return `
+    <div class="media-grid">
+      ${items.map((item) => renderMediaCard(item)).join('')}
+    </div>
+  `;
+}
+
 function renderLink(label, href, currentPath) {
   const active = currentPath === href ? ' aria-current="page"' : '';
   return `<a href="${attr(href)}"${active}>${esc(label)}</a>`;
+}
+
+function renderBrandMark() {
+  const media = getMedia('portraitAlt') || getMedia('portrait');
+  if (!media) {
+    return `<span class="brand-mark" aria-hidden="true">TC</span>`;
+  }
+
+  return `
+    <span class="brand-mark brand-mark--portrait" aria-hidden="true">
+      <img src="${attr(media.src)}" alt="" loading="eager" decoding="async" fetchpriority="high">
+    </span>
+  `;
 }
 
 function renderTopbar(currentPath) {
@@ -120,7 +182,7 @@ function renderTopbar(currentPath) {
   return `
     <header class="site-header">
       <a class="brand" href="/">
-        <span class="brand-mark">TC</span>
+        ${renderBrandMark()}
         <span class="brand-copy">
           <strong>${esc(site.name)}</strong>
           <small>${esc(site.tagline)}</small>
@@ -136,8 +198,11 @@ function renderTopbar(currentPath) {
 function renderFooter() {
   return `
     <footer class="site-footer">
-      <p>${esc(site.author)} uses Think College Level as a public front door for writing, research, service, and product work.</p>
-      <p>Published from git. © 2026 ${esc(site.author)}</p>
+      <p>${esc(site.author)}, Tokyo.</p>
+      <div class="footer-links" aria-label="Links">
+        ${site.contactLinks.map((link) => `<a href="${attr(link.href)}">${esc(link.label)}</a>`).join('')}
+      </div>
+      <p>© 2026 ${esc(site.author)}</p>
     </footer>
   `;
 }
@@ -186,74 +251,95 @@ ${content}
 function renderHeroRail() {
   return `
     <aside class="hero-rail">
-      <section class="panel hero-visual">
-        <p class="label hero-visual-label">Current signal</p>
-        <div class="hero-monogram">HC</div>
-        <div class="hero-visual-copy">
-          <p>${esc(site.identityLine)}</p>
+      <article class="hero-card hero-card-portrait">
+        ${renderMediaFigure('portrait', 'eager')}
+        <div class="hero-card-copy">
+          <p class="label">Howard Chan</p>
           <p>${esc(site.location)}</p>
+          <p>${esc(site.identityLine)}</p>
         </div>
-      </section>
-      <section class="panel panel-soft compact-panel">
-        <p class="label">At a glance</p>
-        <ul class="fact-list">
-          ${site.heroNotes.map((item) => `<li>${esc(item)}</li>`).join('')}
-        </ul>
-      </section>
-      <section class="panel panel-soft compact-panel">
-        <p class="label">Current builds</p>
+      </article>
+      <article class="hero-card hero-card-project">
+        ${renderMediaFigure('elevateos', 'eager')}
+        <div class="hero-card-copy">
+          <p class="label">ElevateOS</p>
+          <p>Education platform.</p>
+        </div>
+      </article>
+      <article class="hero-card hero-card-project">
+        ${renderMediaFigure('pulse')}
+        <div class="hero-card-copy">
+          <p class="label">Pulse Manila 2026</p>
+          <p>Convention companion.</p>
+        </div>
+      </article>
+      <article class="hero-card hero-links">
+        <p class="label">Links</p>
         <ul class="stack-list">
-          <li><a href="/portfolio/">ElevateOS, Pulse, Katalyst, and the rest of the build stack</a></li>
-          <li><a href="/blog/">Writing that keeps the work legible</a></li>
-          <li><a href="/about/">Identity, thesis, and supporting proof</a></li>
+          ${site.contactLinks.map((link) => `<li><a href="${attr(link.href)}">${esc(link.label)}</a></li>`).join('')}
         </ul>
-      </section>
+      </article>
     </aside>
   `;
 }
 
 function renderSignalBoard() {
-  const latestPost = site.posts[0];
-
   return `
     <section class="section">
       ${renderSectionIntro(
-        'Current signal',
-        'A few widgets that explain the site at a glance',
-        'The home page works better as a board than as a wall of paragraphs. These widgets keep the current story visible without making the layout feel busy.'
+        'Photos',
+        'Service and events',
+        'Service and school moments.'
       )}
-      <div class="widget-grid">
-        <article class="widget widget-featured">
-          <p class="label">Working thesis</p>
-          <p class="widget-quote">${esc(site.thesis)}</p>
-          <p>${esc(site.coreIdentity[0])}</p>
-          <p>${esc(site.coreIdentity[1])}</p>
-          <p class="widget-link"><a href="/about/">Read the full background</a></p>
-        </article>
-        <article class="widget">
-          <p class="label">Now</p>
-          <h3>${esc(site.identityLine)}</h3>
-          <p>${esc(site.location)}</p>
-          <ul class="widget-list">
-            ${site.heroNotes.map((note) => `<li>${esc(note)}</li>`).join('')}
-          </ul>
-        </article>
-        <article class="widget widget-muted">
-          <p class="label">Latest note</p>
-          <h3><a href="/blog/${attr(latestPost.slug)}/">${esc(latestPost.title)}</a></h3>
-          <p>${esc(latestPost.summary)}</p>
-          <p class="widget-meta">${esc(latestPost.date)} · ${esc(latestPost.readTime)}</p>
-          <p class="widget-link"><a href="/blog/${attr(latestPost.slug)}/">Open essay</a></p>
-        </article>
-        <article class="widget widget-accent">
-          <p class="label">Start here</p>
-          <ul class="widget-list">
-            <li><a href="/portfolio/">Portfolio</a> for the work.</li>
-            <li><a href="/blog/">Writing</a> for the thinking.</li>
-            <li><a href="/contact/">Contact</a> if you need a reply.</li>
-          </ul>
-          <p class="widget-link"><a href="https://elevateos.org">Open ElevateOS</a></p>
-        </article>
+      <div class="media-grid">
+        <a class="media-card span-4" href="/about/">
+          ${renderMediaFigure('kiwanis')}
+          <div class="media-copy">
+            <p class="label">Service</p>
+            <h3>Kiwanis Voice Club</h3>
+            <p>Charter ceremony and launch.</p>
+          </div>
+        </a>
+        <a class="media-card span-4" href="/about/">
+          ${renderMediaFigure('keyclub')}
+          <div class="media-copy">
+            <p class="label">Service</p>
+            <h3>KIST Key Club</h3>
+            <p>Event coordination and service work.</p>
+          </div>
+        </a>
+        <a class="media-card span-4" href="/about/">
+          ${renderMediaFigure('charter1')}
+          <div class="media-copy">
+            <p class="label">Service</p>
+            <h3>Charter Ceremony #1</h3>
+            <p>Founding moment.</p>
+          </div>
+        </a>
+        <a class="media-card span-6" href="/about/">
+          ${renderMediaFigure('charter2')}
+          <div class="media-copy">
+            <p class="label">Service</p>
+            <h3>Charter Ceremony #2</h3>
+            <p>Founding moment.</p>
+          </div>
+        </a>
+        <a class="media-card span-3" href="/portfolio/">
+          ${renderMediaFigure('mural')}
+          <div class="media-copy">
+            <p class="label">Community</p>
+            <h3>Mural Project</h3>
+            <p>Collaborative mural build.</p>
+          </div>
+        </a>
+        <a class="media-card span-3" href="/portfolio/">
+          ${renderMediaFigure('ashinaga')}
+          <div class="media-copy">
+            <p class="label">Community</p>
+            <h3>Ashinaga collaboration</h3>
+            <p>Service partnership.</p>
+          </div>
+        </a>
       </div>
     </section>
   `;
@@ -317,12 +403,13 @@ function renderFeatureList(items) {
       ${items
         .map(
           (item) => `
-            <article class="feature-row ${item.label === 'Main build' ? 'feature-lead' : ''}">
+            <article class="feature-row ${item.label === 'Work' ? 'feature-lead' : ''} ${item.image ? 'feature-with-media' : ''}">
               <div class="feature-meta">
                 <p class="label">${esc(item.label || 'Focus')}</p>
                 <h3>${esc(item.name)}</h3>
               </div>
               <div class="feature-body">
+                ${item.image ? renderMediaFigure(item.image) : ''}
                 <p>${esc(item.summary)}</p>
                 <ul>
                   ${item.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join('')}
@@ -385,8 +472,9 @@ function renderNotes(items) {
       ${items
         .map(
           (item) => `
-            <article class="note-card">
+            <article class="note-card ${item.image ? 'note-card-media' : ''}">
               <p class="label">${esc(item.name)}</p>
+              ${item.image ? renderMediaFigure(item.image) : ''}
               <p>${esc(item.summary)}</p>
               <ul>
                 ${item.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join('')}
@@ -400,50 +488,19 @@ function renderNotes(items) {
 }
 
 function renderPostsPreview(posts) {
-  if (!posts.length) {
-    return `
-      <div class="panel">
-        <p class="label">Writing</p>
-        <p>No posts yet.</p>
-      </div>
-    `;
-  }
-
-  const [featured, ...rest] = posts;
-
   return `
-    <div class="post-stack">
-      <article class="post-feature">
-        <div class="post-feature-copy">
-          <p class="label">${esc(featured.meta)}</p>
-          <h3><a href="/blog/${attr(featured.slug)}/">${esc(featured.title)}</a></h3>
-          <p>${esc(featured.summary)}</p>
-          <p class="post-feature-meta">${esc(featured.date)} · ${esc(featured.readTime)}</p>
-        </div>
-        <div class="post-feature-aside">
-          <p class="label">Featured</p>
-          <p>This note explains why the site stays small enough to revise quickly.</p>
-          <p class="feature-link"><a href="/blog/${attr(featured.slug)}/">Open the essay</a></p>
-        </div>
-      </article>
-      <div class="post-list">
-        ${rest
+    <div class="post-grid">
+      ${posts
         .map(
           (post) => `
-            <article class="post-row">
-              <div class="post-meta">
-                <p class="label">${esc(post.meta)}</p>
-                <p>${esc(post.date)} · ${esc(post.readTime)}</p>
-              </div>
-              <div class="post-copy">
-                <h3><a href="/blog/${attr(post.slug)}/">${esc(post.title)}</a></h3>
-                <p>${esc(post.summary)}</p>
-              </div>
+            <article class="post-card">
+              <h3><a href="/blog/${attr(post.slug)}/">${esc(post.title)}</a></h3>
+              <p class="post-card-meta">${esc(post.date)} · ${esc(post.readTime)}</p>
+              <p>${esc(post.summary)}</p>
             </article>
           `
         )
         .join('')}
-      </div>
     </div>
   `;
 }
@@ -455,19 +512,19 @@ function renderHome() {
     renderSignalBoard(),
     `
       <section class="section">
-        ${renderSectionIntro('Current focus', 'The main story', site.focusIntro, `<a class="button secondary" href="/about/">Read the full background</a>`)}
+        ${renderSectionIntro('Work', 'ElevateOS', site.focusIntro, `<a class="button secondary" href="/about/">Background</a>`)}
         ${renderFeatureList(site.focusItems)}
       </section>
     `,
     `
       <section class="section">
-        ${renderSectionIntro('Supporting proof', 'Projects and systems', site.projectsIntro, `<a class="button secondary" href="/portfolio/">See the portfolio</a>`)}
+        ${renderSectionIntro('Projects', 'Other work', site.projectsIntro, `<a class="button secondary" href="/portfolio/">Portfolio</a>`)}
         ${renderFeatureList(site.projects)}
       </section>
     `,
     `
       <section class="section">
-        ${renderSectionIntro('Writing', 'Recent notes', 'Short essays that explain the site, the publishing system, and the way the work is organized.', `<a class="button secondary" href="/blog/">Open the archive</a>`)}
+        ${renderSectionIntro('Writing', 'Essays', 'Recent essays.', `<a class="button secondary" href="/blog/">Open the archive</a>`)}
         ${renderPostsPreview(site.posts)}
       </section>
     `,
@@ -475,14 +532,15 @@ function renderHome() {
       <section class="section">
         <div class="split-section">
           <div>
-            <p class="eyebrow">Public front door</p>
-            <h2>What this site is for</h2>
-            <p class="section-lead">Think College Level holds the writing trail, the project map, and the current story in one place. The site is meant to stay readable, editable, and honest about what is actually being built.</p>
+            <p class="eyebrow">Links</p>
+            <h2>Elsewhere</h2>
+            <p class="section-lead">LinkedIn, GitHub, ElevateOS, and Crystal Century.</p>
           </div>
           <div class="panel">
-            <p class="label">Best next step</p>
-            <p>Start with the portfolio if you want the work, the blog if you want the thinking, or the about page if you want the thesis.</p>
-            <p><a class="button primary" href="/contact/">Contact</a></p>
+            <p class="label">Links</p>
+            <ul class="stack-list">
+              ${site.contactLinks.map((link) => `<li><a href="${attr(link.href)}">${esc(link.label)}</a></li>`).join('')}
+            </ul>
           </div>
         </div>
       </section>
@@ -501,7 +559,6 @@ function renderHome() {
       '@type': 'Person',
       name: site.author,
       url: site.url,
-      jobTitle: 'CEO of ElevateOS',
       sameAs: [site.linkedin, site.github],
       alumniOf: ['University of Cambridge', 'K. International School Tokyo'],
       description: site.thesis,
@@ -513,34 +570,62 @@ function renderAbout() {
   const content = joinLines([
     `
       <section class="section">
-        ${renderSectionIntro('About', 'Identity, thesis, and direction', site.description, `<a class="button secondary" href="/portfolio/">Portfolio</a>`)}
-        <div class="narrow-copy">
-          <p>${esc(
-            'Incoming HSPS student at the University of Cambridge interested in connecting politics, international systems, AI, service, and entrepreneurship. I build projects at the intersection of technology and real-world coordination: from leading Kiwanis Voice Club of Nippon and building Pulse Manila 2026, to developing ElevateOS as an AI-enabled education platform.'
-          )}</p>
-          <p>${esc(
-            'My research has focused on cross-cultural communication and cognitive systems, including top-5% Lumiere work scheduled for publication in NHSJS. Long term, I want to use institutional thinking and entrepreneurial execution to build technology that works not just in theory, but in real social and international settings.'
-          )}</p>
+        ${renderSectionIntro('About', 'Background', 'Tokyo-based student at Cambridge.', `<a class="button secondary" href="/portfolio/">Portfolio</a>`)}
+        <div class="split-section about-split">
+          <div class="narrow-copy">
+            <p>${esc(
+              'Tokyo-based student at Cambridge. Service, research, product, and writing.'
+            )}</p>
+            <p>${esc(
+              'The thread is coordination: keep the next handoff clear, keep the record readable, and keep useful work moving.'
+            )}</p>
+          </div>
+          <div class="about-stack">
+            ${renderMediaCard({
+              image: 'portraitAlt',
+              label: 'Howard Chan',
+              title: 'Howard Chan',
+              summary: 'Tokyo · Cambridge',
+              loading: 'eager',
+            })}
+            <article class="panel">
+              <p class="label">Links</p>
+              <ul class="stack-list">
+                ${site.contactLinks.map((link) => `<li><a href="${attr(link.href)}">${esc(link.label)}</a></li>`).join('')}
+              </ul>
+            </article>
+          </div>
         </div>
       </section>
     `,
     `
       <section class="section">
-        ${renderSectionIntro('Pattern', 'The way the work repeats', site.thesis)}
+        ${renderSectionIntro('Approach', 'Coordination', 'Keep the next handoff clear.')}
         <div class="quote-block">
-          <p>${esc('Identify messy, human-dependent systems -> impose structure -> make them scalable and repeatable.')}</p>
+          <p>${esc('Structure turns messy, human-dependent systems into something people can use and repeat.')}</p>
         </div>
       </section>
     `,
     `
       <section class="section">
-        ${renderSectionIntro('Experience', 'Roles and proof points', site.experienceIntro)}
+        ${renderSectionIntro('Service', 'Moments', 'Service, school, and event moments.')}
+        ${renderMediaBoard([
+          { image: 'kiwanis', label: 'Service', title: 'Kiwanis Voice Club', summary: 'Charter ceremony and launch.', href: '/portfolio/', span: 'span-4' },
+          { image: 'keyclub', label: 'Service', title: 'KIST Key Club', summary: 'Event coordination and service work.', href: '/portfolio/', span: 'span-4' },
+          { image: 'charter1', label: 'Service', title: 'Charter Ceremony #1', summary: 'Founding moment.', href: '/portfolio/', span: 'span-4' },
+          { image: 'charter2', label: 'Service', title: 'Charter Ceremony #2', summary: 'Founding moment.', href: '/portfolio/', span: 'span-6' },
+        ])}
+      </section>
+    `,
+    `
+      <section class="section">
+        ${renderSectionIntro('Experience', 'Roles', site.experienceIntro)}
         ${renderTimeline(site.experience)}
       </section>
     `,
     `
       <section class="section">
-        ${renderSectionIntro('Education', 'Academic context', site.educationIntro)}
+        ${renderSectionIntro('Studies', 'Education', site.educationIntro)}
         ${renderTimeline(site.education)}
         <div class="credential-list">
           ${site.credentials.map((item) => `<span class="tag">${esc(item)}</span>`).join('')}
@@ -549,7 +634,7 @@ function renderAbout() {
     `,
     `
       <section class="section">
-        ${renderSectionIntro('Capabilities', 'Skills and subjects', 'The skills are grouped by how the work shows up in public.')}
+        ${renderSectionIntro('Skills', 'Areas', 'Grouped by area.')}
         ${renderTagGroups(site.skillsGroups)}
       </section>
     `,
@@ -557,7 +642,7 @@ function renderAbout() {
 
   return renderPage({
     title: `${site.name} - About`,
-    description: `${site.author}'s background, thesis, and current direction.`,
+    description: `${site.author}'s background and studies.`,
     canonicalPath: '/about/',
     bodyClass: 'page-about',
     content,
@@ -568,7 +653,6 @@ function renderAbout() {
       mainEntity: {
         '@type': 'Person',
         name: site.author,
-        jobTitle: 'CEO of ElevateOS',
         sameAs: [site.linkedin, site.github],
         description: site.thesis,
       },
@@ -580,25 +664,25 @@ function renderPortfolio() {
   const content = joinLines([
     `
       <section class="section">
-        ${renderSectionIntro('Portfolio', 'Work that stays easy to explain', 'The portfolio is organized around products, systems, research, and service. Each piece should be able to stand on its own without extra context.', `<a class="button secondary" href="/about/">About</a>`)}
+        ${renderSectionIntro('Portfolio', 'Projects', 'Products, service, research, and writing.', `<a class="button secondary" href="/about/">About</a>`)}
         ${renderFeatureList(site.focusItems)}
       </section>
     `,
     `
       <section class="section">
-        ${renderSectionIntro('Systems', 'Projects with operational weight', 'These are the pieces that turn the thesis into real infrastructure.')}
+        ${renderSectionIntro('Projects', 'Systems', 'Work that needs upkeep and coordination.')}
         ${renderNotes(site.projects)}
       </section>
     `,
     `
       <section class="section">
-        ${renderSectionIntro('Service and leadership', 'Public proof that the pattern works outside software', 'The service side matters because it shows the same style in real groups, events, and handoffs.')}
+        ${renderSectionIntro('Service', 'Community', 'Clubs, events, and service projects.')}
         ${renderNotes(site.serviceProjects)}
       </section>
     `,
     `
       <section class="section">
-        ${renderSectionIntro('Research and credentials', 'Credibility layer', 'A concise record of research, writing, and selected credentials that support the public story.')}
+        ${renderSectionIntro('Research', 'Research and credentials', 'Research, writing, and a short record of credentials.')}
         <div class="split-section">
           <div class="panel">
             <p class="label">Research areas</p>
@@ -610,7 +694,7 @@ function renderPortfolio() {
             </ul>
           </div>
           <div class="panel">
-            <p class="label">Selected credentials</p>
+            <p class="label">Credentials</p>
             <div class="credential-list">
               ${site.credentials.map((item) => `<span class="tag">${esc(item)}</span>`).join('')}
             </div>
@@ -622,7 +706,7 @@ function renderPortfolio() {
 
   return renderPage({
     title: `${site.name} - Portfolio`,
-    description: `${site.author}'s portfolio of systems, products, research, and service work.`,
+    description: `${site.author}'s projects in product, service, research, and writing.`,
     canonicalPath: '/portfolio/',
     bodyClass: 'page-portfolio',
     content,
@@ -631,7 +715,7 @@ function renderPortfolio() {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
       name: `${site.name} Portfolio`,
-      description: `${site.author}'s portfolio of systems, products, research, and service work.`,
+      description: `${site.author}'s projects in product, service, research, and writing.`,
     },
   });
 }
@@ -640,7 +724,7 @@ function renderBlogIndex() {
   const content = joinLines([
     `
       <section class="section">
-        ${renderSectionIntro('Writing', 'Short essays with a job', 'These posts explain the site, the publishing process, and the way the work is organized. Each one should be worth keeping.', `<a class="button secondary" href="/contact/">Contact</a>`)}
+        ${renderSectionIntro('Writing', 'Essays', 'Recent essays.', `<a class="button secondary" href="/contact/">Contact</a>`)}
         ${renderPostsPreview(site.posts)}
       </section>
     `,
@@ -648,7 +732,7 @@ function renderBlogIndex() {
 
   return renderPage({
     title: `${site.name} - Writing`,
-    description: `${site.author}'s essays about clarity, publishing, and systems.`,
+    description: `${site.author}'s writing on clarity and process.`,
     canonicalPath: '/blog/',
     bodyClass: 'page-blog',
     content,
@@ -657,7 +741,7 @@ function renderBlogIndex() {
       '@context': 'https://schema.org',
       '@type': 'Blog',
       name: `${site.name} Writing`,
-      description: `${site.author}'s essays about clarity, publishing, and systems.`,
+      description: `${site.author}'s writing on clarity and process.`,
     },
   });
 }
@@ -666,7 +750,6 @@ function renderPost(post) {
   const body = post.body.map((paragraph) => `<p>${esc(paragraph)}</p>`).join('\n');
   const content = `
     <article class="section article">
-      <p class="eyebrow">${esc(post.meta)}</p>
       <h1>${esc(post.title)}</h1>
       <div class="article-meta">${esc(post.date)} · ${esc(post.readTime)}</div>
       <div class="article-body">
@@ -698,15 +781,15 @@ function renderPost(post) {
 function renderContact() {
   const content = `
     <section class="section">
-      ${renderSectionIntro('Contact', 'Reach out with context', site.contactIntro, `<a class="button secondary" href="/portfolio/">Portfolio</a>`)}
+      ${renderSectionIntro('Contact', 'Reach out', site.contactIntro, `<a class="button secondary" href="/portfolio/">Portfolio</a>`)}
       <div class="split-section">
         <div class="panel">
           <p class="label">Best channel</p>
-          <p>LinkedIn is the most direct route. If you want a useful reply, include what you are building, what you need, and why it should matter.</p>
+          <p>LinkedIn is the fastest route. Mention what you are building or need.</p>
           <p><a class="button primary" href="${attr(site.linkedin)}">Open LinkedIn</a></p>
         </div>
         <div class="panel">
-          <p class="label">Other links</p>
+          <p class="label">Links</p>
           <ul class="stack-list">
             ${site.contactLinks.map((link) => `<li><a href="${attr(link.href)}">${esc(link.label)}</a></li>`).join('')}
           </ul>
@@ -741,7 +824,7 @@ function renderNotFound() {
         <div>
           <p class="eyebrow">404</p>
           <h1>That page is not here.</h1>
-          <p class="section-lead">Think College Level is organized around a small set of routes. The home page will get you back to the public front door.</p>
+          <p class="section-lead">Use Home, Portfolio, Writing, About, or Contact.</p>
         </div>
         <div class="panel">
           <p class="label">Try this instead</p>
@@ -790,9 +873,9 @@ function renderLlms() {
 
   const posts = site.posts.map((post) => `- ${post.title}: ${site.url}/blog/${post.slug}/`);
 
-  return `# ${site.name}
+return `# ${site.name}
 
-${site.author}'s personal blog and portfolio. The site focuses on systems, research, service, product work, and public writing.
+${site.name} is a personal blog and portfolio.
 
 ## Pages
 ${pagesList.map(([label, route]) => `- ${label}: ${site.url}${route === '/' ? '/' : route}`).join('\n')}
@@ -806,7 +889,7 @@ ${posts.join('\n')}
 - Pulse Manila 2026
 - Katalyst
 - OpenClaw
-- research, service, and public writing
+- service, research, product, and writing
 `;
 }
 
