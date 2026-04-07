@@ -131,7 +131,7 @@ export const site = {
     },
   ],
   thesis:
-    'Reduce friction, keep handoffs clear, and make systems easier to run.',
+    'Education, service, research, and product work.',
   focusIntro:
     'ElevateOS, Kiwanis Voice Club of Nippon, KIST Key Club, and research.',
   focusItems: [
@@ -174,7 +174,7 @@ export const site = {
     },
   ],
   projectsIntro:
-    'Other projects and collaborations.',
+    'Projects.',
   projects: [
     {
       name: 'Pulse Manila 2026',
@@ -191,41 +191,41 @@ export const site = {
       name: 'Katalyst',
       image: 'katalyst',
       summary:
-        'Long-term systems layer for continuity, coordination, and information flow across youth-led organizations. Built to strengthen institutional memory, cleaner handovers, and more durable operating structure.',
+        'Coordination layer for Kiwanis projects and continuity.',
       bullets: [
-        'Reduce fragmentation across leadership transitions.',
-        'Make coordination less dependent on any one student leader.',
-        'Deploy first inside an existing tutoring network in Japan.',
+        'Keep handoffs clear.',
+        'Make continuity visible.',
+        'Support cleaner transitions.',
       ],
     },
     {
       name: 'OpenClaw',
       summary:
-        'WhatsApp-based execution agent system running on VPS, local gateway, and systemd. Focused on delegation, automation, and controlled execution.',
+        'WhatsApp-based execution agent system on VPS, local gateway, and systemd.',
       bullets: [
-        'Agent orchestration for real operations.',
-        'Useful where lightweight channel-based execution works best.',
-        'Represents infra and systems thinking at the technical layer.',
+        'Orchestrate work through simple channels.',
+        'Keep execution lightweight.',
+        'Use direct automation where it fits.',
       ],
     },
     {
       name: 'thinkcollegelevel.com',
       summary:
-        'Personal site for writing and projects.',
+        'Personal site for projects and links.',
       bullets: [
-        'Writing, portfolio, and links in one place.',
+        'Projects, writing, and links together.',
         'Simple to read on mobile and desktop.',
-        'Keeps writing and projects together.',
+        'Holds the work in one place.',
       ],
     },
     {
       name: 'crystalcentury.com',
       summary:
-        'Live WordPress recovery and infrastructure project. Focused on stability, security, and operational resilience.',
+        'WordPress recovery and infrastructure project.',
       bullets: [
-        'Real production handling, not just prototypes.',
-        'Shows the difference between surface polish and site reliability.',
-        'Useful as a reference point for operational recovery work.',
+        'Focus on stability and security.',
+        'Real production handling.',
+        'Useful for recovery work.',
       ],
       href: crystalcenturyUrl,
     },
@@ -296,8 +296,7 @@ export const site = {
       org: 'Think College Level',
       role: 'Publisher',
       dates: 'Jun 2024 - Present',
-      summary:
-        'Runs the site for projects, notes, and links.',
+      summary: 'Publishes the site.',
     },
     {
       org: 'Japan Cancer Society, KIST',
@@ -460,8 +459,8 @@ export const site = {
         'An education platform for tutoring, worksheets, and admissions support.',
       body: [
         'ElevateOS keeps tutoring work, worksheet generation, and admissions support in one place.',
-        'It is built to stay useful in real sessions: fast to open, clear to use, and simple enough for students, parents, and tutors to follow without extra explanation.',
-        'The point is to reduce handoff friction and keep the work organized enough that it can actually move.',
+        'Students, parents, and tutors use it to move through sessions quickly.',
+        'It keeps study work organized across handoffs and follow-up.',
       ],
     },
     {
@@ -474,8 +473,8 @@ export const site = {
         'A mobile event companion for schedules, venues, and updates.',
       body: [
         'Pulse gives attendees a fast way to see schedules, sessions, venues, and updates at a live convention.',
-        'It is designed for low-friction mobile use when people need information quickly and do not want to dig through a busy event page.',
-        'The goal is to support the official event flow and make the convention easier to navigate in practice.',
+        'It works well on mobile during a live convention.',
+        'It keeps event navigation simple when people need information quickly.',
       ],
     },
     {
@@ -488,13 +487,13 @@ export const site = {
         'A coordination layer for Kiwanis projects and continuity.',
       body: [
         'Katalyst keeps youth service work, project handoffs, and continuity in one place.',
-        'It is meant to make transitions cleaner, keep tasks visible, and reduce the amount of context that gets lost between one round of work and the next.',
-        'The focus is practical coordination for Kiwanis and related service work rather than another layer of overhead.',
+        'It keeps transitions clear and tasks visible between rounds of work.',
+        'It supports Kiwanis and related service work without adding overhead.',
       ],
     },
   ],
   contactIntro:
-    'Reach out on LinkedIn or WhatsApp.',
+    'Use LinkedIn or WhatsApp.',
   contactLinks: [
     { label: 'Think College Level', href: siteUrl },
     { label: 'GitHub', href: githubUrl },
@@ -508,7 +507,7 @@ export const site = {
   ],
   linkGroups: [
     {
-      group: 'Core / Professional',
+      group: 'Work',
       items: [
         { label: 'Think College Level', href: siteUrl },
         { label: 'GitHub', href: githubUrl },
@@ -517,14 +516,14 @@ export const site = {
       ],
     },
     {
-      group: 'Social / Personal',
+      group: 'Personal',
       items: [
         { label: 'Facebook', href: facebookUrl },
         { label: 'Instagram', href: instagramUrl },
       ],
     },
     {
-      group: 'Ventures / Projects',
+      group: 'Projects',
       items: [
         { label: 'ElevateOS', href: elevateosUrl },
         { label: 'Crystal Century', href: crystalcenturyUrl },

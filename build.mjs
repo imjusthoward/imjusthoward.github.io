@@ -33,8 +33,8 @@ const pages = [
   {
     path: '/blog/',
     file: path.join('blog', 'index.html'),
-    title: `Writing · ${site.name}`,
-    description: 'Project notes on ElevateOS, Pulse, Katalyst, and service work.',
+    title: `Projects · ${site.name}`,
+    description: 'Project writeups on ElevateOS, Pulse, and Katalyst.',
     bodyClass: 'page-blog',
     render: renderBlogIndex,
   },
@@ -42,7 +42,7 @@ const pages = [
     path: '/contact/',
     file: path.join('contact', 'index.html'),
     title: `Contact · ${site.name}`,
-    description: 'Reach out on LinkedIn, WhatsApp, GitHub, Wantedly, and project links.',
+    description: 'LinkedIn, WhatsApp, GitHub, Wantedly, Facebook, Instagram, ElevateOS, and Crystal Century.',
     bodyClass: 'page-contact',
     render: renderContact,
   },
@@ -286,7 +286,7 @@ function renderHeroRail() {
         </div>
       </article>
       <article class="hero-card hero-card-note">
-        <p class="label">Current focus</p>
+        <p class="label">Work</p>
         <div class="hero-card-copy">
           <p>${esc(site.focusIntro)}</p>
           <ul class="stack-list">
@@ -319,7 +319,7 @@ function renderAboutRail() {
         </div>
       </article>
       <article class="hero-card hero-card-note">
-        <p class="label">Current work</p>
+        <p class="label">Work</p>
         <div class="hero-card-copy">
           <ul class="stack-list">
             <li>ElevateOS</li>
@@ -500,19 +500,18 @@ function renderHome() {
           ${renderHeroIntro()}
           ${renderMetricStrip()}
           <section class="section">
-            ${renderSectionIntro('Work', 'Featured work', site.focusIntro, `<a class="button secondary" href="/about/">Background</a>`)}
+            ${renderSectionIntro('Work', 'Projects', site.focusIntro, `<a class="button secondary" href="/about/">Background</a>`)}
             ${renderFeatureList(site.focusItems)}
           </section>
           <section class="section">
-            ${renderSectionIntro('Writing', 'Project notes', 'Notes on the work.', `<a class="button secondary" href="/blog/">Open the archive</a>`)}
+            ${renderSectionIntro('Writing', 'Project posts', '', `<a class="button secondary" href="/blog/">View posts</a>`)}
             ${renderPostsPreview(site.posts)}
           </section>
           <section class="section">
             <div class="split-section">
               <div>
                 <p class="eyebrow">Links</p>
-                <h2>Elsewhere</h2>
-                <p class="section-lead">Professional, personal, and project links.</p>
+                <h2>Links</h2>
               </div>
               <div class="panel">
                 <p class="label">Links</p>
@@ -555,8 +554,8 @@ function renderAbout() {
           <section class="section">
             ${renderSectionIntro('About', 'Background', 'Tokyo-based student at Cambridge.', `<a class="button secondary" href="/portfolio/">Portfolio</a>`)}
             <div class="narrow-copy">
-              <p>${esc('Work includes ElevateOS, Kiwanis Voice Club of Nippon, KIST Key Club, and Lumiere research.')}</p>
-              <p>${esc('Based in Tokyo and moving between school, service, and product work.')}</p>
+              <p>${esc('ElevateOS, Kiwanis Voice Club of Nippon, KIST Key Club, and Lumiere research.')}</p>
+              <p>${esc('Based in Tokyo. School, service, and product work keep the schedule full.')}</p>
             </div>
           </section>
           <section class="section">
@@ -571,7 +570,7 @@ function renderAbout() {
             </div>
           </section>
           <section class="section">
-            ${renderSectionIntro('Service', 'Photos', 'Service and school events.')}
+            ${renderSectionIntro('Service', 'Service')}
             ${renderMediaBoard([
               { image: 'kiwanis', label: 'Service', title: 'Kiwanis Voice Club', summary: 'Charter photo.', href: '/portfolio/', span: 'span-4' },
               { image: 'keyclub', label: 'Service', title: 'KIST Key Club', summary: 'School service event.', href: '/portfolio/', span: 'span-4' },
@@ -624,25 +623,25 @@ function renderPortfolio() {
   const content = joinLines([
     `
       <section class="section">
-        ${renderSectionIntro('Portfolio', 'Projects', 'Products, service, research, and writing.', `<a class="button secondary" href="/about/">About</a>`)}
+        ${renderSectionIntro('Portfolio', 'Projects', '', `<a class="button secondary" href="/about/">About</a>`)}
         ${renderFeatureList(site.focusItems)}
       </section>
     `,
     `
       <section class="section">
-        ${renderSectionIntro('Projects', 'Systems', 'Work that needs upkeep and coordination.')}
+        ${renderSectionIntro('Projects', 'More projects')}
         ${renderNotes(site.projects)}
       </section>
     `,
     `
       <section class="section">
-        ${renderSectionIntro('Service', 'Community', 'Clubs, events, and service projects.')}
+        ${renderSectionIntro('Service', 'Service')}
         ${renderNotes(site.serviceProjects)}
       </section>
     `,
     `
       <section class="section">
-        ${renderSectionIntro('Research', 'Research and credentials', 'Research, writing, and a short record of credentials.')}
+        ${renderSectionIntro('Research', 'Research')}
         <div class="split-section">
           <div class="panel">
             <p class="label">Research areas</p>
@@ -684,15 +683,15 @@ function renderBlogIndex() {
   const content = joinLines([
     `
       <section class="section">
-        ${renderSectionIntro('Writing', 'Project notes', 'Notes on the work.', `<a class="button secondary" href="/contact/">Contact</a>`)}
+        ${renderSectionIntro('Writing', 'Projects', '', `<a class="button secondary" href="/contact/">Contact</a>`)}
         ${renderPostsPreview(site.posts)}
       </section>
     `,
   ]);
 
   return renderPage({
-    title: `Writing · ${site.name}`,
-    description: site.tagline,
+    title: `Projects · ${site.name}`,
+    description: 'Project writeups on ElevateOS, Pulse, and Katalyst.',
     canonicalPath: '/blog/',
     bodyClass: 'page-blog',
     content,
@@ -700,8 +699,8 @@ function renderBlogIndex() {
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'Blog',
-      name: `${site.name} Writing`,
-      description: `${site.author}'s notes on projects, service, and systems.`,
+      name: `${site.name} Projects`,
+      description: `Project writeups on ElevateOS, Pulse, and Katalyst.`,
     },
   });
 }
@@ -715,7 +714,7 @@ function renderPost(post) {
       <div class="article-body">
         ${body}
       </div>
-      <p class="article-back"><a class="button secondary" href="/blog/">Back to project notes</a></p>
+      <p class="article-back"><a class="button secondary" href="/blog/">Back to Projects</a></p>
     </article>
   `;
 
@@ -744,8 +743,8 @@ function renderContact() {
       ${renderSectionIntro('Contact', 'Reach out', site.contactIntro, `<a class="button secondary" href="/portfolio/">Portfolio</a>`)}
       <div class="split-section">
         <div class="panel">
-          <p class="label">Best channel</p>
-          <p>LinkedIn or WhatsApp is the fastest route.</p>
+          <p class="label">Direct</p>
+          <p>Use LinkedIn or WhatsApp.</p>
           <div class="actions">
             <a class="button primary" href="${attr(site.linkedin)}">Open LinkedIn</a>
             <a class="button secondary" href="${attr(site.whatsapp)}">Message on WhatsApp</a>
@@ -782,7 +781,7 @@ function renderNotFound() {
         <div>
           <p class="eyebrow">404</p>
           <h1>That page is not here.</h1>
-          <p class="section-lead">Use Home, Portfolio, Writing, About, or Contact.</p>
+          <p class="section-lead">Try Home, Portfolio, Writing, About, or Contact.</p>
         </div>
         <div class="panel">
           <p class="label">Try this instead</p>
@@ -824,7 +823,7 @@ function renderLlms() {
   const pagesList = [
     ['Home', '/'],
     ['Portfolio', '/portfolio/'],
-    ['Writing', '/blog/'],
+    ['Projects', '/blog/'],
     ['About', '/about/'],
     ['Contact', '/contact/'],
   ];
@@ -835,24 +834,29 @@ return `# ${site.name}
 
 ${site.tagline}
 
-${site.name} is a personal site for projects, notes, and links.
+${site.name} is a personal site for projects and links.
 
 ## Pages
 ${pagesList.map(([label, route]) => `- ${label}: ${site.url}${route === '/' ? '/' : route}`).join('\n')}
 
-## Writing
+## Posts
 ${posts.join('\n')}
 
 ## Links
 ${site.contactLinks.map((link) => `- ${link.label}: ${link.href}`).join('\n')}
 
-## Topics
+## Projects
 - ElevateOS
 - Kiwanis Voice Club of Nippon
 - Pulse Manila 2026
 - Katalyst
 - OpenClaw
-- service, research, product, and writing
+
+## Service
+- Japan Cancer Society, KIST
+- Recycling Initiative, KIST
+- Mural Project
+- Ashinaga collaboration
 `;
 }
 

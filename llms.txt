@@ -2,16 +2,16 @@
 
 Cambridge (HSPS) Offer Holder | President of Kiwanis Voice Club of Nippon | CEO of ElevateOS | Lumiere Scholar
 
-Think College Level is a personal site for projects, notes, and links.
+Think College Level is a personal site for projects and links.
 
 ## Pages
 - Home: https://thinkcollegelevel.com/
 - Portfolio: https://thinkcollegelevel.com/portfolio/
-- Writing: https://thinkcollegelevel.com/blog/
+- Projects: https://thinkcollegelevel.com/blog/
 - About: https://thinkcollegelevel.com/about/
 - Contact: https://thinkcollegelevel.com/contact/
 
-## Writing
+## Posts
 - ElevateOS: https://thinkcollegelevel.com/blog/elevateos/
 - Pulse Manila 2026: https://thinkcollegelevel.com/blog/pulse-manila-2026/
 - Katalyst: https://thinkcollegelevel.com/blog/katalyst/
@@ -27,10 +27,15 @@ Think College Level is a personal site for projects, notes, and links.
 - Crystal Century: https://crystalcentury.com
 - WhatsApp: https://wa.me/85293442294
 
-## Topics
+## Projects
 - ElevateOS
 - Kiwanis Voice Club of Nippon
 - Pulse Manila 2026
 - Katalyst
 - OpenClaw
-- service, research, product, and writing
+
+## Service
+- Japan Cancer Society, KIST
+- Recycling Initiative, KIST
+- Mural Project
+- Ashinaga collaboration
