@@ -493,7 +493,7 @@ export const site = {
     },
   ],
   contactIntro:
-    'Use LinkedIn or WhatsApp.',
+    '',
   contactLinks: [
     { label: 'Think College Level', href: siteUrl },
     { label: 'GitHub', href: githubUrl },
