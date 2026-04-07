@@ -319,14 +319,13 @@ function renderAboutRail() {
         </div>
       </article>
       <article class="hero-card hero-card-note">
-        <p class="label">Focus</p>
+        <p class="label">Current work</p>
         <div class="hero-card-copy">
-          <p>${esc(site.focusIntro)}</p>
           <ul class="stack-list">
-            <li>Service</li>
-            <li>Research</li>
-            <li>Product</li>
-            <li>Writing</li>
+            <li>ElevateOS</li>
+            <li>Kiwanis Voice Club of Nippon</li>
+            <li>KIST Key Club</li>
+            <li>Lumiere research</li>
           </ul>
         </div>
       </article>
@@ -378,7 +377,7 @@ function renderSectionIntro(eyebrow, title, lead, action = '') {
       <div>
         <p class="eyebrow">${esc(eyebrow)}</p>
         <h2>${esc(title)}</h2>
-        <p class="section-lead">${esc(lead)}</p>
+        ${lead ? `<p class="section-lead">${esc(lead)}</p>` : ''}
       </div>
       ${action}
     </div>
@@ -556,38 +555,43 @@ function renderAbout() {
           <section class="section">
             ${renderSectionIntro('About', 'Background', 'Tokyo-based student at Cambridge.', `<a class="button secondary" href="/portfolio/">Portfolio</a>`)}
             <div class="narrow-copy">
-              <p>${esc('Service, research, product, and writing.')}</p>
-              <p>${esc('The thread is coordination: keep the next handoff clear, keep the record readable, and keep useful work moving.')}</p>
+              <p>${esc('Work includes ElevateOS, Kiwanis Voice Club of Nippon, KIST Key Club, and Lumiere research.')}</p>
+              <p>${esc('Based in Tokyo and moving between school, service, and product work.')}</p>
             </div>
           </section>
           <section class="section">
-            ${renderSectionIntro('Approach', 'Coordination', 'Keep the next handoff clear.')}
-            <div class="quote-block">
-              <p>${esc('Structure turns messy, human-dependent systems into something people can use and repeat.')}</p>
+            ${renderSectionIntro('Work', 'Projects', '', `<a class="button secondary" href="/portfolio/">Portfolio</a>`)}
+            <div class="panel">
+              <ul class="stack-list">
+                <li>ElevateOS</li>
+                <li>Kiwanis Voice Club of Nippon</li>
+                <li>KIST Key Club</li>
+                <li>Lumiere research</li>
+              </ul>
             </div>
           </section>
           <section class="section">
-            ${renderSectionIntro('Service', 'Moments', 'Service, school, and event moments.')}
+            ${renderSectionIntro('Service', 'Photos', 'Service and school events.')}
             ${renderMediaBoard([
-              { image: 'kiwanis', label: 'Service', title: 'Kiwanis Voice Club', summary: 'Charter ceremony and launch.', href: '/portfolio/', span: 'span-4' },
-              { image: 'keyclub', label: 'Service', title: 'KIST Key Club', summary: 'Event coordination and service work.', href: '/portfolio/', span: 'span-4' },
-              { image: 'charter1', label: 'Service', title: 'Charter Ceremony #1', summary: 'Founding moment.', href: '/portfolio/', span: 'span-4' },
-              { image: 'charter2', label: 'Service', title: 'Charter Ceremony #2', summary: 'Founding moment.', href: '/portfolio/', span: 'span-6' },
+              { image: 'kiwanis', label: 'Service', title: 'Kiwanis Voice Club', summary: 'Charter photo.', href: '/portfolio/', span: 'span-4' },
+              { image: 'keyclub', label: 'Service', title: 'KIST Key Club', summary: 'School service event.', href: '/portfolio/', span: 'span-4' },
+              { image: 'charter1', label: 'Service', title: 'Charter Ceremony #1', summary: 'Charter photo.', href: '/portfolio/', span: 'span-4' },
+              { image: 'charter2', label: 'Service', title: 'Charter Ceremony #2', summary: 'Charter photo.', href: '/portfolio/', span: 'span-6' },
             ])}
           </section>
           <section class="section">
-            ${renderSectionIntro('Experience', 'Roles', site.experienceIntro)}
+            ${renderSectionIntro('Experience', 'Roles')}
             ${renderTimeline(site.experience)}
           </section>
           <section class="section">
-            ${renderSectionIntro('Studies', 'Education', site.educationIntro)}
+            ${renderSectionIntro('Studies', 'Education')}
             ${renderTimeline(site.education)}
             <div class="credential-list">
               ${site.credentials.map((item) => `<span class="tag">${esc(item)}</span>`).join('')}
             </div>
           </section>
           <section class="section">
-            ${renderSectionIntro('Skills', 'Areas', 'Grouped by area.')}
+            ${renderSectionIntro('Skills', 'Skills')}
             ${renderTagGroups(site.skillsGroups)}
           </section>
         </div>

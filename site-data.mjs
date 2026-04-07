@@ -133,7 +133,7 @@ export const site = {
   thesis:
     'Reduce friction, keep handoffs clear, and make systems easier to run.',
   focusIntro:
-    'ElevateOS anchors the work.',
+    'ElevateOS, Kiwanis Voice Club of Nippon, KIST Key Club, and research.',
   focusItems: [
     {
       name: 'ElevateOS',
@@ -153,7 +153,7 @@ export const site = {
       label: 'Service',
       image: 'kiwanis',
       summary:
-        'Founded the first Voice Club representing Japan within the Kiwanis network. Focused on youth service, continuity, and event coordination across health, education, caregiving, and community work.',
+        'Founded the first Voice Club in Japan within the Kiwanis network. Leads youth service and event coordination.',
       bullets: [
         'Make service repeatable.',
         'Treat continuity as a system.',
@@ -165,7 +165,7 @@ export const site = {
       label: 'Research',
       image: 'portraitAlt',
       summary:
-        'Lumiere research on emoji semiotics and cognitive aging, plus project notes.',
+        'Lumiere research on emoji semiotics and cognitive aging.',
       bullets: [
         'Cross-cultural communication and interpretation.',
         'Research written for readers.',
@@ -262,14 +262,14 @@ export const site = {
       role: 'Founder and President of Kiwanis Voice Club of Nippon',
       dates: 'Jan 2026 - Present',
       summary:
-        'Founded the first Voice Club representing Japan within the Kiwanis network. Focused on youth service, continuity, and stakeholder coordination across health, education, caregiving, and community resilience.',
+        'Founded the first Voice Club in Japan within the Kiwanis network. Leads youth service and event coordination.',
     },
     {
       org: 'ElevateOS',
       role: 'Founder',
       dates: 'Jan 2026 - Present',
       summary:
-        'Building an AI-enabled education platform for IB, AP, SAT, and admissions workflows. Focused on tutoring operations, worksheet generation, past-paper simulation, admissions support, and execution infrastructure.',
+        'Building an AI-enabled education platform for IB, AP, SAT, and admissions support. Oversees product direction and tutoring operations.',
     },
     {
       org: 'Key Club International',
@@ -283,35 +283,35 @@ export const site = {
       role: 'Researcher',
       dates: 'Jun 2025 - Present',
       summary:
-        'Selected for the Lumiere Research Inclusion Foundation with full scholarship support. Authored a research proposal on culturally and generationally mediated interpretation of ambiguous emojis in Japan and China.',
+        'Lumiere Research Inclusion Foundation scholar. Working on a proposal about ambiguous emoji interpretation in Japan and China.',
     },
     {
       org: 'Independent and collaborative research',
       role: 'Research writer',
       dates: 'Jul 2024 - Present',
       summary:
-        'Authored work on emoji semiotics and cognitive aging, and drafted a concept paper on semiconductor supply-chain resilience using big data analytics and blockchain.',
+        'Writes on emoji semiotics, cognitive aging, and semiconductor supply-chain resilience.',
     },
     {
       org: 'Think College Level',
       role: 'Publisher',
       dates: 'Jun 2024 - Present',
       summary:
-        'Maintains the site for project notes and links.',
+        'Runs the site for projects, notes, and links.',
     },
     {
       org: 'Japan Cancer Society, KIST',
       role: 'President',
       dates: 'Sep 2024 - Present',
       summary:
-        'Organized a 10-kilometer interschool walkathon with 500+ participants and raised more than Y50,000 for awareness and support.',
+        'Organized a 10-kilometer walkathon with 500+ participants and raised more than Y50,000.',
     },
     {
       org: 'Recycling Initiative, KIST',
       role: 'President',
       dates: 'Aug 2024 - Present',
       summary:
-        'Tripled membership to 60 and introduced Quality Inspector roles that improved oversight and recycling efficiency by 40%.',
+        'Tripled membership to 60 and introduced Quality Inspector roles that improved recycling efficiency by 40%.',
     },
   ],
   educationIntro:
