@@ -86,7 +86,7 @@ figure {
 .page-shell {
   width: min(calc(100% - 24px), var(--max));
   margin: 0 auto;
-  padding: 16px 0 52px;
+  padding: 14px 0 44px;
 }
 
 .site-header {
@@ -97,8 +97,8 @@ figure {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  padding: 14px 16px;
-  margin-bottom: 22px;
+  padding: 12px 14px;
+  margin-bottom: 18px;
   border: 1px solid var(--line);
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.84);
@@ -117,15 +117,20 @@ figure {
 .brand-mark {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
   color: #ffffff;
   background: linear-gradient(135deg, var(--accent), #c79261);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24);
-  font-family: var(--serif);
-  font-size: 0.98rem;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 800;
   letter-spacing: 0.08em;
+}
+
+.brand-mark--glyph {
+  line-height: 1;
 }
 
 .brand-mark--portrait {
@@ -197,7 +202,7 @@ figure {
 
 .page-main {
   display: grid;
-  gap: 22px;
+  gap: 18px;
 }
 
 .hero,
@@ -213,9 +218,40 @@ figure {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
   gap: 22px;
-  padding: clamp(22px, 3.8vw, 40px);
+  padding: clamp(20px, 3.2vw, 36px);
   align-items: start;
   animation: rise 0.72s ease both;
+}
+
+.home-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 390px);
+  gap: 18px;
+  align-items: start;
+}
+
+.home-column {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+
+.about-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 390px);
+  gap: 18px;
+  align-items: start;
+}
+
+.about-column {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+
+.hero--intro {
+  grid-template-columns: minmax(0, 1fr);
+  padding: clamp(18px, 2.8vw, 32px);
 }
 
 .hero-copy {
@@ -239,7 +275,7 @@ figure {
 
 .hero-copy h1 {
   max-width: 8ch;
-  font-size: clamp(2.55rem, 4.25vw, 4.25rem);
+  font-size: clamp(2.4rem, 4vw, 4rem);
 }
 
 .hero-copy .lede {
@@ -314,7 +350,7 @@ figure {
   gap: 14px;
   align-self: start;
   position: sticky;
-  top: 92px;
+  top: 88px;
 }
 
 .hero-card,
@@ -383,7 +419,7 @@ figure {
 
 .metric-strip {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -391,8 +427,8 @@ figure {
   display: grid;
   align-content: start;
   gap: 8px;
-  min-height: 150px;
-  padding: 18px;
+  min-height: 132px;
+  padding: 16px;
 }
 
 .metric-value {
@@ -415,7 +451,7 @@ figure {
 }
 
 .section {
-  padding: clamp(22px, 3.2vw, 34px);
+  padding: clamp(20px, 3vw, 30px);
   animation: rise 0.72s ease both;
 }
 
@@ -878,6 +914,14 @@ figure {
 }
 
 @media (max-width: 980px) {
+  .home-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .about-layout {
+    grid-template-columns: 1fr;
+  }
+
   .hero {
     grid-template-columns: 1fr;
   }
@@ -900,6 +944,10 @@ figure {
   .media-grid,
   .note-grid,
   .post-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .metric-strip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 

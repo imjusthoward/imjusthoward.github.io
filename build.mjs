@@ -158,16 +158,7 @@ function renderLink(label, href, currentPath) {
 }
 
 function renderBrandMark() {
-  const media = getMedia('portraitAlt') || getMedia('portrait');
-  if (!media) {
-    return `<span class="brand-mark" aria-hidden="true">TC</span>`;
-  }
-
-  return `
-    <span class="brand-mark brand-mark--portrait" aria-hidden="true">
-      <img src="${attr(media.src)}" alt="" loading="eager" decoding="async" fetchpriority="high">
-    </span>
-  `;
+  return `<span class="brand-mark brand-mark--glyph" aria-hidden="true">HC</span>`;
 }
 
 function renderTopbar(currentPath) {
@@ -226,6 +217,8 @@ function renderPage({
   <meta name="theme-color" content="#f4f1ea">
   <link rel="canonical" href="${attr(urlFor(canonicalPath))}">
   <link rel="stylesheet" href="/assets/styles.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="shortcut icon" href="/favicon.svg">
   ${metaRobots ? `<meta name="robots" content="${attr(metaRobots)}">` : ''}
   <meta property="og:type" content="${attr(ogType)}">
   <meta property="og:title" content="${attr(title)}">
@@ -281,9 +274,36 @@ function renderHeroRail() {
   `;
 }
 
-function renderHero() {
+function renderAboutRail() {
   return `
-    <section class="hero">
+    <aside class="hero-rail">
+      <article class="hero-card hero-card-portrait">
+        ${renderMediaFigure('portraitAlt', 'eager')}
+        <div class="hero-card-copy">
+          <p class="label">Howard Chan</p>
+          <p>${esc(site.location)}</p>
+          <p>${esc(site.identityLine)}</p>
+        </div>
+      </article>
+      <article class="hero-card hero-card-note">
+        <p class="label">Focus</p>
+        <div class="hero-card-copy">
+          <p>${esc(site.focusIntro)}</p>
+          <ul class="stack-list">
+            <li>Service</li>
+            <li>Research</li>
+            <li>Product</li>
+            <li>Writing</li>
+          </ul>
+        </div>
+      </article>
+    </aside>
+  `;
+}
+
+function renderHeroIntro() {
+  return `
+    <section class="hero hero--intro">
       <div class="hero-copy">
         <p class="eyebrow">${esc(site.name)}</p>
         <h1>${esc(site.heroHeadline)}</h1>
@@ -443,35 +463,36 @@ function renderPostsPreview(posts) {
 
 function renderHome() {
   const content = joinLines([
-    renderHero(),
-    renderMetricStrip(),
     `
-      <section class="section">
-        ${renderSectionIntro('Work', 'Featured work', site.focusIntro, `<a class="button secondary" href="/about/">Background</a>`)}
-        ${renderFeatureList(site.focusItems)}
-      </section>
-    `,
-    `
-      <section class="section">
-        ${renderSectionIntro('Writing', 'Recent notes', 'Recent writing.', `<a class="button secondary" href="/blog/">Open the archive</a>`)}
-        ${renderPostsPreview(site.posts)}
-      </section>
-    `,
-    `
-      <section class="section">
-        <div class="split-section">
-          <div>
-            <p class="eyebrow">Links</p>
-            <h2>Elsewhere</h2>
-            <p class="section-lead">LinkedIn, GitHub, ElevateOS, and Crystal Century.</p>
-          </div>
-          <div class="panel">
-            <p class="label">Links</p>
-            <ul class="stack-list">
-              ${site.contactLinks.map((link) => `<li><a href="${attr(link.href)}">${esc(link.label)}</a></li>`).join('')}
-            </ul>
-          </div>
+      <section class="home-layout">
+        <div class="home-column">
+          ${renderHeroIntro()}
+          ${renderMetricStrip()}
+          <section class="section">
+            ${renderSectionIntro('Work', 'Featured work', site.focusIntro, `<a class="button secondary" href="/about/">Background</a>`)}
+            ${renderFeatureList(site.focusItems)}
+          </section>
+          <section class="section">
+            ${renderSectionIntro('Writing', 'Recent notes', 'Recent writing.', `<a class="button secondary" href="/blog/">Open the archive</a>`)}
+            ${renderPostsPreview(site.posts)}
+          </section>
+          <section class="section">
+            <div class="split-section">
+              <div>
+                <p class="eyebrow">Links</p>
+                <h2>Elsewhere</h2>
+                <p class="section-lead">LinkedIn, GitHub, ElevateOS, and Crystal Century.</p>
+              </div>
+              <div class="panel">
+                <p class="label">Links</p>
+                <ul class="stack-list">
+                  ${site.contactLinks.map((link) => `<li><a href="${attr(link.href)}">${esc(link.label)}</a></li>`).join('')}
+                </ul>
+              </div>
+            </div>
+          </section>
         </div>
+        ${renderHeroRail()}
       </section>
     `,
   ]);
@@ -498,73 +519,47 @@ function renderHome() {
 function renderAbout() {
   const content = joinLines([
     `
-      <section class="section">
-        ${renderSectionIntro('About', 'Background', 'Tokyo-based student at Cambridge.', `<a class="button secondary" href="/portfolio/">Portfolio</a>`)}
-        <div class="split-section about-split">
-          <div class="narrow-copy">
-            <p>${esc(
-              'Tokyo-based student at Cambridge. Service, research, product, and writing.'
-            )}</p>
-            <p>${esc(
-              'The thread is coordination: keep the next handoff clear, keep the record readable, and keep useful work moving.'
-            )}</p>
-          </div>
-          <div class="about-stack">
-            ${renderMediaCard({
-              image: 'portraitAlt',
-              label: 'Howard Chan',
-              title: 'Howard Chan',
-              summary: 'Tokyo · Cambridge',
-              loading: 'eager',
-            })}
-            <article class="panel">
-              <p class="label">Links</p>
-              <ul class="stack-list">
-                ${site.contactLinks.map((link) => `<li><a href="${attr(link.href)}">${esc(link.label)}</a></li>`).join('')}
-              </ul>
-            </article>
-          </div>
+      <section class="about-layout">
+        <div class="about-column">
+          <section class="section">
+            ${renderSectionIntro('About', 'Background', 'Tokyo-based student at Cambridge.', `<a class="button secondary" href="/portfolio/">Portfolio</a>`)}
+            <div class="narrow-copy">
+              <p>${esc('Service, research, product, and writing.')}</p>
+              <p>${esc('The thread is coordination: keep the next handoff clear, keep the record readable, and keep useful work moving.')}</p>
+            </div>
+          </section>
+          <section class="section">
+            ${renderSectionIntro('Approach', 'Coordination', 'Keep the next handoff clear.')}
+            <div class="quote-block">
+              <p>${esc('Structure turns messy, human-dependent systems into something people can use and repeat.')}</p>
+            </div>
+          </section>
+          <section class="section">
+            ${renderSectionIntro('Service', 'Moments', 'Service, school, and event moments.')}
+            ${renderMediaBoard([
+              { image: 'kiwanis', label: 'Service', title: 'Kiwanis Voice Club', summary: 'Charter ceremony and launch.', href: '/portfolio/', span: 'span-4' },
+              { image: 'keyclub', label: 'Service', title: 'KIST Key Club', summary: 'Event coordination and service work.', href: '/portfolio/', span: 'span-4' },
+              { image: 'charter1', label: 'Service', title: 'Charter Ceremony #1', summary: 'Founding moment.', href: '/portfolio/', span: 'span-4' },
+              { image: 'charter2', label: 'Service', title: 'Charter Ceremony #2', summary: 'Founding moment.', href: '/portfolio/', span: 'span-6' },
+            ])}
+          </section>
+          <section class="section">
+            ${renderSectionIntro('Experience', 'Roles', site.experienceIntro)}
+            ${renderTimeline(site.experience)}
+          </section>
+          <section class="section">
+            ${renderSectionIntro('Studies', 'Education', site.educationIntro)}
+            ${renderTimeline(site.education)}
+            <div class="credential-list">
+              ${site.credentials.map((item) => `<span class="tag">${esc(item)}</span>`).join('')}
+            </div>
+          </section>
+          <section class="section">
+            ${renderSectionIntro('Skills', 'Areas', 'Grouped by area.')}
+            ${renderTagGroups(site.skillsGroups)}
+          </section>
         </div>
-      </section>
-    `,
-    `
-      <section class="section">
-        ${renderSectionIntro('Approach', 'Coordination', 'Keep the next handoff clear.')}
-        <div class="quote-block">
-          <p>${esc('Structure turns messy, human-dependent systems into something people can use and repeat.')}</p>
-        </div>
-      </section>
-    `,
-    `
-      <section class="section">
-        ${renderSectionIntro('Service', 'Moments', 'Service, school, and event moments.')}
-        ${renderMediaBoard([
-          { image: 'kiwanis', label: 'Service', title: 'Kiwanis Voice Club', summary: 'Charter ceremony and launch.', href: '/portfolio/', span: 'span-4' },
-          { image: 'keyclub', label: 'Service', title: 'KIST Key Club', summary: 'Event coordination and service work.', href: '/portfolio/', span: 'span-4' },
-          { image: 'charter1', label: 'Service', title: 'Charter Ceremony #1', summary: 'Founding moment.', href: '/portfolio/', span: 'span-4' },
-          { image: 'charter2', label: 'Service', title: 'Charter Ceremony #2', summary: 'Founding moment.', href: '/portfolio/', span: 'span-6' },
-        ])}
-      </section>
-    `,
-    `
-      <section class="section">
-        ${renderSectionIntro('Experience', 'Roles', site.experienceIntro)}
-        ${renderTimeline(site.experience)}
-      </section>
-    `,
-    `
-      <section class="section">
-        ${renderSectionIntro('Studies', 'Education', site.educationIntro)}
-        ${renderTimeline(site.education)}
-        <div class="credential-list">
-          ${site.credentials.map((item) => `<span class="tag">${esc(item)}</span>`).join('')}
-        </div>
-      </section>
-    `,
-    `
-      <section class="section">
-        ${renderSectionIntro('Skills', 'Areas', 'Grouped by area.')}
-        ${renderTagGroups(site.skillsGroups)}
+        ${renderAboutRail()}
       </section>
     `,
   ]);
