@@ -27,7 +27,7 @@ const pages = [
     path: '/about/',
     file: path.join('about', 'index.html'),
     title: `About · ${site.name}`,
-    description: 'About Howard Chan.',
+    description: 'About Chak Hang (Howard) Chan.',
     bodyClass: 'page-about',
     render: renderAbout,
   },
@@ -35,7 +35,7 @@ const pages = [
     path: '/awards/',
     file: path.join('awards', 'index.html'),
     title: `Awards · ${site.name}`,
-    description: 'Selected achievements and recognition.',
+    description: 'Academic distinction, leadership, research, and certifications.',
     bodyClass: 'page-awards',
     render: renderAwards,
   },
@@ -43,7 +43,7 @@ const pages = [
     path: '/portfolio/',
     file: path.join('portfolio', 'index.html'),
     title: `Projects · ${site.name}`,
-    description: 'Projects, service work, and research.',
+    description: 'Product, service, infrastructure, and research.',
     bodyClass: 'page-portfolio',
     render: renderProjects,
   },
@@ -51,7 +51,7 @@ const pages = [
     path: '/blog/',
     file: path.join('blog', 'index.html'),
     title: `Writing · ${site.name}`,
-    description: 'Project notes and publications.',
+    description: 'Publications and short notes.',
     bodyClass: 'page-blog',
     render: renderBlogIndex,
   },
@@ -302,7 +302,7 @@ function renderHome() {
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'Person',
-      name: site.author,
+      name: site.fullName || site.author,
       url: site.url,
       sameAs: site.contactLinks.map((link) => link.href),
       alumniOf: ['University of Cambridge', 'K. International School Tokyo'],
@@ -312,12 +312,14 @@ function renderHome() {
 }
 
 function renderAbout() {
-  const intro = renderIntro(site.heroHeadline, 'Incoming HSPS student at the University of Cambridge.');
+  const intro = renderIntro(site.heroHeadline, 'Tokyo-based incoming HSPS offer holder at Peterhouse, University of Cambridge.');
 
   const sections = [
     renderSection('About Me', renderProse(site.aboutParagraphs)),
     renderSection('Education', renderEntries(site.education), 'education'),
     renderSection('Experience', renderEntries(site.experience), 'experience'),
+    renderSection('Service', renderEntries(site.service), 'service'),
+    renderSection('Skills', renderEntries(site.skills), 'skills'),
   ];
 
   return renderPage({
@@ -332,7 +334,7 @@ function renderAbout() {
       '@type': 'ProfilePage',
       mainEntity: {
         '@type': 'Person',
-        name: site.author,
+        name: site.fullName || site.author,
         sameAs: site.contactLinks.map((link) => link.href),
         description: site.tagline,
       },
@@ -341,7 +343,7 @@ function renderAbout() {
 }
 
 function renderAwards() {
-  const intro = renderIntro('Awards', 'Selected achievements and recognition.');
+  const intro = renderIntro('Awards', 'Academic distinction, leadership, research, and certifications.');
 
   const sections = site.awards.map((group, index) =>
     renderSection(group.group, renderEntries(group.items), index === 0 ? 'academic-distinction' : '')
@@ -349,7 +351,7 @@ function renderAwards() {
 
   return renderPage({
     title: `Awards · ${site.name}`,
-    description: 'Selected achievements and recognition.',
+    description: 'Academic distinction, leadership, research, and certifications.',
     canonicalPath: '/awards/',
     bodyClass: 'page-awards',
     content: `<article class="page-article">${intro}${sections.join('')}</article>`,
@@ -358,13 +360,13 @@ function renderAwards() {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
       name: `${site.name} Awards`,
-      description: 'Selected achievements and recognition.',
+      description: 'Academic distinction, leadership, research, and certifications.',
     },
   });
 }
 
 function renderProjects() {
-  const intro = renderIntro('Projects', 'Product, service, and research.');
+  const intro = renderIntro('Projects', 'Product, service, infrastructure, and research.');
 
   const sections = site.projects.map((group) =>
     renderSection(group.group, renderEntries(group.items), group.group.toLowerCase().replace(/[^a-z0-9]+/g, '-'))
@@ -387,7 +389,7 @@ function renderProjects() {
 }
 
 function renderBlogIndex() {
-  const intro = renderIntro('Writing', 'Project notes and publications.');
+  const intro = renderIntro('Writing', 'Publications and short notes.');
 
   const sections = [
     renderSection('Publications', renderEntries(site.publications), 'publications'),
@@ -407,7 +409,7 @@ function renderBlogIndex() {
 
   return renderPage({
     title: `Writing · ${site.name}`,
-    description: 'Project notes and publications.',
+    description: 'Publications and short notes.',
     canonicalPath: '/blog/',
     bodyClass: 'page-blog',
     content: `<article class="page-article">${intro}${sections.join('')}</article>`,
@@ -416,7 +418,7 @@ function renderBlogIndex() {
       '@context': 'https://schema.org',
       '@type': 'Blog',
       name: `${site.name} Writing`,
-      description: 'Project notes and publications.',
+      description: 'Publications and short notes.',
     },
   });
 }
@@ -438,7 +440,7 @@ function renderPost(post) {
       '@type': 'BlogPosting',
       headline: post.title,
       datePublished: post.dateIso || today,
-      author: { '@type': 'Person', name: site.author },
+      author: { '@type': 'Person', name: site.fullName || site.author },
       description: post.summary,
       mainEntityOfPage: `${site.url}/blog/${post.slug}/`,
     },
@@ -454,7 +456,7 @@ function renderContact() {
 
   return renderPage({
     title: `Contact · ${site.name}`,
-    description: 'LinkedIn, WhatsApp, GitHub, Wantedly, Facebook, Instagram, ElevateOS, and Crystal Century.',
+    description: 'LinkedIn, WhatsApp, GitHub, Wantedly, ElevateOS, Pulse Manila 2026, Crystal Century, Facebook, Instagram, and email.',
     canonicalPath: '/contact/',
     bodyClass: 'page-contact',
     content: `<article class="page-article">${intro}${sections.join('')}</article>`,
@@ -464,7 +466,7 @@ function renderContact() {
       '@type': 'ContactPage',
       mainEntity: {
         '@type': 'Person',
-        name: site.author,
+        name: site.fullName || site.author,
         sameAs: site.contactLinks.map((link) => link.href),
       },
     },
@@ -523,13 +525,22 @@ function renderLlms() {
 
 ${site.tagline}
 
-Howard Chan's profile, awards, projects, writing, and contact links.
+Howard Chan's profile, awards, projects, research, service, and contact links.
 
 ## Pages
 ${pagesList.map(([label, route]) => `- ${label}: ${site.url}${route === '/' ? '/' : route}`).join('\n')}
 
+## About
+- ${site.aboutParagraphs.join(' ')}
+
 ## Writing
 ${site.posts.map((post) => `- ${post.title}: ${site.url}/blog/${post.slug}/`).join('\n')}
+
+  ## Volunteer Service
+${site.service.map((item) => `- ${item.title}: ${item.summary}`).join('\n')}
+
+## Skills
+${site.skills.map((item) => `- ${item.title}: ${item.summary}`).join('\n')}
 
 ## Links
 ${site.contactLinks.map((link) => `- ${link.label}: ${link.href}`).join('\n')}
@@ -543,7 +554,7 @@ ${site.contactLinks.map((link) => `- ${link.label}: ${link.href}`).join('\n')}
 - Crystal Century
 - Think College Level
 
-## Service
+  ## Leadership
 - Kiwanis Voice Club of Nippon
 - KIST Key Club
 - Japan Cancer Society, KIST

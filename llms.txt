@@ -2,7 +2,7 @@
 
 Cambridge (HSPS) Offer Holder | President of Kiwanis Voice Club of Nippon | CEO of ElevateOS | Lumiere Scholar
 
-Howard Chan's profile, awards, projects, writing, and contact links.
+Howard Chan's profile, awards, projects, research, service, and contact links.
 
 ## Pages
 - Home: https://thinkcollegelevel.com/
@@ -12,20 +12,35 @@ Howard Chan's profile, awards, projects, writing, and contact links.
 - Writing: https://thinkcollegelevel.com/blog/
 - Contact: https://thinkcollegelevel.com/contact/
 
+## About
+- I am Chak Hang (Howard) Chan, a Tokyo-based builder interested in politics, international systems, AI, service, and entrepreneurship. I build projects at the intersection of technology and real-world coordination: Kiwanis Voice Club of Nippon, Pulse Manila 2026, ElevateOS, and related systems work. My research has focused on cross-cultural communication and cognitive systems, including a top-5% Lumiere project scheduled for publication in NHSJS. Long term, I want to build technology that works in real social and international settings, not only in theory.
+
 ## Writing
 - ElevateOS: https://thinkcollegelevel.com/blog/elevateos/
 - Pulse Manila 2026: https://thinkcollegelevel.com/blog/pulse-manila-2026/
 - Katalyst: https://thinkcollegelevel.com/blog/katalyst/
 
+  ## Volunteer Service
+- Salvation Army SKY Family and Child Development Centre: Gardening and pest removal with SEN children, plus day-to-day support work.
+- HKSKH Lok Man Kwok Fong Hin Comprehensive Service Centre: Board-game activities with dementia patients and a five-day Tokyo tour plan tailored to participant ability.
+- Shirahige Nursing Home, Sumida-ku: Meals, mobility support, and recreational activities with residents.
+- Tokyo / Japan Red Cross: Wheelchair sports event leadership and disability-centered volunteer work.
+
+## Skills
+- Languages: English, Cantonese, Mandarin, Japanese.
+- Stack: TypeScript, Next.js / React, PostgreSQL / SQL, Git / GitHub, Python, Prisma, NextAuth, OpenAI, Stripe, Cloud Run, Figma, Notion, Google Workspace.
+
 ## Links
 - Think College Level: https://thinkcollegelevel.com
 - LinkedIn: https://www.linkedin.com/in/howardchan2008/
+- LinkedIn (previous): https://www.linkedin.com/in/chakhanghoward-chan/
 - GitHub: https://github.com/imjusthoward/
 - Wantedly: https://www.wantedly.com/id/chakhang_chan
 - Email: mailto:chakhanghowardchan2008@gmail.com
 - Facebook: https://www.facebook.com/imjusthoward
 - Instagram: https://www.instagram.com/imjusthoward/
 - ElevateOS: https://elevateos.org
+- Pulse Manila 2026: https://pulse-kiwanis-309064718968.us-west1.run.app/
 - Crystal Century: https://crystalcentury.com
 - WhatsApp: https://wa.me/85293442294
 
@@ -38,7 +53,7 @@ Howard Chan's profile, awards, projects, writing, and contact links.
 - Crystal Century
 - Think College Level
 
-## Service
+  ## Leadership
 - Kiwanis Voice Club of Nippon
 - KIST Key Club
 - Japan Cancer Society, KIST
