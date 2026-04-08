@@ -7,11 +7,11 @@ Think College Level is a personal site for projects and links.
 ## Pages
 - Home: https://thinkcollegelevel.com/
 - Portfolio: https://thinkcollegelevel.com/portfolio/
-- Projects: https://thinkcollegelevel.com/blog/
+- Writing: https://thinkcollegelevel.com/blog/
 - About: https://thinkcollegelevel.com/about/
 - Contact: https://thinkcollegelevel.com/contact/
 
-## Posts
+## Writing
 - ElevateOS: https://thinkcollegelevel.com/blog/elevateos/
 - Pulse Manila 2026: https://thinkcollegelevel.com/blog/pulse-manila-2026/
 - Katalyst: https://thinkcollegelevel.com/blog/katalyst/
