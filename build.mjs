@@ -3,7 +3,7 @@ import path from 'node:path';
 import { site } from './site-data.mjs';
 
 const root = process.cwd();
-const today = '2026-04-07';
+const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Tokyo' }).format(new Date());
 
 const pages = [
   {
@@ -33,8 +33,8 @@ const pages = [
   {
     path: '/blog/',
     file: path.join('blog', 'index.html'),
-    title: `Projects · ${site.name}`,
-    description: 'Project writeups on ElevateOS, Pulse, and Katalyst.',
+    title: `Writing · ${site.name}`,
+    description: 'Project notes on ElevateOS, Pulse, and Katalyst.',
     bodyClass: 'page-blog',
     render: renderBlogIndex,
   },
@@ -68,6 +68,8 @@ const postPages = site.posts.map((post) => ({
 await main();
 
 async function main() {
+  await cleanupMediaAssets();
+
   for (const page of [...pages, ...postPages]) {
     await writeOutput(page.file, page.render(page));
   }
@@ -108,89 +110,13 @@ function joinLines(lines) {
   return lines.filter(Boolean).join('\n');
 }
 
-function getMedia(key) {
-  return site.media?.[key];
-}
-
-function renderMediaFigure(key, loading = 'lazy') {
-  const media = getMedia(key);
-  if (!media) {
-    return '';
-  }
-
-  const frameClass = media.frame ? ` media-frame--${media.frame}` : '';
-
-  return `
-    <figure class="media-frame${frameClass}">
-      <img src="${attr(media.src)}" alt="${attr(media.alt)}" loading="${attr(loading)}" decoding="async">
-    </figure>
-  `;
-}
-
-function renderMediaCard({ image, label, title, summary, href, span = '', loading = 'lazy' }) {
-  const classes = ['media-card'];
-  if (span) {
-    classes.push(span);
-  }
-
-  const inner = `
-    ${image ? renderMediaFigure(image, loading) : ''}
-    <div class="media-copy">
-      ${label ? `<p class="label">${esc(label)}</p>` : ''}
-      <h3>${esc(title)}</h3>
-      ${summary ? `<p>${esc(summary)}</p>` : ''}
-    </div>
-  `;
-
-  if (href) {
-    return `<a class="${classes.join(' ')}" href="${attr(href)}">${inner}</a>`;
-  }
-
-  return `<article class="${classes.join(' ')}">${inner}</article>`;
-}
-
-function renderMediaBoard(items) {
-  return `
-    <div class="media-grid">
-      ${items.map((item) => renderMediaCard(item)).join('')}
-    </div>
-  `;
-}
-
-function renderLink(label, href, currentPath) {
+function renderLink(href, label, currentPath) {
   const active = currentPath === href ? ' aria-current="page"' : '';
   return `<a href="${attr(href)}"${active}>${esc(label)}</a>`;
 }
 
 function renderBrandMark() {
-  if (site.brandMark?.src) {
-    return `
-      <span class="brand-mark brand-mark--image" aria-hidden="true">
-        <img src="${attr(site.brandMark.src)}" alt="" width="40" height="40" loading="eager" decoding="async">
-      </span>
-    `;
-  }
-
-  return `<span class="brand-mark brand-mark--glyph" aria-hidden="true">HC</span>`;
-}
-
-function renderLinkGroups(groups) {
-  return `
-    <div class="link-groups">
-      ${groups
-        .map(
-          (group) => `
-            <article class="panel link-group">
-              <p class="label">${esc(group.group)}</p>
-              <div class="footer-links link-grid">
-                ${group.items.map((item) => `<a href="${attr(item.href)}">${esc(item.label)}</a>`).join('')}
-              </div>
-            </article>
-          `
-        )
-        .join('')}
-    </div>
-  `;
+  return `<span class="brand-mark brand-mark--glyph" aria-hidden="true">${esc(site.brandMark?.text || 'HC')}</span>`;
 }
 
 function renderTopbar(currentPath) {
@@ -213,38 +139,137 @@ function renderTopbar(currentPath) {
           </span>
         </a>
         <nav class="site-nav" aria-label="Primary">
-          ${nav.map(([label, href]) => renderLink(label, href, currentPath)).join('')}
+          ${nav.map(([label, href]) => renderLink(href, label, currentPath)).join('')}
         </nav>
       </div>
     </header>
   `;
 }
 
-function renderHeroImage(key) {
-  const media = getMedia(key);
-  if (!media) {
-    return '';
-  }
-
+function renderHero({ kicker = '', title, subtitle = '', actions = [], tags = [], className = '' }) {
   return `
-    <figure class="hero-banner-media" aria-hidden="true">
-      <img src="${attr(media.src)}" alt="" loading="eager" decoding="async">
-    </figure>
+    <section class="hero-panel ${className}">
+      ${kicker ? `<p class="eyebrow">${esc(kicker)}</p>` : ''}
+      <h1>${esc(title)}</h1>
+      ${subtitle ? `<p class="hero-subtitle">${esc(subtitle)}</p>` : ''}
+      ${
+        actions.length
+          ? `<div class="actions">${actions
+              .map((action) => `<a class="button ${action.primary ? 'primary' : 'secondary'}" href="${attr(action.href)}">${esc(action.label)}</a>`)
+              .join('')}</div>`
+          : ''
+      }
+      ${
+        tags.length
+          ? `<div class="hero-tags">${tags.map((tag) => `<span class="tag">${esc(tag)}</span>`).join('')}</div>`
+          : ''
+      }
+    </section>
   `;
 }
 
-function renderHeroBanner({ image, kicker = '', title, subtitle = '', className = '', align = 'center' }) {
+function renderSectionIntro(eyebrow, title, lead = '', action = '') {
   return `
-    <section class="hero-banner ${className}">
-      ${renderHeroImage(image)}
-      <div class="hero-banner-scrim"></div>
-      <div class="band-inner hero-banner-inner hero-banner-inner--${align}">
-        ${kicker ? `<p class="hero-kicker">${esc(kicker)}</p>` : ''}
-        <h1>${esc(title)}</h1>
-        ${subtitle ? `<p class="hero-subtitle">${esc(subtitle)}</p>` : ''}
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">${esc(eyebrow)}</p>
+        <h2>${esc(title)}</h2>
+        ${lead ? `<p class="section-lead">${esc(lead)}</p>` : ''}
       </div>
-      <a class="hero-scroll" href="#main-content" aria-label="Scroll to content">⌄</a>
-    </section>
+      ${action}
+    </div>
+  `;
+}
+
+function renderMetricGrid(metrics) {
+  return `
+    <div class="metric-grid">
+      ${metrics
+        .map(
+          (metric) => `
+            <article class="panel metric-card">
+              <p class="metric-value">${esc(metric.value)}</p>
+              <p class="metric-label">${esc(metric.label)}</p>
+              <p class="metric-detail">${esc(metric.detail)}</p>
+            </article>
+          `
+        )
+        .join('')}
+    </div>
+  `;
+}
+
+function renderCardGrid(items, variant = 'feature') {
+  return `
+    <div class="card-grid card-grid--${variant}">
+      ${items
+        .map(
+          (item) => `
+            <article class="panel text-card text-card--${variant}">
+              <p class="label">${esc(item.label || (variant === 'note' ? 'Project' : 'Focus'))}</p>
+              <h3>${esc(item.name)}</h3>
+              <p>${esc(item.summary)}</p>
+              ${
+                item.bullets?.length
+                  ? `<ul>${item.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join('')}</ul>`
+                  : ''
+              }
+              ${item.href ? `<p class="card-link"><a href="${attr(item.href)}">Open ${esc(item.name)}</a></p>` : ''}
+            </article>
+          `
+        )
+        .join('')}
+    </div>
+  `;
+}
+
+function renderFeatureCards(items) {
+  return renderCardGrid(items, 'feature');
+}
+
+function renderNoteCards(items) {
+  return renderCardGrid(items, 'note');
+}
+
+function renderTimeline(items) {
+  return `
+    <div class="timeline">
+      ${items
+        .map(
+          (item) => `
+            <article class="timeline-item">
+              <div class="timeline-meta">
+                <p class="timeline-org">${esc(item.org || item.school)}</p>
+                <p class="timeline-dates">${esc(item.dates)}</p>
+              </div>
+              <div class="timeline-body">
+                <h3>${esc(item.role || item.degree)}</h3>
+                <p>${esc(item.summary)}</p>
+              </div>
+            </article>
+          `
+        )
+        .join('')}
+    </div>
+  `;
+}
+
+function renderTagGroups(groups) {
+  return `
+    <div class="tag-groups">
+      ${groups
+        .map(
+          (group) => `
+            <section class="panel tag-group">
+              <p class="label">${esc(group.group)}</p>
+              <div class="tag-list">
+                ${group.items.map((item) => `<span class="tag">${esc(item)}</span>`).join('')}
+              </div>
+            </section>
+          `
+        )
+        .join('')}
+    </div>
   `;
 }
 
@@ -265,6 +290,56 @@ function renderPostList(posts) {
           `
         )
         .join('')}
+    </div>
+  `;
+}
+
+function renderLinkGroups(groups) {
+  return `
+    <div class="link-groups">
+      ${groups
+        .map(
+          (group) => `
+            <article class="panel link-group">
+              <p class="label">${esc(group.group)}</p>
+              <div class="footer-links link-grid">
+                ${group.items.map((item) => `<a href="${attr(item.href)}">${esc(item.label)}</a>`).join('')}
+              </div>
+            </article>
+          `
+        )
+        .join('')}
+    </div>
+  `;
+}
+
+function renderSidebar() {
+  return `
+    <div class="sidebar-stack">
+      <article class="panel profile-card">
+        <img
+          class="profile-photo"
+          src="${attr(site.profilePhoto.src)}"
+          alt="${attr(site.profilePhoto.alt)}"
+          width="92"
+          height="120"
+          loading="eager"
+          decoding="async"
+        >
+        <div class="profile-copy">
+          <p class="label">${esc(site.author)}</p>
+          <p>${esc(site.location)}</p>
+          <p>${esc(site.identityLine)}</p>
+        </div>
+      </article>
+      <article class="panel sidebar-panel">
+        <p class="label">Current focus</p>
+        <p class="sidebar-lead">${esc(site.focusIntro)}</p>
+        <ul class="stack-list">
+          ${site.currentFocus.map((item) => `<li>${esc(item)}</li>`).join('')}
+        </ul>
+      </article>
+      ${renderLinkGroups(site.linkGroups)}
     </div>
   `;
 }
@@ -299,7 +374,7 @@ function renderPage({
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="${attr(description)}">
-  <meta name="theme-color" content="#f4f1ea">
+  <meta name="theme-color" content="#101418">
   <link rel="canonical" href="${attr(urlFor(canonicalPath))}">
   <link rel="stylesheet" href="/assets/styles.css">
   <link rel="icon" href="/favicon.png" type="image/png">
@@ -318,7 +393,14 @@ function renderPage({
   <div class="page-shell">
     ${renderTopbar(canonicalPath)}
     <main id="main-content" class="page-main">
-${content}
+      <div class="page-layout">
+        <div class="page-column">
+          ${content}
+        </div>
+        <aside class="page-sidebar" aria-label="Profile and links">
+          ${renderSidebar()}
+        </aside>
+      </div>
     </main>
     ${renderFooter()}
   </div>
@@ -327,279 +409,32 @@ ${content}
 `;
 }
 
-function renderHeroRail() {
-  return `
-    <aside class="hero-rail">
-      <article class="hero-card hero-card-portrait">
-        ${renderMediaFigure('portrait', 'eager')}
-        <div class="hero-card-copy">
-          <p class="label">Howard Chan</p>
-          <p>${esc(site.location)}</p>
-          <p>${esc(site.identityLine)}</p>
-        </div>
-      </article>
-      <article class="hero-card hero-card-note">
-        <p class="label">Work</p>
-        <div class="hero-card-copy">
-          <p>${esc(site.focusIntro)}</p>
-          <ul class="stack-list">
-            <li>ElevateOS</li>
-            <li>Kiwanis Voice Club of Nippon</li>
-            <li>Lumiere research</li>
-            <li>Writing</li>
-          </ul>
-        </div>
-      </article>
-      <article class="hero-card hero-links">
-        <p class="label">Links</p>
-        <div class="footer-links hero-link-cloud">
-          ${site.contactLinks.map((link) => `<a href="${attr(link.href)}">${esc(link.label)}</a>`).join('')}
-        </div>
-      </article>
-    </aside>
-  `;
-}
-
-function renderAboutRail() {
-  return `
-    <aside class="hero-rail">
-      <article class="hero-card hero-card-portrait">
-        ${renderMediaFigure('portraitAlt', 'eager')}
-        <div class="hero-card-copy">
-          <p class="label">Howard Chan</p>
-          <p>${esc(site.location)}</p>
-          <p>${esc(site.identityLine)}</p>
-        </div>
-      </article>
-      <article class="hero-card hero-card-note">
-        <p class="label">Work</p>
-        <div class="hero-card-copy">
-          <ul class="stack-list">
-            <li>ElevateOS</li>
-            <li>Kiwanis Voice Club of Nippon</li>
-            <li>KIST Key Club</li>
-            <li>Lumiere research</li>
-          </ul>
-        </div>
-      </article>
-    </aside>
-  `;
-}
-
-function renderHeroIntro() {
-  return `
-    <section class="hero hero--intro">
-      <div class="hero-copy">
-        <p class="eyebrow">${esc(site.name)}</p>
-        <h1>${esc(site.heroHeadline)}</h1>
-        <p class="lede">${esc(site.heroLede)}</p>
-        <div class="actions">
-          ${site.heroActions
-            .map((action, index) => `<a class="button ${index === 0 ? 'primary' : 'secondary'}" href="${attr(action.href)}">${esc(action.label)}</a>`)
-            .join('')}
-        </div>
-        <div class="hero-tags">
-          ${site.heroNotes.map((item) => `<span class="tag tag-dark">${esc(item)}</span>`).join('')}
-        </div>
-      </div>
-    </section>
-  `;
-}
-
-function renderMetricStrip() {
-  return `
-    <section class="metric-strip">
-      ${site.metrics
-        .map(
-          (metric) => `
-            <article class="metric">
-              <p class="metric-value">${esc(metric.value)}</p>
-              <p class="metric-label">${esc(metric.label)}</p>
-              <p class="metric-detail">${esc(metric.detail)}</p>
-            </article>
-          `
-        )
-        .join('')}
-    </section>
-  `;
-}
-
-function renderSectionIntro(eyebrow, title, lead, action = '') {
-  return `
-    <div class="section-head">
-      <div>
-        <p class="eyebrow">${esc(eyebrow)}</p>
-        <h2>${esc(title)}</h2>
-        ${lead ? `<p class="section-lead">${esc(lead)}</p>` : ''}
-      </div>
-      ${action}
-    </div>
-  `;
-}
-
-function renderFeatureList(items) {
-  return `
-    <div class="feature-stack">
-      ${items
-        .map(
-          (item) => `
-            <article class="feature-row ${item.label === 'Work' ? 'feature-lead' : ''} ${item.image ? 'feature-with-media' : ''}">
-              <div class="feature-meta">
-                <p class="label">${esc(item.label || 'Focus')}</p>
-                <h3>${esc(item.name)}</h3>
-              </div>
-              <div class="feature-body">
-                ${item.image ? renderMediaFigure(item.image) : ''}
-                <p>${esc(item.summary)}</p>
-                <ul>
-                  ${item.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join('')}
-                </ul>
-                ${item.href ? `<p class="feature-link"><a href="${attr(item.href)}">Open ${esc(item.name)}</a></p>` : ''}
-              </div>
-            </article>
-          `
-        )
-        .join('')}
-    </div>
-  `;
-}
-
-function renderTimeline(items) {
-  return `
-    <div class="timeline">
-      ${items
-        .map(
-          (item) => `
-            <article class="timeline-item">
-              <div class="timeline-meta">
-                <p class="timeline-org">${esc(item.org || item.school)}</p>
-                <p class="timeline-dates">${esc(item.dates)}</p>
-              </div>
-              <div class="timeline-body">
-                <h3>${esc(item.role || item.degree)}</h3>
-                <p>${esc(item.summary)}</p>
-              </div>
-            </article>
-          `
-        )
-        .join('')}
-    </div>
-  `;
-}
-
-function renderTagGroups(groups) {
-  return `
-    <div class="tag-groups">
-      ${groups
-        .map(
-          (group) => `
-            <section class="tag-group">
-              <p class="label">${esc(group.group)}</p>
-              <div class="tag-list">
-                ${group.items.map((item) => `<span class="tag">${esc(item)}</span>`).join('')}
-              </div>
-            </section>
-          `
-        )
-        .join('')}
-    </div>
-  `;
-}
-
-function renderNotes(items) {
-  return `
-    <div class="note-grid">
-      ${items
-        .map(
-          (item) => `
-            <article class="note-card ${item.image ? 'note-card-media' : ''}">
-              <p class="label">${esc(item.name)}</p>
-              ${item.image ? renderMediaFigure(item.image) : ''}
-              <p>${esc(item.summary)}</p>
-              <ul>
-                ${item.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join('')}
-              </ul>
-            </article>
-          `
-        )
-        .join('')}
-    </div>
-  `;
-}
-
-function renderPostsPreview(posts) {
-  return `
-    <div class="post-grid">
-      ${posts
-        .map(
-          (post) => `
-            <article class="post-card">
-              <h3><a href="/blog/${attr(post.slug)}/">${esc(post.title)}</a></h3>
-              <p class="post-card-meta">${esc(post.date)} · ${esc(post.readTime)}</p>
-              <p>${esc(post.summary)}</p>
-            </article>
-          `
-        )
-        .join('')}
-    </div>
-  `;
-}
-
 function renderHome() {
   const content = joinLines([
     `
-      ${renderHeroBanner({
-        image: 'mural',
+      ${renderHero({
         kicker: site.name,
         title: site.heroHeadline,
-        subtitle: site.heroLede,
-        className: 'hero-banner--home',
+        subtitle: site.homeSummary,
+        actions: site.heroActions,
+        tags: site.heroNotes,
+        className: 'hero-panel--home',
       })}
-      <section class="page-band page-band--intro" id="about">
-        <div class="band-inner split-layout about-split">
-          <div class="band-copy">
-            <p class="eyebrow">About me</p>
-            <h2>About me</h2>
-            <div class="narrow-copy">
-              <p>Tokyo-based student at Cambridge.</p>
-              <p>Work spans ElevateOS, Kiwanis Voice Club of Nippon, KIST Key Club, and Lumiere research.</p>
-              <p>Education, service, product, and writing stay in one place here.</p>
-            </div>
-            <ul class="fact-list">
-              <li>Cambridge (HSPS) offer holder</li>
-              <li>Tokyo based</li>
-              <li>Built around ElevateOS</li>
-              <li>Edited from git</li>
-            </ul>
-          </div>
-          <figure class="feature-media feature-media--portrait">
-            ${renderMediaFigure('portraitAlt', 'eager')}
-          </figure>
-        </div>
+      <section class="page-section">
+        ${renderSectionIntro('At a glance', 'Metrics', 'Concrete numbers from the work.')}
+        ${renderMetricGrid(site.metrics)}
       </section>
-      <section class="page-band page-band--alt">
-        <div class="band-inner">
-          ${renderSectionIntro('Projects', 'Projects', '', `<a class="button secondary" href="/portfolio/">Portfolio</a>`)}
-          ${renderFeatureList(site.focusItems)}
-        </div>
+      <section class="page-section">
+        ${renderSectionIntro('Work', 'Current work', site.focusIntro)}
+        ${renderFeatureCards(site.focusItems)}
       </section>
-      <section class="page-band">
-        <div class="band-inner">
-          ${renderSectionIntro('Projects', 'More projects')}
-          ${renderNotes(site.projects)}
-        </div>
+      <section class="page-section">
+        ${renderSectionIntro('Projects', 'Selected projects', 'Product, service, and infrastructure.')}
+        ${renderNoteCards(site.projects)}
       </section>
-      <section class="page-band page-band--alt">
-        <div class="band-inner">
-          ${renderSectionIntro('Writing', 'Writing', 'Recent project writeups.', `<a class="button secondary" href="/blog/">Writing</a>`)}
-          ${renderPostList(site.posts)}
-        </div>
-      </section>
-      <section class="page-band">
-        <div class="band-inner">
-          ${renderSectionIntro('Links', 'Links', '', `<a class="button secondary" href="/contact/">Contact</a>`)}
-          ${renderLinkGroups(site.linkGroups)}
-        </div>
+      <section class="page-section">
+        ${renderSectionIntro('Writing', 'Recent notes', 'Project writeups and updates.')}
+        ${renderPostList(site.posts)}
       </section>
     `,
   ]);
@@ -618,7 +453,7 @@ function renderHome() {
       url: site.url,
       sameAs: sameAsLinks(),
       alumniOf: ['University of Cambridge', 'K. International School Tokyo'],
-      description: site.thesis,
+      description: site.tagline,
     },
   });
 }
@@ -626,59 +461,41 @@ function renderHome() {
 function renderAbout() {
   const content = joinLines([
     `
-      ${renderHeroBanner({
-        image: 'kiwanis',
+      ${renderHero({
         kicker: site.name,
-        title: 'About Me',
-        subtitle: 'Tokyo-based student at Cambridge.',
-        className: 'hero-banner--about',
+        title: 'About',
+        subtitle: 'Background, experience, education, and skills.',
+        actions: [
+          { label: 'Portfolio', href: '/portfolio/' },
+          { label: 'Contact', href: '/contact/' },
+        ],
+        className: 'hero-panel--about',
       })}
-      <section class="page-band page-band--intro">
-        <div class="band-inner split-layout about-split">
-          <div class="band-copy">
-            <p class="eyebrow">Background</p>
-            <h2>Background</h2>
-            <div class="narrow-copy">
-              <p>ElevateOS, Kiwanis Voice Club of Nippon, KIST Key Club, and Lumiere research.</p>
-              <p>Based in Tokyo. School, service, and product work keep the schedule full.</p>
-            </div>
-          </div>
-          <figure class="feature-media feature-media--portrait">
-            ${renderMediaFigure('portraitAlt', 'eager')}
-          </figure>
+      <section class="page-section">
+        ${renderSectionIntro('Background', 'Background', 'Tokyo-based student at Cambridge.')}
+        <div class="prose-panel panel">
+          <p>Work spans ElevateOS, Kiwanis Voice Club of Nippon, KIST Key Club, and research.</p>
+          <p>Education, service, product, and writing stay in one place here.</p>
         </div>
       </section>
-      <section class="page-band page-band--alt">
-        <div class="band-inner">
-          ${renderSectionIntro('Experience', 'Professional experience')}
-          ${renderTimeline(site.experience)}
+      <section class="page-section">
+        ${renderSectionIntro('Experience', 'Experience')}
+        ${renderTimeline(site.experience)}
+      </section>
+      <section class="page-section">
+        ${renderSectionIntro('Education', 'Education')}
+        ${renderTimeline(site.education)}
+        <div class="credential-list">
+          ${site.credentials.map((item) => `<span class="tag">${esc(item)}</span>`).join('')}
         </div>
       </section>
-      <section class="page-band">
-        <div class="band-inner split-layout">
-          <div>
-            ${renderSectionIntro('Education', 'Education')}
-            ${renderTimeline(site.education)}
-            <div class="credential-list">
-              ${site.credentials.map((item) => `<span class="tag">${esc(item)}</span>`).join('')}
-            </div>
-          </div>
-          <div>
-            ${renderSectionIntro('Service', 'Selected activities')}
-            ${renderMediaBoard([
-              { image: 'kiwanis', label: 'Service', title: 'Kiwanis Voice Club', summary: 'Charter ceremony and launch.', href: '/portfolio/', span: 'span-4' },
-              { image: 'keyclub', label: 'Service', title: 'KIST Key Club', summary: 'Event coordination and service work.', href: '/portfolio/', span: 'span-4' },
-              { image: 'charter1', label: 'Service', title: 'Charter Ceremony #1', summary: 'Founding moment.', href: '/portfolio/', span: 'span-4' },
-              { image: 'charter2', label: 'Service', title: 'Charter Ceremony #2', summary: 'Founding moment.', href: '/portfolio/', span: 'span-6' },
-            ])}
-          </div>
-        </div>
+      <section class="page-section">
+        ${renderSectionIntro('Service', 'Service and projects')}
+        ${renderNoteCards(site.serviceProjects)}
       </section>
-      <section class="page-band page-band--alt">
-        <div class="band-inner">
-          ${renderSectionIntro('Skills', 'Skills')}
-          ${renderTagGroups(site.skillsGroups)}
-        </div>
+      <section class="page-section">
+        ${renderSectionIntro('Skills', 'Skills')}
+        ${renderTagGroups(site.skillsGroups)}
       </section>
     `,
   ]);
@@ -697,7 +514,7 @@ function renderAbout() {
         '@type': 'Person',
         name: site.author,
         sameAs: sameAsLinks(),
-        description: site.thesis,
+        description: site.tagline,
       },
     },
   });
@@ -706,57 +523,46 @@ function renderAbout() {
 function renderPortfolio() {
   const content = joinLines([
     `
-      ${renderHeroBanner({
-        image: 'elevateos',
+      ${renderHero({
         kicker: site.name,
-        title: 'Projects and Sharings',
-        subtitle: 'Student projects, service, research, and writing.',
-        className: 'hero-banner--portfolio',
+        title: 'Portfolio',
+        subtitle: 'Projects, service, and research.',
+        actions: [
+          { label: 'About', href: '/about/' },
+          { label: 'Writing', href: '/blog/' },
+        ],
+        className: 'hero-panel--portfolio',
       })}
-      <section class="page-band page-band--intro">
-        <div class="band-inner">
-          ${renderSectionIntro('Projects', 'Student projects', '', `<a class="button secondary" href="/about/">About</a>`)}
-          ${renderFeatureList(site.focusItems)}
-        </div>
+      <section class="page-section">
+        ${renderSectionIntro('Work', 'Current work', site.focusIntro)}
+        ${renderFeatureCards(site.focusItems)}
       </section>
-    `,
-    `
-      <section class="page-band page-band--alt">
-        <div class="band-inner">
-          ${renderSectionIntro('Projects', 'More projects')}
-          ${renderNotes(site.projects)}
-        </div>
+      <section class="page-section">
+        ${renderSectionIntro('Projects', 'Projects', 'Short notes on product and infrastructure.')}
+        ${renderNoteCards(site.projects)}
       </section>
-    `,
-    `
-      <section class="page-band">
-        <div class="band-inner">
-          ${renderSectionIntro('Service', 'Service')}
-          ${renderNotes(site.serviceProjects)}
-        </div>
+      <section class="page-section">
+        ${renderSectionIntro('Service', 'Service')}
+        ${renderNoteCards(site.serviceProjects)}
       </section>
-    `,
-    `
-      <section class="page-band page-band--alt">
-        <div class="band-inner">
-          ${renderSectionIntro('Research', 'Research')}
-          <div class="split-section">
-            <div class="panel">
-              <p class="label">Research areas</p>
-              <ul class="fact-list">
-                <li>Cross-cultural communication</li>
-                <li>Cognitive systems and aging</li>
-                <li>Semiconductor supply-chain resilience</li>
-                <li>Generational and cultural interpretation</li>
-              </ul>
+      <section class="page-section">
+        ${renderSectionIntro('Research', 'Research')}
+        <div class="split-grid">
+          <article class="panel">
+            <p class="label">Research areas</p>
+            <ul class="stack-list">
+              <li>Cross-cultural communication</li>
+              <li>Cognitive systems and aging</li>
+              <li>Semiconductor supply-chain resilience</li>
+              <li>Generational and cultural interpretation</li>
+            </ul>
+          </article>
+          <article class="panel">
+            <p class="label">Credentials</p>
+            <div class="credential-list">
+              ${site.credentials.map((item) => `<span class="tag">${esc(item)}</span>`).join('')}
             </div>
-            <div class="panel">
-              <p class="label">Credentials</p>
-              <div class="credential-list">
-                ${site.credentials.map((item) => `<span class="tag">${esc(item)}</span>`).join('')}
-              </div>
-            </div>
-          </div>
+          </article>
         </div>
       </section>
     `,
@@ -781,25 +587,23 @@ function renderPortfolio() {
 function renderBlogIndex() {
   const content = joinLines([
     `
-      ${renderHeroBanner({
-        image: 'katalyst',
+      ${renderHero({
         kicker: site.name,
         title: 'Writing',
-        subtitle: 'Project writeups on ElevateOS, Pulse, and Katalyst.',
-        className: 'hero-banner--writing',
+        subtitle: 'Project notes on ElevateOS, Pulse, and Katalyst.',
+        actions: [{ label: 'Contact', href: '/contact/' }],
+        className: 'hero-panel--writing',
       })}
-      <section class="page-band page-band--intro">
-        <div class="band-inner">
-          ${renderSectionIntro('Writing', 'Writing', '', `<a class="button secondary" href="/contact/">Contact</a>`)}
-          ${renderPostList(site.posts)}
-        </div>
+      <section class="page-section">
+        ${renderSectionIntro('Writing', 'Recent notes', 'Project writeups and updates.')}
+        ${renderPostList(site.posts)}
       </section>
     `,
   ]);
 
   return renderPage({
     title: `Writing · ${site.name}`,
-    description: 'Project writeups on ElevateOS, Pulse, and Katalyst.',
+    description: 'Project notes on ElevateOS, Pulse, and Katalyst.',
     canonicalPath: '/blog/',
     bodyClass: 'page-blog',
     content,
@@ -808,38 +612,30 @@ function renderBlogIndex() {
       '@context': 'https://schema.org',
       '@type': 'Blog',
       name: `${site.name} Writing`,
-      description: `Project writeups on ElevateOS, Pulse, and Katalyst.`,
+      description: 'Project notes on ElevateOS, Pulse, and Katalyst.',
     },
   });
 }
 
 function renderPost(post) {
   const body = post.body.map((paragraph) => `<p>${esc(paragraph)}</p>`).join('\n');
-  const postHeroImages = {
-    elevateos: 'elevateos',
-    'pulse-manila-2026': 'pulse',
-    katalyst: 'kiwanis',
-  };
 
   const content = joinLines([
-    renderHeroBanner({
-      image: postHeroImages[post.slug] || 'portrait',
-      kicker: site.name,
-      title: post.title,
-      subtitle: post.summary,
-      className: 'hero-banner--post',
-    }),
     `
-      <section class="page-band page-band--intro">
-        <div class="band-inner">
-          <article class="article">
-            <div class="article-meta">${esc(post.date)} · ${esc(post.readTime)}</div>
-            <div class="article-body">
-              ${body}
-            </div>
-            <p class="article-back"><a class="button secondary" href="/blog/">Back to Writing</a></p>
-          </article>
-        </div>
+      ${renderHero({
+        kicker: site.name,
+        title: post.title,
+        subtitle: post.summary,
+        actions: [{ label: 'Back to Writing', href: '/blog/' }],
+        className: 'hero-panel--post',
+      })}
+      <section class="page-section">
+        <article class="panel article">
+          <div class="article-meta">${esc(post.date)} · ${esc(post.readTime)}</div>
+          <div class="article-body">
+            ${body}
+          </div>
+        </article>
       </section>
     `,
   ]);
@@ -864,37 +660,36 @@ function renderPost(post) {
 }
 
 function renderContact() {
+  const directLinks = [
+    { label: 'Open LinkedIn', href: site.linkedin, primary: true },
+    { label: 'Message on WhatsApp', href: site.whatsapp },
+  ];
+
   const content = joinLines([
-    renderHeroBanner({
-      image: 'ashinaga',
-      kicker: site.name,
-      title: 'Contact',
-      subtitle: 'LinkedIn and WhatsApp are the fastest routes.',
-      className: 'hero-banner--contact',
-    }),
     `
-      <section class="page-band page-band--intro">
-        <div class="band-inner">
-          ${renderSectionIntro('Contact', 'Reach out', '', `<a class="button secondary" href="/portfolio/">Portfolio</a>`)}
-          <div class="split-section">
-            <div class="panel">
-              <p class="label">Direct</p>
-              <p>Use LinkedIn or WhatsApp.</p>
-              <div class="actions">
-                <a class="button primary" href="${attr(site.linkedin)}">Open LinkedIn</a>
-                <a class="button secondary" href="${attr(site.whatsapp)}">Message on WhatsApp</a>
-              </div>
-            </div>
-            ${renderLinkGroups(site.linkGroups)}
-          </div>
+      ${renderHero({
+        kicker: site.name,
+        title: 'Contact',
+        subtitle: site.contactIntro,
+        actions: directLinks,
+        className: 'hero-panel--contact',
+      })}
+      <section class="page-section">
+        ${renderSectionIntro('Contact', 'Direct', 'Use LinkedIn or WhatsApp.')}
+        <div class="panel prose-panel">
+          <p>LinkedIn is the fastest route for professional contact. WhatsApp works for quick replies.</p>
         </div>
+      </section>
+      <section class="page-section">
+        ${renderSectionIntro('Links', 'Links', 'All outbound links in one place.')}
+        ${renderLinkGroups(site.linkGroups)}
       </section>
     `,
   ]);
 
   return renderPage({
     title: `Contact · ${site.name}`,
-    description: site.tagline,
+    description: 'LinkedIn, WhatsApp, GitHub, Wantedly, Facebook, Instagram, ElevateOS, and Crystal Century.',
     canonicalPath: '/contact/',
     bodyClass: 'page-contact',
     content,
@@ -913,27 +708,27 @@ function renderContact() {
 
 function renderNotFound() {
   const content = joinLines([
-    renderHeroBanner({
-      image: 'portrait',
-      kicker: site.name,
-      title: 'That page is not here.',
-      subtitle: 'Try Home, Portfolio, Writing, About, or Contact.',
-      className: 'hero-banner--404',
-    }),
     `
-      <section class="page-band page-band--intro">
-        <div class="band-inner">
-          <div class="split-section">
-            <div class="panel">
-              <p class="label">Try this instead</p>
-              <ul class="stack-list">
-                <li><a href="/">Home</a></li>
-                <li><a href="/portfolio/">Portfolio</a></li>
-                <li><a href="/blog/">Writing</a></li>
-                <li><a href="/about/">About</a></li>
-              </ul>
-            </div>
-          </div>
+      ${renderHero({
+        kicker: site.name,
+        title: 'Page not found',
+        subtitle: 'Try Home, Portfolio, Writing, About, or Contact.',
+        actions: [
+          { label: 'Home', href: '/' },
+          { label: 'Portfolio', href: '/portfolio/' },
+        ],
+        className: 'hero-panel--404',
+      })}
+      <section class="page-section">
+        ${renderSectionIntro('Try this instead', 'Start here')}
+        <div class="panel prose-panel">
+          <ul class="stack-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/portfolio/">Portfolio</a></li>
+            <li><a href="/blog/">Writing</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/contact/">Contact</a></li>
+          </ul>
         </div>
       </section>
     `,
@@ -973,11 +768,11 @@ function renderLlms() {
 
   const posts = site.posts.map((post) => `- ${post.title}: ${site.url}/blog/${post.slug}/`);
 
-return `# ${site.name}
+  return `# ${site.name}
 
 ${site.tagline}
 
-${site.name} is a personal site for projects and links.
+${site.name} is a personal site for projects, writing, and links.
 
 ## Pages
 ${pagesList.map(([label, route]) => `- ${label}: ${site.url}${route === '/' ? '/' : route}`).join('\n')}
@@ -1037,6 +832,26 @@ ${entries
   .join('\n')}
 </urlset>
 `;
+}
+
+async function cleanupMediaAssets() {
+  const mediaDir = path.join(root, 'assets', 'media');
+  let entries;
+
+  try {
+    entries = await readdir(mediaDir, { withFileTypes: true });
+  } catch (error) {
+    if (error?.code === 'ENOENT') {
+      return;
+    }
+    throw error;
+  }
+
+  await Promise.all(
+    entries
+      .filter((entry) => entry.isFile() && entry.name !== 'pfp.png')
+      .map((entry) => rm(path.join(mediaDir, entry.name), { force: true }))
+  );
 }
 
 async function writeOutput(relativePath, content) {
