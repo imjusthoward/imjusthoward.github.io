@@ -2,13 +2,13 @@
 
 Cambridge (HSPS) Offer Holder | President of Kiwanis Voice Club of Nippon | CEO of ElevateOS | Lumiere Scholar
 
-Think College Level is a personal site for projects, writing, and links.
+Howard Chan's projects, writing, and contact links.
 
 ## Pages
 - Home: https://thinkcollegelevel.com/
-- Portfolio: https://thinkcollegelevel.com/portfolio/
-- Writing: https://thinkcollegelevel.com/blog/
 - About: https://thinkcollegelevel.com/about/
+- Projects: https://thinkcollegelevel.com/portfolio/
+- Writing: https://thinkcollegelevel.com/blog/
 - Contact: https://thinkcollegelevel.com/contact/
 
 ## Writing
@@ -29,13 +29,13 @@ Think College Level is a personal site for projects, writing, and links.
 
 ## Projects
 - ElevateOS
-- Kiwanis Voice Club of Nippon
 - Pulse Manila 2026
 - Katalyst
 - OpenClaw
+- Crystal Century
 
 ## Service
+- Kiwanis Voice Club of Nippon
+- KIST Key Club
 - Japan Cancer Society, KIST
 - Recycling Initiative, KIST
-- Mural Project
-- Ashinaga collaboration

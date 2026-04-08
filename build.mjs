@@ -5,11 +5,19 @@ import { site } from './site-data.mjs';
 const root = process.cwd();
 const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Tokyo' }).format(new Date());
 
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about/' },
+  { label: 'Projects', href: '/portfolio/' },
+  { label: 'Writing', href: '/blog/' },
+  { label: 'Contact', href: '/contact/' },
+];
+
 const pages = [
   {
     path: '/',
     file: 'index.html',
-    title: `${site.name}`,
+    title: site.name,
     description: site.description,
     bodyClass: 'page-home',
     render: renderHome,
@@ -25,8 +33,8 @@ const pages = [
   {
     path: '/portfolio/',
     file: path.join('portfolio', 'index.html'),
-    title: `Portfolio · ${site.name}`,
-    description: site.tagline,
+    title: `Projects · ${site.name}`,
+    description: 'Projects, service work, and research.',
     bodyClass: 'page-portfolio',
     render: renderPortfolio,
   },
@@ -34,7 +42,7 @@ const pages = [
     path: '/blog/',
     file: path.join('blog', 'index.html'),
     title: `Writing · ${site.name}`,
-    description: 'Project notes on ElevateOS, Pulse, and Katalyst.',
+    description: 'Project notes.',
     bodyClass: 'page-blog',
     render: renderBlogIndex,
   },
@@ -42,7 +50,7 @@ const pages = [
     path: '/contact/',
     file: path.join('contact', 'index.html'),
     title: `Contact · ${site.name}`,
-    description: 'LinkedIn, WhatsApp, GitHub, Wantedly, Facebook, Instagram, ElevateOS, and Crystal Century.',
+    description: 'Links and direct contact routes.',
     bodyClass: 'page-contact',
     render: renderContact,
   },
@@ -95,19 +103,7 @@ function attr(input = '') {
 }
 
 function urlFor(route) {
-  if (route === '/') {
-    return `${site.url}/`;
-  }
-
-  return `${site.url}${route}`;
-}
-
-function sameAsLinks() {
-  return site.contactLinks.map((link) => link.href);
-}
-
-function joinLines(lines) {
-  return lines.filter(Boolean).join('\n');
+  return route === '/' ? `${site.url}/` : `${site.url}${route}`;
 }
 
 function renderLink(href, label, currentPath) {
@@ -115,19 +111,15 @@ function renderLink(href, label, currentPath) {
   return `<a href="${attr(href)}"${active}>${esc(label)}</a>`;
 }
 
-function renderBrandMark() {
-  return `<span class="brand-mark brand-mark--glyph" aria-hidden="true">${esc(site.brandMark?.text || 'HC')}</span>`;
+function renderNav(currentPath) {
+  return navItems.map((item) => renderLink(item.href, item.label, currentPath)).join('');
 }
 
-function renderTopbar(currentPath) {
-  const nav = [
-    ['Home', '/'],
-    ['Portfolio', '/portfolio/'],
-    ['Writing', '/blog/'],
-    ['About', '/about/'],
-    ['Contact', '/contact/'],
-  ];
+function renderBrandMark() {
+  return `<span class="brand-mark" aria-hidden="true">${esc(site.brandMark?.text || 'HC')}</span>`;
+}
 
+function renderHeader(currentPath) {
   return `
     <header class="site-header">
       <div class="site-header-inner">
@@ -139,208 +131,10 @@ function renderTopbar(currentPath) {
           </span>
         </a>
         <nav class="site-nav" aria-label="Primary">
-          ${nav.map(([label, href]) => renderLink(href, label, currentPath)).join('')}
+          ${renderNav(currentPath)}
         </nav>
       </div>
     </header>
-  `;
-}
-
-function renderHero({ kicker = '', title, subtitle = '', actions = [], tags = [], className = '' }) {
-  return `
-    <section class="hero-panel ${className}">
-      ${kicker ? `<p class="eyebrow">${esc(kicker)}</p>` : ''}
-      <h1>${esc(title)}</h1>
-      ${subtitle ? `<p class="hero-subtitle">${esc(subtitle)}</p>` : ''}
-      ${
-        actions.length
-          ? `<div class="actions">${actions
-              .map((action) => `<a class="button ${action.primary ? 'primary' : 'secondary'}" href="${attr(action.href)}">${esc(action.label)}</a>`)
-              .join('')}</div>`
-          : ''
-      }
-      ${
-        tags.length
-          ? `<div class="hero-tags">${tags.map((tag) => `<span class="tag">${esc(tag)}</span>`).join('')}</div>`
-          : ''
-      }
-    </section>
-  `;
-}
-
-function renderSectionIntro(eyebrow, title, lead = '', action = '') {
-  return `
-    <div class="section-head">
-      <div>
-        <p class="eyebrow">${esc(eyebrow)}</p>
-        <h2>${esc(title)}</h2>
-        ${lead ? `<p class="section-lead">${esc(lead)}</p>` : ''}
-      </div>
-      ${action}
-    </div>
-  `;
-}
-
-function renderMetricGrid(metrics) {
-  return `
-    <div class="metric-grid">
-      ${metrics
-        .map(
-          (metric) => `
-            <article class="panel metric-card">
-              <p class="metric-value">${esc(metric.value)}</p>
-              <p class="metric-label">${esc(metric.label)}</p>
-              <p class="metric-detail">${esc(metric.detail)}</p>
-            </article>
-          `
-        )
-        .join('')}
-    </div>
-  `;
-}
-
-function renderCardGrid(items, variant = 'feature') {
-  return `
-    <div class="card-grid card-grid--${variant}">
-      ${items
-        .map(
-          (item) => `
-            <article class="panel text-card text-card--${variant}">
-              <p class="label">${esc(item.label || (variant === 'note' ? 'Project' : 'Focus'))}</p>
-              <h3>${esc(item.name)}</h3>
-              <p>${esc(item.summary)}</p>
-              ${
-                item.bullets?.length
-                  ? `<ul>${item.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join('')}</ul>`
-                  : ''
-              }
-              ${item.href ? `<p class="card-link"><a href="${attr(item.href)}">Open ${esc(item.name)}</a></p>` : ''}
-            </article>
-          `
-        )
-        .join('')}
-    </div>
-  `;
-}
-
-function renderFeatureCards(items) {
-  return renderCardGrid(items, 'feature');
-}
-
-function renderNoteCards(items) {
-  return renderCardGrid(items, 'note');
-}
-
-function renderTimeline(items) {
-  return `
-    <div class="timeline">
-      ${items
-        .map(
-          (item) => `
-            <article class="timeline-item">
-              <div class="timeline-meta">
-                <p class="timeline-org">${esc(item.org || item.school)}</p>
-                <p class="timeline-dates">${esc(item.dates)}</p>
-              </div>
-              <div class="timeline-body">
-                <h3>${esc(item.role || item.degree)}</h3>
-                <p>${esc(item.summary)}</p>
-              </div>
-            </article>
-          `
-        )
-        .join('')}
-    </div>
-  `;
-}
-
-function renderTagGroups(groups) {
-  return `
-    <div class="tag-groups">
-      ${groups
-        .map(
-          (group) => `
-            <section class="panel tag-group">
-              <p class="label">${esc(group.group)}</p>
-              <div class="tag-list">
-                ${group.items.map((item) => `<span class="tag">${esc(item)}</span>`).join('')}
-              </div>
-            </section>
-          `
-        )
-        .join('')}
-    </div>
-  `;
-}
-
-function renderPostList(posts) {
-  return `
-    <div class="post-list">
-      ${posts
-        .map(
-          (post) => `
-            <article class="post-row">
-              <div class="post-row-meta">
-                <p class="label">${esc(post.date)}</p>
-                <h3><a href="/blog/${attr(post.slug)}/">${esc(post.title)}</a></h3>
-              </div>
-              <p class="post-row-summary">${esc(post.summary)}</p>
-              <a class="post-row-link" href="/blog/${attr(post.slug)}/">Open</a>
-            </article>
-          `
-        )
-        .join('')}
-    </div>
-  `;
-}
-
-function renderLinkGroups(groups) {
-  return `
-    <div class="link-groups">
-      ${groups
-        .map(
-          (group) => `
-            <article class="panel link-group">
-              <p class="label">${esc(group.group)}</p>
-              <div class="footer-links link-grid">
-                ${group.items.map((item) => `<a href="${attr(item.href)}">${esc(item.label)}</a>`).join('')}
-              </div>
-            </article>
-          `
-        )
-        .join('')}
-    </div>
-  `;
-}
-
-function renderSidebar() {
-  return `
-    <div class="sidebar-stack">
-      <article class="panel profile-card">
-        <img
-          class="profile-photo"
-          src="${attr(site.profilePhoto.src)}"
-          alt="${attr(site.profilePhoto.alt)}"
-          width="92"
-          height="120"
-          loading="eager"
-          decoding="async"
-        >
-        <div class="profile-copy">
-          <p class="label">${esc(site.author)}</p>
-          <p>${esc(site.location)}</p>
-          <p>${esc(site.identityLine)}</p>
-        </div>
-      </article>
-      <article class="panel sidebar-panel">
-        <p class="label">Current focus</p>
-        <p class="sidebar-lead">${esc(site.focusIntro)}</p>
-        <ul class="stack-list">
-          ${site.currentFocus.map((item) => `<li>${esc(item)}</li>`).join('')}
-        </ul>
-      </article>
-      ${renderLinkGroups(site.linkGroups)}
-    </div>
   `;
 }
 
@@ -348,10 +142,10 @@ function renderFooter() {
   return `
     <footer class="site-footer">
       <div class="site-footer-inner">
-        <p>${esc(site.author)}, Tokyo.</p>
-        <div class="footer-links" aria-label="Links">
+        <p>${esc(site.author)}, ${esc(site.location)}</p>
+        <p class="footer-links">
           ${site.contactLinks.map((link) => `<a href="${attr(link.href)}">${esc(link.label)}</a>`).join('')}
-        </div>
+        </p>
         <p>© 2026 ${esc(site.author)}</p>
       </div>
     </footer>
@@ -374,10 +168,11 @@ function renderPage({
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="${attr(description)}">
-  <meta name="theme-color" content="#101418">
+  <meta name="theme-color" content="#f6f0e7">
   <link rel="canonical" href="${attr(urlFor(canonicalPath))}">
   <link rel="stylesheet" href="/assets/styles.css">
-  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="/favicon.png" type="image/png">
   <link rel="shortcut icon" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon.png">
   ${metaRobots ? `<meta name="robots" content="${attr(metaRobots)}">` : ''}
@@ -391,16 +186,9 @@ function renderPage({
 <body class="${attr(bodyClass)}">
   <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="page-shell">
-    ${renderTopbar(canonicalPath)}
+    ${renderHeader(canonicalPath)}
     <main id="main-content" class="page-main">
-      <div class="page-layout">
-        <div class="page-column">
-          ${content}
-        </div>
-        <aside class="page-sidebar" aria-label="Profile and links">
-          ${renderSidebar()}
-        </aside>
-      </div>
+      ${content}
     </main>
     ${renderFooter()}
   </div>
@@ -409,49 +197,140 @@ function renderPage({
 `;
 }
 
+function renderIntro({ eyebrow, title, subtitle, photo = false }) {
+  return `
+    <header class="page-intro${photo ? ' page-intro--photo' : ''}">
+      ${photo ? renderProfilePhoto() : ''}
+      <div class="page-intro-copy">
+        <p class="eyebrow">${esc(eyebrow)}</p>
+        <h1>${esc(title)}</h1>
+        ${subtitle ? `<p class="intro-subtitle">${esc(subtitle)}</p>` : ''}
+      </div>
+    </header>
+  `;
+}
+
+function renderProfilePhoto() {
+  return `
+    <figure class="profile-photo">
+      <img
+        src="${attr(site.profilePhoto.src)}"
+        alt="${attr(site.profilePhoto.alt)}"
+        width="88"
+        height="88"
+        loading="eager"
+        decoding="async"
+      >
+    </figure>
+  `;
+}
+
+function renderSection(title, lead, body) {
+  return `
+    <section class="page-section">
+      <div class="section-head">
+        <h2>${esc(title)}</h2>
+        ${lead ? `<p class="section-lead">${esc(lead)}</p>` : ''}
+      </div>
+      ${body}
+    </section>
+  `;
+}
+
+function renderProse(paragraphs) {
+  return `<div class="prose">${paragraphs.map((paragraph) => `<p>${esc(paragraph)}</p>`).join('')}</div>`;
+}
+
+function renderCompactList(items) {
+  return `<ul class="compact-list">${items.map((item) => `<li>${esc(item)}</li>`).join('')}</ul>`;
+}
+
+function renderEntries(items) {
+  return `
+    <div class="entry-list">
+      ${items
+        .map(
+          (item) => `
+            <article class="entry">
+              <div class="entry-head">
+                <h3>${item.href ? `<a href="${attr(item.href)}">${esc(item.title)}</a>` : esc(item.title)}</h3>
+                ${item.meta ? `<span class="entry-meta">${esc(item.meta)}</span>` : ''}
+              </div>
+              ${item.eyebrow ? `<p class="entry-eyebrow">${esc(item.eyebrow)}</p>` : ''}
+              ${item.summary ? `<p class="entry-summary">${esc(item.summary)}</p>` : ''}
+            </article>
+          `
+        )
+        .join('')}
+    </div>
+  `;
+}
+
+function renderLinkRow(items) {
+  return `
+    <p class="link-row">
+      ${items.map((item) => `<a href="${attr(item.href)}">${esc(item.label)}</a>`).join('<span aria-hidden="true">·</span>')}
+    </p>
+  `;
+}
+
+function renderLinkGroups(groups) {
+  return `
+    <div class="link-groups">
+      ${groups
+        .map(
+          (group) => `
+            <section class="link-group">
+              <h3>${esc(group.group)}</h3>
+              ${renderLinkRow(group.items)}
+            </section>
+          `
+        )
+        .join('')}
+    </div>
+  `;
+}
+
 function renderHome() {
-  const content = joinLines([
-    `
-      ${renderHero({
-        kicker: site.name,
-        title: site.heroHeadline,
-        subtitle: site.homeSummary,
-        actions: site.heroActions,
-        tags: site.heroNotes,
-        className: 'hero-panel--home',
-      })}
-      <section class="page-section">
-        ${renderSectionIntro('At a glance', 'Metrics', 'Concrete numbers from the work.')}
-        ${renderMetricGrid(site.metrics)}
-      </section>
-      <section class="page-section">
-        ${renderSectionIntro('Work', 'Current work', site.focusIntro)}
-        ${renderFeatureCards(site.focusItems)}
-      </section>
-      <section class="page-section">
-        ${renderSectionIntro('Projects', 'Selected projects', 'Product, service, and infrastructure.')}
-        ${renderNoteCards(site.projects)}
-      </section>
-      <section class="page-section">
-        ${renderSectionIntro('Writing', 'Recent notes', 'Project writeups and updates.')}
-        ${renderPostList(site.posts)}
-      </section>
-    `,
-  ]);
+  const intro = renderIntro({
+    eyebrow: site.name,
+    title: site.heroHeadline,
+    subtitle: site.tagline,
+  });
+
+  const sections = [
+    renderSection(
+      'About Me',
+      '',
+      renderProse([site.homeSummary])
+    ),
+    renderSection(
+      'Current Work',
+      '',
+      renderEntries(
+        site.focusItems.map((item) => ({
+          title: item.name,
+          meta: item.label,
+          summary: item.summary,
+          href: item.href || '',
+        }))
+      )
+    ),
+  ];
 
   return renderPage({
-    title: `${site.name}`,
+    title: site.name,
     description: site.description,
     canonicalPath: '/',
     bodyClass: 'page-home',
-    content,
+    content: `<article class="page-article">${intro}${sections.join('')}</article>`,
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'Person',
       name: site.author,
       url: site.url,
-      sameAs: sameAsLinks(),
+      sameAs: site.contactLinks.map((link) => link.href),
       alumniOf: ['University of Cambridge', 'K. International School Tokyo'],
       description: site.tagline,
     },
@@ -459,53 +338,43 @@ function renderHome() {
 }
 
 function renderAbout() {
-  const content = joinLines([
-    `
-      ${renderHero({
-        kicker: site.name,
-        title: 'About',
-        subtitle: 'Background, experience, education, and skills.',
-        actions: [
-          { label: 'Portfolio', href: '/portfolio/' },
-          { label: 'Contact', href: '/contact/' },
-        ],
-        className: 'hero-panel--about',
-      })}
-      <section class="page-section">
-        ${renderSectionIntro('Background', 'Background', 'Tokyo-based student at Cambridge.')}
-        <div class="prose-panel panel">
-          <p>Work spans ElevateOS, Kiwanis Voice Club of Nippon, KIST Key Club, and research.</p>
-          <p>Education, service, product, and writing stay in one place here.</p>
-        </div>
-      </section>
-      <section class="page-section">
-        ${renderSectionIntro('Experience', 'Experience')}
-        ${renderTimeline(site.experience)}
-      </section>
-      <section class="page-section">
-        ${renderSectionIntro('Education', 'Education')}
-        ${renderTimeline(site.education)}
-        <div class="credential-list">
-          ${site.credentials.map((item) => `<span class="tag">${esc(item)}</span>`).join('')}
-        </div>
-      </section>
-      <section class="page-section">
-        ${renderSectionIntro('Service', 'Service and projects')}
-        ${renderNoteCards(site.serviceProjects)}
-      </section>
-      <section class="page-section">
-        ${renderSectionIntro('Skills', 'Skills')}
-        ${renderTagGroups(site.skillsGroups)}
-      </section>
-    `,
-  ]);
+  const intro = renderIntro({
+    eyebrow: 'About Me',
+    title: 'About Me',
+    subtitle: 'Tokyo-based student at Cambridge.',
+    photo: true,
+  });
+
+  const sections = [
+    renderSection(
+      'Background',
+      '',
+      renderProse([
+        'I study HSPS at Cambridge and work from Tokyo.',
+        'My work spans ElevateOS, Kiwanis Voice Club of Nippon, KIST Key Club, and research and writing.',
+        'The aim is to keep each project practical, readable, and easy to pick up again later.',
+      ])
+    ),
+    renderSection(
+      'Current Roles',
+      '',
+      renderEntries(
+        site.experience.slice(0, 4).map((item) => ({
+          title: item.role,
+          eyebrow: item.org,
+          meta: item.dates,
+          summary: item.summary,
+        }))
+      )
+    ),
+  ];
 
   return renderPage({
     title: `About · ${site.name}`,
     description: site.tagline,
     canonicalPath: '/about/',
     bodyClass: 'page-about',
-    content,
+    content: `<article class="page-article">${intro}${sections.join('')}</article>`,
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
@@ -513,7 +382,7 @@ function renderAbout() {
       mainEntity: {
         '@type': 'Person',
         name: site.author,
-        sameAs: sameAsLinks(),
+        sameAs: site.contactLinks.map((link) => link.href),
         description: site.tagline,
       },
     },
@@ -521,131 +390,110 @@ function renderAbout() {
 }
 
 function renderPortfolio() {
-  const content = joinLines([
-    `
-      ${renderHero({
-        kicker: site.name,
-        title: 'Portfolio',
-        subtitle: 'Projects, service, and research.',
-        actions: [
-          { label: 'About', href: '/about/' },
-          { label: 'Writing', href: '/blog/' },
-        ],
-        className: 'hero-panel--portfolio',
-      })}
-      <section class="page-section">
-        ${renderSectionIntro('Work', 'Current work', site.focusIntro)}
-        ${renderFeatureCards(site.focusItems)}
-      </section>
-      <section class="page-section">
-        ${renderSectionIntro('Projects', 'Projects', 'Short notes on product and infrastructure.')}
-        ${renderNoteCards(site.projects)}
-      </section>
-      <section class="page-section">
-        ${renderSectionIntro('Service', 'Service')}
-        ${renderNoteCards(site.serviceProjects)}
-      </section>
-      <section class="page-section">
-        ${renderSectionIntro('Research', 'Research')}
-        <div class="split-grid">
-          <article class="panel">
-            <p class="label">Research areas</p>
-            <ul class="stack-list">
-              <li>Cross-cultural communication</li>
-              <li>Cognitive systems and aging</li>
-              <li>Semiconductor supply-chain resilience</li>
-              <li>Generational and cultural interpretation</li>
-            </ul>
-          </article>
-          <article class="panel">
-            <p class="label">Credentials</p>
-            <div class="credential-list">
-              ${site.credentials.map((item) => `<span class="tag">${esc(item)}</span>`).join('')}
-            </div>
-          </article>
-        </div>
-      </section>
-    `,
-  ]);
+  const intro = renderIntro({
+    eyebrow: 'Projects',
+    title: 'Projects',
+    subtitle: 'Product, service, and research.',
+  });
+
+  const sections = [
+    renderSection(
+      'Product',
+      '',
+      renderEntries(
+        site.projects.map((item) => ({
+          title: item.name,
+          eyebrow: item.label,
+          summary: item.summary,
+          href: item.href || '',
+        }))
+      )
+    ),
+    renderSection(
+      'Service',
+      '',
+      renderEntries(
+        site.serviceProjects.map((item) => ({
+          title: item.name,
+          eyebrow: 'Service',
+          summary: item.summary,
+        }))
+      )
+    ),
+  ];
 
   return renderPage({
-    title: `Portfolio · ${site.name}`,
-    description: site.tagline,
+    title: `Projects · ${site.name}`,
+    description: 'Projects, service work, and research.',
     canonicalPath: '/portfolio/',
     bodyClass: 'page-portfolio',
-    content,
+    content: `<article class="page-article">${intro}${sections.join('')}</article>`,
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
-      name: `${site.name} Portfolio`,
-      description: `${site.author}'s projects in product, service, research, and writing.`,
+      name: `${site.name} Projects`,
+      description: 'Projects, service work, and research.',
     },
   });
 }
 
 function renderBlogIndex() {
-  const content = joinLines([
-    `
-      ${renderHero({
-        kicker: site.name,
-        title: 'Writing',
-        subtitle: 'Project notes on ElevateOS, Pulse, and Katalyst.',
-        actions: [{ label: 'Contact', href: '/contact/' }],
-        className: 'hero-panel--writing',
-      })}
-      <section class="page-section">
-        ${renderSectionIntro('Writing', 'Recent notes', 'Project writeups and updates.')}
-        ${renderPostList(site.posts)}
-      </section>
-    `,
-  ]);
+  const intro = renderIntro({
+    eyebrow: 'Writing',
+    title: 'Writing',
+    subtitle: 'Project notes.',
+  });
+
+  const sections = [
+    renderSection(
+      'Recent Notes',
+      '',
+      renderEntries(
+        site.posts.map((post) => ({
+          title: post.title,
+          eyebrow: post.date,
+          meta: post.readTime,
+          summary: post.summary,
+          href: `/blog/${post.slug}/`,
+        }))
+      )
+    ),
+  ];
 
   return renderPage({
     title: `Writing · ${site.name}`,
-    description: 'Project notes on ElevateOS, Pulse, and Katalyst.',
+    description: 'Project notes.',
     canonicalPath: '/blog/',
     bodyClass: 'page-blog',
-    content,
+    content: `<article class="page-article">${intro}${sections.join('')}</article>`,
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'Blog',
       name: `${site.name} Writing`,
-      description: 'Project notes on ElevateOS, Pulse, and Katalyst.',
+      description: 'Project notes.',
     },
   });
 }
 
 function renderPost(post) {
-  const body = post.body.map((paragraph) => `<p>${esc(paragraph)}</p>`).join('\n');
+  const intro = renderIntro({
+    eyebrow: 'Writing',
+    title: post.title,
+    subtitle: post.summary,
+  });
 
-  const content = joinLines([
-    `
-      ${renderHero({
-        kicker: site.name,
-        title: post.title,
-        subtitle: post.summary,
-        actions: [{ label: 'Back to Writing', href: '/blog/' }],
-        className: 'hero-panel--post',
-      })}
-      <section class="page-section">
-        <article class="panel article">
-          <div class="article-meta">${esc(post.date)} · ${esc(post.readTime)}</div>
-          <div class="article-body">
-            ${body}
-          </div>
-        </article>
-      </section>
-    `,
-  ]);
+  const sections = [
+    renderSection('Note', `${post.date} · ${post.readTime}`, renderProse(post.body)),
+  ];
 
   return renderPage({
     title: `${post.title} · ${site.name}`,
     description: post.summary,
     canonicalPath: `/blog/${post.slug}/`,
     bodyClass: 'page-post',
-    content,
+    content: `<article class="page-article">${intro}${sections.join('')}</article>`,
     ogType: 'article',
     jsonLd: {
       '@context': 'https://schema.org',
@@ -660,39 +508,25 @@ function renderPost(post) {
 }
 
 function renderContact() {
-  const directLinks = [
-    { label: 'Open LinkedIn', href: site.linkedin, primary: true },
-    { label: 'Message on WhatsApp', href: site.whatsapp },
-  ];
+  const intro = renderIntro({
+    eyebrow: 'Contact',
+    title: 'Contact',
+    subtitle: 'LinkedIn is the fastest route. WhatsApp is fine for a quick reply.',
+  });
 
-  const content = joinLines([
-    `
-      ${renderHero({
-        kicker: site.name,
-        title: 'Contact',
-        subtitle: site.contactIntro,
-        actions: directLinks,
-        className: 'hero-panel--contact',
-      })}
-      <section class="page-section">
-        ${renderSectionIntro('Contact', 'Direct', 'Use LinkedIn or WhatsApp.')}
-        <div class="panel prose-panel">
-          <p>LinkedIn is the fastest route for professional contact. WhatsApp works for quick replies.</p>
-        </div>
-      </section>
-      <section class="page-section">
-        ${renderSectionIntro('Links', 'Links', 'All outbound links in one place.')}
-        ${renderLinkGroups(site.linkGroups)}
-      </section>
-    `,
-  ]);
+  const sections = [
+    renderSection('Direct', '', renderProse(['Use LinkedIn for professional contact. Use WhatsApp for a quick reply.'])),
+    renderSection('Core / Professional', '', renderLinkRow(site.linkGroups[0].items)),
+    renderSection('Social / Personal', '', renderLinkRow(site.linkGroups[1].items)),
+    renderSection('Ventures / Projects', '', renderLinkRow(site.linkGroups[2].items)),
+  ];
 
   return renderPage({
     title: `Contact · ${site.name}`,
     description: 'LinkedIn, WhatsApp, GitHub, Wantedly, Facebook, Instagram, ElevateOS, and Crystal Century.',
     canonicalPath: '/contact/',
     bodyClass: 'page-contact',
-    content,
+    content: `<article class="page-article">${intro}${sections.join('')}</article>`,
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
@@ -700,46 +534,38 @@ function renderContact() {
       mainEntity: {
         '@type': 'Person',
         name: site.author,
-        sameAs: sameAsLinks(),
+        sameAs: site.contactLinks.map((link) => link.href),
       },
     },
   });
 }
 
 function renderNotFound() {
-  const content = joinLines([
-    `
-      ${renderHero({
-        kicker: site.name,
-        title: 'Page not found',
-        subtitle: 'Try Home, Portfolio, Writing, About, or Contact.',
-        actions: [
-          { label: 'Home', href: '/' },
-          { label: 'Portfolio', href: '/portfolio/' },
-        ],
-        className: 'hero-panel--404',
-      })}
-      <section class="page-section">
-        ${renderSectionIntro('Try this instead', 'Start here')}
-        <div class="panel prose-panel">
-          <ul class="stack-list">
-            <li><a href="/">Home</a></li>
-            <li><a href="/portfolio/">Portfolio</a></li>
-            <li><a href="/blog/">Writing</a></li>
-            <li><a href="/about/">About</a></li>
-            <li><a href="/contact/">Contact</a></li>
-          </ul>
-        </div>
-      </section>
-    `,
-  ]);
+  const intro = renderIntro({
+    eyebrow: '404',
+    title: 'Page not found',
+    subtitle: 'Use Home, About, Projects, Writing, or Contact.',
+  });
+
+  const sections = [
+    renderSection(
+      'Try this instead',
+      '',
+      renderLinkGroups([
+        {
+          group: 'Pages',
+          items: navItems,
+        },
+      ])
+    ),
+  ];
 
   return renderPage({
     title: `Not found · ${site.name}`,
     description: 'The page you were looking for is not here.',
     canonicalPath: '/404/',
     bodyClass: 'page-404',
-    content,
+    content: `<article class="page-article">${intro}${sections.join('')}</article>`,
     ogType: 'website',
     metaRobots: 'noindex,follow',
     jsonLd: {
@@ -760,50 +586,48 @@ Sitemap: ${site.url}/sitemap.xml
 function renderLlms() {
   const pagesList = [
     ['Home', '/'],
-    ['Portfolio', '/portfolio/'],
-    ['Writing', '/blog/'],
     ['About', '/about/'],
+    ['Projects', '/portfolio/'],
+    ['Writing', '/blog/'],
     ['Contact', '/contact/'],
   ];
-
-  const posts = site.posts.map((post) => `- ${post.title}: ${site.url}/blog/${post.slug}/`);
 
   return `# ${site.name}
 
 ${site.tagline}
 
-${site.name} is a personal site for projects, writing, and links.
+Howard Chan's projects, writing, and contact links.
 
 ## Pages
 ${pagesList.map(([label, route]) => `- ${label}: ${site.url}${route === '/' ? '/' : route}`).join('\n')}
 
 ## Writing
-${posts.join('\n')}
+${site.posts.map((post) => `- ${post.title}: ${site.url}/blog/${post.slug}/`).join('\n')}
 
 ## Links
 ${site.contactLinks.map((link) => `- ${link.label}: ${link.href}`).join('\n')}
 
 ## Projects
 - ElevateOS
-- Kiwanis Voice Club of Nippon
 - Pulse Manila 2026
 - Katalyst
 - OpenClaw
+- Crystal Century
 
 ## Service
+- Kiwanis Voice Club of Nippon
+- KIST Key Club
 - Japan Cancer Society, KIST
 - Recycling Initiative, KIST
-- Mural Project
-- Ashinaga collaboration
 `;
 }
 
 function renderSitemap() {
   const entries = [
     '/',
+    '/about/',
     '/portfolio/',
     '/blog/',
-    '/about/',
     '/contact/',
     ...site.posts.map((post) => `/blog/${post.slug}/`),
   ];

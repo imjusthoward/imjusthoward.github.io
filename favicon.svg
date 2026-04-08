@@ -1,17 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="HC">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#9b6a44"/>
-      <stop offset="100%" stop-color="#5b4533"/>
-    </linearGradient>
-  </defs>
-  <rect width="128" height="128" rx="32" fill="url(#g)"/>
+  <rect width="128" height="128" rx="32" fill="#8b5f39"/>
   <text
     x="64"
     y="74"
     text-anchor="middle"
-    fill="#f7f5f1"
-    font-family="Manrope, Arial, Helvetica, sans-serif"
+    fill="#fff9f3"
+    font-family="Segoe UI, Arial, Helvetica, sans-serif"
     font-size="52"
     font-weight="800"
     letter-spacing="2"

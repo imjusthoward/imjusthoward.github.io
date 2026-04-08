@@ -15,7 +15,7 @@ export const site = {
   title: 'Think College Level',
   tagline:
     'Cambridge (HSPS) Offer Holder | President of Kiwanis Voice Club of Nippon | CEO of ElevateOS | Lumiere Scholar',
-  description: "Howard Chan's portfolio, writing, and links.",
+  description: "Howard Chan's projects, writing, and contact links.",
   identityLine: 'Cambridge HSPS offer holder',
   location: 'Sumida-ku, Tokyo, Japan',
   linkedin: linkedinUrl,
@@ -34,152 +34,80 @@ export const site = {
     alt: 'Howard Chan portrait',
   },
   heroHeadline: 'Howard Chan',
-  homeSummary:
-    'Tokyo-based student at Cambridge. Work spans ElevateOS, service, research, and writing.',
-  heroActions: [
-    { label: 'Portfolio', href: '/portfolio/' },
-    { label: 'Writing', href: '/blog/' },
-    { label: 'About', href: '/about/' },
-  ],
-  heroNotes: ['Cambridge HSPS', 'Tokyo', 'Service', 'Projects'],
-  metrics: [
-    {
-      value: '10K+',
-      label: 'Pulse users',
-      detail: 'Mobile-first convention companion built for ASPAC Manila 2026.',
-    },
-    {
-      value: '500+',
-      label: 'Walkathon participants',
-      detail: 'Japan Cancer Society, KIST event coordination and outreach.',
-    },
-    {
-      value: '40%',
-      label: 'Efficiency gain',
-      detail: 'Quality Inspector roles improved recycling oversight.',
-    },
-    {
-      value: '¥200K+',
-      label: 'Raised',
-      detail: 'Service and fundraising across KIST initiatives.',
-    },
-    {
-      value: 'Top 5%',
-      label: 'Lumiere research',
-      detail: 'Cross-cultural emoji semiotics proposal.',
-    },
-  ],
-  focusIntro: 'ElevateOS anchors the work.',
-  currentFocus: ['ElevateOS', 'Kiwanis Voice Club of Nippon', 'Lumiere research', 'Writing'],
+  homeSummary: 'Tokyo-based student at Cambridge. Work spans ElevateOS, Kiwanis service, research, and writing.',
   focusItems: [
     {
       name: 'ElevateOS',
       label: 'Work',
       summary:
-        'AI-enabled education platform for IB, AP, SAT, and admissions workflows. Focused on tutoring operations, worksheet generation, past-paper simulation, admissions support, and execution tools.',
-      bullets: ['Keep execution visible.', 'Make study materials faster to produce.', 'Build for students, parents, and tutors.'],
+        'AI-enabled education platform for IB, AP, SAT, and admissions support. Handles tutoring operations, worksheet generation, and session follow-up.',
       href: elevateosUrl,
     },
     {
       name: 'Kiwanis Voice Club of Nippon',
       label: 'Service',
-      summary:
-        'Founded the first Voice Club in Japan within the Kiwanis network. Leads youth service and event coordination.',
-      bullets: ['Make service repeatable.', 'Treat continuity as a system.', 'Keep coordination practical.'],
+      summary: 'Founded Kiwanis Voice Club of Nippon and leads youth service and event coordination.',
     },
     {
       name: 'Research and writing',
       label: 'Research',
-      summary: 'Lumiere research on emoji semiotics and cognitive aging.',
-      bullets: ['Cross-cultural communication and interpretation.', 'Research written for readers.', 'Writing that stays clear on a second pass.'],
+      summary: 'Lumiere research on emoji semiotics, cross-cultural interpretation, and cognitive aging.',
     },
   ],
-  projectsIntro: 'Projects.',
   projects: [
     {
       name: 'Pulse Manila 2026',
       label: 'Project',
-      summary: 'Mobile-first convention companion for ASPAC Manila 2026. Built to keep schedules, venues, and updates easy to check on the move.',
-      bullets: ['Built for speed and low-friction mobile use.', 'Complement official communication instead of replacing it.', 'Tested under real convention conditions in Manila.'],
+      summary: 'Mobile companion for ASPAC Manila 2026. Keeps schedules, venues, and updates easy to check on the move.',
     },
     {
       name: 'Katalyst',
       label: 'Project',
       summary: 'Coordination layer for Kiwanis projects and continuity.',
-      bullets: ['Keep handoffs clear.', 'Make continuity visible.', 'Support cleaner transitions.'],
     },
     {
       name: 'OpenClaw',
       label: 'Project',
       summary: 'WhatsApp-based execution agent system on VPS, local gateway, and systemd.',
-      bullets: ['Orchestrate work through simple channels.', 'Keep execution lightweight.', 'Use direct automation where it fits.'],
     },
     {
       name: 'Think College Level',
       label: 'Site',
-      summary: 'Personal site for projects, writing, and links.',
-      bullets: ['Projects and writing in one place.', 'Simple to read on mobile and desktop.', 'A public index for the work.'],
+      summary: 'Projects, writing, and contact links.',
     },
     {
       name: 'Crystal Century',
       label: 'Project',
       summary: 'WordPress recovery and infrastructure project.',
-      bullets: ['Focus on stability and security.', 'Real production handling.', 'Useful for recovery work.'],
       href: crystalcenturyUrl,
     },
   ],
-  experienceIntro: 'Recent roles.',
   experience: [
     {
       org: 'Kiwanis International',
       role: 'Founder and President of Kiwanis Voice Club of Nippon',
       dates: 'Jan 2026 - Present',
-      summary: 'Founded the first Voice Club in Japan within the Kiwanis network. Leads youth service and event coordination.',
+      summary: 'Founded Kiwanis Voice Club of Nippon and leads youth service and event coordination.',
     },
     {
       org: 'ElevateOS',
       role: 'Founder',
       dates: 'Jan 2026 - Present',
-      summary: 'Building an AI-enabled education platform for IB, AP, SAT, and admissions support. Oversees product direction and tutoring operations.',
+      summary: 'Building an AI-enabled education platform for IB, AP, SAT, and admissions support.',
     },
     {
       org: 'Key Club International',
       role: 'Founder and President of KIST Key Club',
       dates: 'Sep 2024 - Present',
-      summary: "Founded and scaled the school's Key Club into a service organization with 5 executives and 40+ members, coordinating projects across health, caregiving, food insecurity, and youth service.",
+      summary: 'Founded and scaled the school Key Club into a service organization.',
     },
     {
       org: 'Lumiere Education',
       role: 'Researcher',
       dates: 'Jun 2025 - Present',
-      summary: 'Lumiere Research Inclusion Foundation scholar working on a proposal about ambiguous emoji interpretation in Japan and China.',
-    },
-    {
-      org: 'Independent and collaborative research',
-      role: 'Research writer',
-      dates: 'Jul 2024 - Present',
-      summary: 'Writes on emoji semiotics, cognitive aging, and semiconductor supply-chain resilience.',
-    },
-    {
-      org: 'Think College Level',
-      role: 'Publisher',
-      dates: 'Jun 2024 - Present',
-      summary: 'Publishes the site.',
-    },
-    {
-      org: 'Japan Cancer Society, KIST',
-      role: 'President',
-      dates: 'Sep 2024 - Present',
-      summary: 'Organized a 10-kilometer walkathon with 500+ participants and raised more than Y50,000.',
-    },
-    {
-      org: 'Recycling Initiative, KIST',
-      role: 'President',
-      dates: 'Aug 2024 - Present',
-      summary: 'Tripled membership to 60 and introduced Quality Inspector roles that improved recycling efficiency by 40%.',
+      summary: 'Researcher on ambiguous emoji interpretation in Japan and China.',
     },
   ],
-  educationIntro: 'Academic record.',
   education: [
     {
       school: 'University of Cambridge',
@@ -194,60 +122,22 @@ export const site = {
       summary: 'GPA 3.96 unweighted; predicted IB 45/45; SAT 1550; Duolingo English Test 160; UCAT 2410, Band 2.',
     },
   ],
-  credentials: [
-    'Claude Code in Action - Anthropic',
-    'English Proficiency Certificate (160/Proficient: CEFR C2) - Duolingo English Test',
-    'MCB63X: Principles of Biochemistry - HarvardX',
-    'Certificate of Distinction in Annual Avogadro Exam - University of Waterloo',
-    'Certificate of Excellence (Edexcel IGCSE) - Pearson',
-    'Certificate of Achievement Group F Winner - Harvard College Debate Union Regional Rounds Japan 2026',
-  ],
-  skillsGroups: [
-    {
-      group: 'Skills',
-      items: ['Nonprofit Leadership', 'AI Product Design', 'EdTech Development', 'Cross-Cultural Analysis', 'International Service Coordination'],
-    },
-    {
-      group: 'Leadership',
-      items: ['Youth Leadership Development', 'Organizational Strategy', 'Stakeholder Engagement', 'Community Program Development', 'Community Engagement', 'Community Outreach'],
-    },
-    {
-      group: 'Product and systems',
-      items: ['Platform Architecture', 'Start-up Leadership', 'Product Strategy', 'Software Development', 'Coding Experience', 'AI Product Design'],
-    },
-    {
-      group: 'Research',
-      items: ['Academic Research', 'Research Skills', 'Publications', 'Generational Differences', 'Cultural Diversity', 'Researcher'],
-    },
-    {
-      group: 'Tools and subjects',
-      items: ['Debate', 'Microsoft Word', 'Microsoft Excel', 'Microsoft Office', 'Artificial Intelligence (AI)', 'Stock Market Analysis', 'Investment Banking', 'Biomedical Engineering', 'Medical Devices', 'Sustainable Agriculture', 'Circular Economy', 'Chemistry', 'Biochemistry', 'Competitive Analysis'],
-    },
-    {
-      group: 'Languages',
-      items: ['English', 'Cantonese'],
-    },
-  ],
   serviceProjects: [
     {
-      name: 'Stand Tall Project',
-      summary: 'Assistive wheelchair add-on designed to reduce intergenerational caregiver burden and improve mobility for elderly users in Japanese care-home settings.',
-      bullets: ['Identified a practical problem in care-home volunteering.', 'Built a transfer-oriented solution with a 45-degree angle and spring-based mechanism.', 'Piloted the concept with care-home partners.'],
+      name: 'Kiwanis Voice Club of Nippon',
+      summary: 'Youth service, continuity, and event coordination within the Kiwanis network.',
     },
     {
-      name: 'Mottainai Initiative',
-      summary: 'Food-waste initiative focused on edible but visually rejected produce in Japan. Redirected usable produce into child-focused community use, smoothies, and school outreach.',
-      bullets: ['Connect waste reduction, education, and local action.', 'Turn a systems problem into a community-facing project.', 'Keep the intervention simple enough to actually run.'],
-    },
-    {
-      name: 'Recycling Initiative',
-      summary: 'Tripled membership to 60 and introduced Quality Inspector roles that improved oversight and recycling efficiency by 40%.',
-      bullets: ['Use structure to increase participation and quality.', 'Make roles legible enough for members to own them.', 'Treat operations as something that can be improved, not just managed.'],
+      name: 'KIST Key Club',
+      summary: 'School service organization with projects across health, caregiving, food insecurity, and youth service.',
     },
     {
       name: 'Japan Cancer Society, KIST',
-      summary: 'Organized a 10-kilometer interschool walkathon with 500+ participants and raised more than Y50,000 for awareness and support.',
-      bullets: ['Large-scale coordination with visible public impact.', 'Community service at event scale.', 'Careful event planning and community outreach matter.'],
+      summary: '10-kilometer walkathon with 500+ participants and more than Y50,000 raised.',
+    },
+    {
+      name: 'Recycling Initiative, KIST',
+      summary: 'Tripled membership to 60 and improved recycling efficiency by 40%.',
     },
   ],
   posts: [
@@ -291,7 +181,7 @@ export const site = {
       ],
     },
   ],
-  contactIntro: 'LinkedIn and WhatsApp are the fastest routes.',
+  contactIntro: 'LinkedIn is the fastest route. WhatsApp works for a quick reply.',
   contactLinks: [
     { label: 'Think College Level', href: siteUrl },
     { label: 'GitHub', href: githubUrl },
@@ -305,16 +195,16 @@ export const site = {
   ],
   linkGroups: [
     {
-      group: 'Work',
+      group: 'Core / Professional',
       items: [
         { label: 'Think College Level', href: siteUrl },
-        { label: 'LinkedIn', href: linkedinUrl },
         { label: 'GitHub', href: githubUrl },
+        { label: 'LinkedIn', href: linkedinUrl },
         { label: 'Wantedly', href: wantedlyUrl },
       ],
     },
     {
-      group: 'Personal',
+      group: 'Social / Personal',
       items: [
         { label: 'Facebook', href: facebookUrl },
         { label: 'Instagram', href: instagramUrl },
@@ -322,7 +212,7 @@ export const site = {
       ],
     },
     {
-      group: 'Projects',
+      group: 'Ventures / Projects',
       items: [
         { label: 'ElevateOS', href: elevateosUrl },
         { label: 'Crystal Century', href: crystalcenturyUrl },
