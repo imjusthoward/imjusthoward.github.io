@@ -8,6 +8,7 @@ const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Tokyo' }).forma
 const navItems = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about/' },
+  { label: 'Awards', href: '/awards/' },
   { label: 'Projects', href: '/portfolio/' },
   { label: 'Writing', href: '/blog/' },
   { label: 'Contact', href: '/contact/' },
@@ -26,9 +27,17 @@ const pages = [
     path: '/about/',
     file: path.join('about', 'index.html'),
     title: `About · ${site.name}`,
-    description: site.tagline,
+    description: 'About Howard Chan.',
     bodyClass: 'page-about',
     render: renderAbout,
+  },
+  {
+    path: '/awards/',
+    file: path.join('awards', 'index.html'),
+    title: `Awards · ${site.name}`,
+    description: 'Selected achievements and recognition.',
+    bodyClass: 'page-awards',
+    render: renderAwards,
   },
   {
     path: '/portfolio/',
@@ -36,13 +45,13 @@ const pages = [
     title: `Projects · ${site.name}`,
     description: 'Projects, service work, and research.',
     bodyClass: 'page-portfolio',
-    render: renderPortfolio,
+    render: renderProjects,
   },
   {
     path: '/blog/',
     file: path.join('blog', 'index.html'),
     title: `Writing · ${site.name}`,
-    description: 'Project notes.',
+    description: 'Project notes and publications.',
     bodyClass: 'page-blog',
     render: renderBlogIndex,
   },
@@ -115,8 +124,18 @@ function renderNav(currentPath) {
   return navItems.map((item) => renderLink(item.href, item.label, currentPath)).join('');
 }
 
-function renderBrandMark() {
-  return `<span class="brand-mark" aria-hidden="true">${esc(site.brandMark?.text || 'HC')}</span>`;
+function renderLogo() {
+  return `
+    <img
+      class="brand-mark"
+      src="${attr(site.logo.src)}"
+      alt="${attr(site.logo.alt)}"
+      width="1024"
+      height="921"
+      loading="eager"
+      decoding="async"
+    >
+  `;
 }
 
 function renderHeader(currentPath) {
@@ -124,7 +143,7 @@ function renderHeader(currentPath) {
     <header class="site-header">
       <div class="site-header-inner">
         <a class="brand" href="/">
-          ${renderBrandMark()}
+          ${renderLogo()}
           <span class="brand-copy">
             <strong>${esc(site.name)}</strong>
             <small>${esc(site.tagline)}</small>
@@ -144,7 +163,7 @@ function renderFooter() {
       <div class="site-footer-inner">
         <p>${esc(site.author)}, ${esc(site.location)}</p>
         <p class="footer-links">
-          ${site.contactLinks.map((link) => `<a href="${attr(link.href)}">${esc(link.label)}</a>`).join('')}
+          ${site.footerLinks.map((link) => `<a href="${attr(link.href)}">${esc(link.label)}</a>`).join('')}
         </p>
         <p>© 2026 ${esc(site.author)}</p>
       </div>
@@ -168,12 +187,10 @@ function renderPage({
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="${attr(description)}">
-  <meta name="theme-color" content="#f6f0e7">
+  <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="${attr(urlFor(canonicalPath))}">
   <link rel="stylesheet" href="/assets/styles.css">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="alternate icon" href="/favicon.png" type="image/png">
-  <link rel="shortcut icon" href="/favicon.png">
+  <link rel="icon" href="/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="/favicon.png">
   ${metaRobots ? `<meta name="robots" content="${attr(metaRobots)}">` : ''}
   <meta property="og:type" content="${attr(ogType)}">
@@ -197,40 +214,20 @@ function renderPage({
 `;
 }
 
-function renderIntro({ eyebrow, title, subtitle, photo = false }) {
+function renderIntro(title, subtitle) {
   return `
-    <header class="page-intro${photo ? ' page-intro--photo' : ''}">
-      ${photo ? renderProfilePhoto() : ''}
-      <div class="page-intro-copy">
-        <p class="eyebrow">${esc(eyebrow)}</p>
-        <h1>${esc(title)}</h1>
-        ${subtitle ? `<p class="intro-subtitle">${esc(subtitle)}</p>` : ''}
-      </div>
+    <header class="page-intro">
+      <h1>${esc(title)}</h1>
+      ${subtitle ? `<p class="intro-subtitle">${esc(subtitle)}</p>` : ''}
     </header>
   `;
 }
 
-function renderProfilePhoto() {
+function renderSection(title, body, id) {
   return `
-    <figure class="profile-photo">
-      <img
-        src="${attr(site.profilePhoto.src)}"
-        alt="${attr(site.profilePhoto.alt)}"
-        width="88"
-        height="88"
-        loading="eager"
-        decoding="async"
-      >
-    </figure>
-  `;
-}
-
-function renderSection(title, lead, body) {
-  return `
-    <section class="page-section">
+    <section class="page-section"${id ? ` id="${attr(id)}"` : ''}>
       <div class="section-head">
         <h2>${esc(title)}</h2>
-        ${lead ? `<p class="section-lead">${esc(lead)}</p>` : ''}
       </div>
       ${body}
     </section>
@@ -241,22 +238,18 @@ function renderProse(paragraphs) {
   return `<div class="prose">${paragraphs.map((paragraph) => `<p>${esc(paragraph)}</p>`).join('')}</div>`;
 }
 
-function renderCompactList(items) {
-  return `<ul class="compact-list">${items.map((item) => `<li>${esc(item)}</li>`).join('')}</ul>`;
-}
-
 function renderEntries(items) {
   return `
     <div class="entry-list">
       ${items
         .map(
           (item) => `
-            <article class="entry">
+            <article class="entry"${item.id ? ` id="${attr(item.id)}"` : ''}>
               <div class="entry-head">
                 <h3>${item.href ? `<a href="${attr(item.href)}">${esc(item.title)}</a>` : esc(item.title)}</h3>
                 ${item.meta ? `<span class="entry-meta">${esc(item.meta)}</span>` : ''}
               </div>
-              ${item.eyebrow ? `<p class="entry-eyebrow">${esc(item.eyebrow)}</p>` : ''}
+              ${item.org ? `<p class="entry-org">${esc(item.org)}</p>` : ''}
               ${item.summary ? `<p class="entry-summary">${esc(item.summary)}</p>` : ''}
             </article>
           `
@@ -292,30 +285,11 @@ function renderLinkGroups(groups) {
 }
 
 function renderHome() {
-  const intro = renderIntro({
-    eyebrow: site.name,
-    title: site.heroHeadline,
-    subtitle: site.tagline,
-  });
+  const intro = renderIntro(site.heroHeadline, site.tagline);
 
   const sections = [
-    renderSection(
-      'About Me',
-      '',
-      renderProse([site.homeSummary])
-    ),
-    renderSection(
-      'Current Work',
-      '',
-      renderEntries(
-        site.focusItems.map((item) => ({
-          title: item.name,
-          meta: item.label,
-          summary: item.summary,
-          href: item.href || '',
-        }))
-      )
-    ),
+    renderSection('About Me', renderProse([site.homeSummary])),
+    renderSection('Current Work', renderEntries(site.currentWork)),
   ];
 
   return renderPage({
@@ -338,40 +312,17 @@ function renderHome() {
 }
 
 function renderAbout() {
-  const intro = renderIntro({
-    eyebrow: 'About Me',
-    title: 'About Me',
-    subtitle: 'Tokyo-based student at Cambridge.',
-    photo: true,
-  });
+  const intro = renderIntro(site.heroHeadline, 'Incoming HSPS student at the University of Cambridge.');
 
   const sections = [
-    renderSection(
-      'Background',
-      '',
-      renderProse([
-        'I study HSPS at Cambridge and work from Tokyo.',
-        'My work spans ElevateOS, Kiwanis Voice Club of Nippon, KIST Key Club, and research and writing.',
-        'The aim is to keep each project practical, readable, and easy to pick up again later.',
-      ])
-    ),
-    renderSection(
-      'Current Roles',
-      '',
-      renderEntries(
-        site.experience.slice(0, 4).map((item) => ({
-          title: item.role,
-          eyebrow: item.org,
-          meta: item.dates,
-          summary: item.summary,
-        }))
-      )
-    ),
+    renderSection('About Me', renderProse(site.aboutParagraphs)),
+    renderSection('Education', renderEntries(site.education), 'education'),
+    renderSection('Experience', renderEntries(site.experience), 'experience'),
   ];
 
   return renderPage({
     title: `About · ${site.name}`,
-    description: site.tagline,
+    description: 'About Howard Chan.',
     canonicalPath: '/about/',
     bodyClass: 'page-about',
     content: `<article class="page-article">${intro}${sections.join('')}</article>`,
@@ -389,38 +340,35 @@ function renderAbout() {
   });
 }
 
-function renderPortfolio() {
-  const intro = renderIntro({
-    eyebrow: 'Projects',
-    title: 'Projects',
-    subtitle: 'Product, service, and research.',
-  });
+function renderAwards() {
+  const intro = renderIntro('Awards', 'Selected achievements and recognition.');
 
-  const sections = [
-    renderSection(
-      'Product',
-      '',
-      renderEntries(
-        site.projects.map((item) => ({
-          title: item.name,
-          eyebrow: item.label,
-          summary: item.summary,
-          href: item.href || '',
-        }))
-      )
-    ),
-    renderSection(
-      'Service',
-      '',
-      renderEntries(
-        site.serviceProjects.map((item) => ({
-          title: item.name,
-          eyebrow: 'Service',
-          summary: item.summary,
-        }))
-      )
-    ),
-  ];
+  const sections = site.awards.map((group, index) =>
+    renderSection(group.group, renderEntries(group.items), index === 0 ? 'academic-distinction' : '')
+  );
+
+  return renderPage({
+    title: `Awards · ${site.name}`,
+    description: 'Selected achievements and recognition.',
+    canonicalPath: '/awards/',
+    bodyClass: 'page-awards',
+    content: `<article class="page-article">${intro}${sections.join('')}</article>`,
+    ogType: 'website',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: `${site.name} Awards`,
+      description: 'Selected achievements and recognition.',
+    },
+  });
+}
+
+function renderProjects() {
+  const intro = renderIntro('Projects', 'Product, service, and research.');
+
+  const sections = site.projects.map((group) =>
+    renderSection(group.group, renderEntries(group.items), group.group.toLowerCase().replace(/[^a-z0-9]+/g, '-'))
+  );
 
   return renderPage({
     title: `Projects · ${site.name}`,
@@ -439,31 +387,27 @@ function renderPortfolio() {
 }
 
 function renderBlogIndex() {
-  const intro = renderIntro({
-    eyebrow: 'Writing',
-    title: 'Writing',
-    subtitle: 'Project notes.',
-  });
+  const intro = renderIntro('Writing', 'Project notes and publications.');
 
   const sections = [
+    renderSection('Publications', renderEntries(site.publications), 'publications'),
     renderSection(
-      'Recent Notes',
-      '',
+      'Notes',
       renderEntries(
         site.posts.map((post) => ({
           title: post.title,
-          eyebrow: post.date,
-          meta: post.readTime,
+          meta: `${post.date} · ${post.readTime}`,
           summary: post.summary,
           href: `/blog/${post.slug}/`,
         }))
-      )
+      ),
+      'notes'
     ),
   ];
 
   return renderPage({
     title: `Writing · ${site.name}`,
-    description: 'Project notes.',
+    description: 'Project notes and publications.',
     canonicalPath: '/blog/',
     bodyClass: 'page-blog',
     content: `<article class="page-article">${intro}${sections.join('')}</article>`,
@@ -472,21 +416,15 @@ function renderBlogIndex() {
       '@context': 'https://schema.org',
       '@type': 'Blog',
       name: `${site.name} Writing`,
-      description: 'Project notes.',
+      description: 'Project notes and publications.',
     },
   });
 }
 
 function renderPost(post) {
-  const intro = renderIntro({
-    eyebrow: 'Writing',
-    title: post.title,
-    subtitle: post.summary,
-  });
+  const intro = renderIntro(post.title, post.summary);
 
-  const sections = [
-    renderSection('Note', `${post.date} · ${post.readTime}`, renderProse(post.body)),
-  ];
+  const sections = [renderSection('Note', renderProse(post.body), 'note')];
 
   return renderPage({
     title: `${post.title} · ${site.name}`,
@@ -508,17 +446,10 @@ function renderPost(post) {
 }
 
 function renderContact() {
-  const intro = renderIntro({
-    eyebrow: 'Contact',
-    title: 'Contact',
-    subtitle: 'LinkedIn is the fastest route. WhatsApp is fine for a quick reply.',
-  });
+  const intro = renderIntro('Contact', site.contactIntro);
 
   const sections = [
-    renderSection('Direct', '', renderProse(['Use LinkedIn for professional contact. Use WhatsApp for a quick reply.'])),
-    renderSection('Core / Professional', '', renderLinkRow(site.linkGroups[0].items)),
-    renderSection('Social / Personal', '', renderLinkRow(site.linkGroups[1].items)),
-    renderSection('Ventures / Projects', '', renderLinkRow(site.linkGroups[2].items)),
+    renderSection('Links', renderLinkGroups(site.linkGroups), 'links'),
   ];
 
   return renderPage({
@@ -541,19 +472,14 @@ function renderContact() {
 }
 
 function renderNotFound() {
-  const intro = renderIntro({
-    eyebrow: '404',
-    title: 'Page not found',
-    subtitle: 'Use Home, About, Projects, Writing, or Contact.',
-  });
+  const intro = renderIntro('Page not found', 'Use Home, About, Awards, Projects, Writing, or Contact.');
 
   const sections = [
     renderSection(
-      'Try this instead',
-      '',
+      'Pages',
       renderLinkGroups([
         {
-          group: 'Pages',
+          group: 'Navigation',
           items: navItems,
         },
       ])
@@ -587,6 +513,7 @@ function renderLlms() {
   const pagesList = [
     ['Home', '/'],
     ['About', '/about/'],
+    ['Awards', '/awards/'],
     ['Projects', '/portfolio/'],
     ['Writing', '/blog/'],
     ['Contact', '/contact/'],
@@ -596,7 +523,7 @@ function renderLlms() {
 
 ${site.tagline}
 
-Howard Chan's projects, writing, and contact links.
+Howard Chan's profile, awards, projects, writing, and contact links.
 
 ## Pages
 ${pagesList.map(([label, route]) => `- ${label}: ${site.url}${route === '/' ? '/' : route}`).join('\n')}
@@ -612,7 +539,9 @@ ${site.contactLinks.map((link) => `- ${link.label}: ${link.href}`).join('\n')}
 - Pulse Manila 2026
 - Katalyst
 - OpenClaw
+- Stand Tall
 - Crystal Century
+- Think College Level
 
 ## Service
 - Kiwanis Voice Club of Nippon
@@ -626,6 +555,7 @@ function renderSitemap() {
   const entries = [
     '/',
     '/about/',
+    '/awards/',
     '/portfolio/',
     '/blog/',
     '/contact/',
@@ -646,11 +576,13 @@ ${entries
             ? '0.9'
             : route === '/portfolio/'
               ? '0.8'
-              : route === '/about/'
-                ? '0.6'
-                : route === '/contact/'
-                  ? '0.5'
-                  : '0.7'
+              : route === '/awards/'
+                ? '0.7'
+                : route === '/about/'
+                  ? '0.6'
+                  : route === '/contact/'
+                    ? '0.5'
+                    : '0.7'
       }</priority></url>`
   )
   .join('\n')}
@@ -673,7 +605,7 @@ async function cleanupMediaAssets() {
 
   await Promise.all(
     entries
-      .filter((entry) => entry.isFile() && entry.name !== 'pfp.png')
+      .filter((entry) => entry.isFile() && entry.name !== 'pfp.png' && entry.name !== 'hc-logo.png')
       .map((entry) => rm(path.join(mediaDir, entry.name), { force: true }))
   );
 }

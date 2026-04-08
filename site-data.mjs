@@ -1,12 +1,14 @@
 const siteUrl = 'https://thinkcollegelevel.com';
+const cambridgeUrl = 'https://www.cam.ac.uk/';
 const elevateosUrl = 'https://elevateos.org';
 const crystalcenturyUrl = 'https://crystalcentury.com';
-const linkedinUrl = 'https://www.linkedin.com/in/chakhanghoward-chan';
+const linkedinUrl = 'https://www.linkedin.com/in/howardchan2008/';
 const githubUrl = 'https://github.com/imjusthoward/';
 const wantedlyUrl = 'https://www.wantedly.com/id/chakhang_chan';
 const facebookUrl = 'https://www.facebook.com/imjusthoward';
 const instagramUrl = 'https://www.instagram.com/imjusthoward/';
 const whatsappUrl = 'https://wa.me/85293442294';
+const emailUrl = 'mailto:chakhanghowardchan2008@gmail.com';
 
 export const site = {
   name: 'Think College Level',
@@ -15,129 +17,296 @@ export const site = {
   title: 'Think College Level',
   tagline:
     'Cambridge (HSPS) Offer Holder | President of Kiwanis Voice Club of Nippon | CEO of ElevateOS | Lumiere Scholar',
-  description: "Howard Chan's projects, writing, and contact links.",
-  identityLine: 'Cambridge HSPS offer holder',
+  description:
+    "Howard Chan's profile, awards, projects, writing, and contact links.",
   location: 'Sumida-ku, Tokyo, Japan',
-  linkedin: linkedinUrl,
-  github: githubUrl,
-  wantedly: wantedlyUrl,
-  facebook: facebookUrl,
-  instagram: instagramUrl,
-  elevateos: elevateosUrl,
-  crystalcentury: crystalcenturyUrl,
-  whatsapp: whatsappUrl,
-  brandMark: {
-    text: 'HC',
-  },
-  profilePhoto: {
-    src: '/assets/media/pfp.png',
-    alt: 'Howard Chan portrait',
+  logo: {
+    src: '/assets/media/hc-logo.png',
+    alt: 'HC logo',
   },
   heroHeadline: 'Howard Chan',
-  homeSummary: 'Tokyo-based student at Cambridge. Work spans ElevateOS, Kiwanis service, research, and writing.',
-  focusItems: [
+  homeSummary:
+    'Incoming HSPS student at the University of Cambridge interested in politics, international systems, AI, service, and entrepreneurship. I build projects at the intersection of technology and real-world coordination.',
+  aboutParagraphs: [
+    'Incoming HSPS student at the University of Cambridge interested in connecting politics, international systems, AI, service, and entrepreneurship.',
+    'I build projects at the intersection of technology and real-world coordination: from leading Kiwanis Voice Club of Nippon and building Pulse Manila 2026, to developing ElevateOS as an AI-enabled education platform.',
+    'My research has focused on cross-cultural communication and cognitive systems, including top-5% Lumiere work scheduled for publication in NHSJS.',
+    'Long term, I want to use institutional thinking and entrepreneurial execution to build technology that works not just in theory, but in real social and international settings.',
+  ],
+  currentWork: [
     {
-      name: 'ElevateOS',
-      label: 'Work',
-      summary:
-        'AI-enabled education platform for IB, AP, SAT, and admissions support. Handles tutoring operations, worksheet generation, and session follow-up.',
+      title: 'ElevateOS',
+      meta: 'Product',
+      summary: 'AI-enabled education platform for IB, AP, SAT, and admissions workflows.',
       href: elevateosUrl,
     },
     {
-      name: 'Kiwanis Voice Club of Nippon',
-      label: 'Service',
-      summary: 'Founded Kiwanis Voice Club of Nippon and leads youth service and event coordination.',
+      title: 'Kiwanis Voice Club of Nippon',
+      meta: 'Service',
+      summary: 'Founding president coordinating youth service, continuity, and stakeholder alignment across Japan.',
+      href: '/portfolio/#kiwanis-voice-club-of-nippon',
     },
     {
-      name: 'Research and writing',
-      label: 'Research',
-      summary: 'Lumiere research on emoji semiotics, cross-cultural interpretation, and cognitive aging.',
-    },
-  ],
-  projects: [
-    {
-      name: 'Pulse Manila 2026',
-      label: 'Project',
-      summary: 'Mobile companion for ASPAC Manila 2026. Keeps schedules, venues, and updates easy to check on the move.',
-    },
-    {
-      name: 'Katalyst',
-      label: 'Project',
-      summary: 'Coordination layer for Kiwanis projects and continuity.',
-    },
-    {
-      name: 'OpenClaw',
-      label: 'Project',
-      summary: 'WhatsApp-based execution agent system on VPS, local gateway, and systemd.',
-    },
-    {
-      name: 'Think College Level',
-      label: 'Site',
-      summary: 'Projects, writing, and contact links.',
-    },
-    {
-      name: 'Crystal Century',
-      label: 'Project',
-      summary: 'WordPress recovery and infrastructure project.',
-      href: crystalcenturyUrl,
-    },
-  ],
-  experience: [
-    {
-      org: 'Kiwanis International',
-      role: 'Founder and President of Kiwanis Voice Club of Nippon',
-      dates: 'Jan 2026 - Present',
-      summary: 'Founded Kiwanis Voice Club of Nippon and leads youth service and event coordination.',
-    },
-    {
-      org: 'ElevateOS',
-      role: 'Founder',
-      dates: 'Jan 2026 - Present',
-      summary: 'Building an AI-enabled education platform for IB, AP, SAT, and admissions support.',
-    },
-    {
-      org: 'Key Club International',
-      role: 'Founder and President of KIST Key Club',
-      dates: 'Sep 2024 - Present',
-      summary: 'Founded and scaled the school Key Club into a service organization.',
-    },
-    {
-      org: 'Lumiere Education',
-      role: 'Researcher',
-      dates: 'Jun 2025 - Present',
-      summary: 'Researcher on ambiguous emoji interpretation in Japan and China.',
+      title: 'Pulse Manila 2026',
+      meta: 'Project',
+      summary: 'Mobile convention companion for schedules, venues, and updates.',
+      href: '/blog/pulse-manila-2026/',
     },
   ],
   education: [
     {
-      school: 'University of Cambridge',
-      degree: 'BA (Hons), HSPS',
-      dates: '2026 - 2029',
-      summary: 'Incoming undergraduate at Peterhouse.',
+      title: 'University of Cambridge',
+      meta: 'BA (Hons) · HSPS · Incoming 2026',
+      summary: 'Offer holder; focus on institutions, politics, and decision-making at scale.',
+      href: cambridgeUrl,
     },
     {
-      school: 'K. International School Tokyo',
-      degree: 'International Baccalaureate Diploma',
-      dates: 'May 2022 - May 2026',
-      summary: 'GPA 3.96 unweighted; predicted IB 45/45; SAT 1550; Duolingo English Test 160; UCAT 2410, Band 2.',
+      title: 'K. International School Tokyo',
+      meta: 'IB Diploma · Predicted 45/45',
+      summary: 'Higher Level: Biology, English A Language & Literature, Chemistry. SAT 1550 · DET 160 · UCAT 2410 Band 2.',
+      href: '/awards/#academic-distinction',
     },
   ],
-  serviceProjects: [
+  experience: [
     {
-      name: 'Kiwanis Voice Club of Nippon',
-      summary: 'Youth service, continuity, and event coordination within the Kiwanis network.',
+      title: 'Founder and President, Kiwanis Voice Club of Nippon',
+      meta: 'Kiwanis International · Jan 2026 - Present',
+      summary: 'Founded the first Voice Club representing Japan within the Kiwanis network and coordinates service initiatives across health, education, and community resilience.',
+      href: '/portfolio/#kiwanis-voice-club-of-nippon',
     },
     {
-      name: 'KIST Key Club',
-      summary: 'School service organization with projects across health, caregiving, food insecurity, and youth service.',
+      title: 'Founder and CEO, ElevateOS',
+      meta: 'Jan 2026 - Present',
+      summary: 'Leading an AI-enabled education platform for IB, AP, SAT, and admissions support using Next.js, TypeScript, PostgreSQL, and AI integrations.',
+      href: elevateosUrl,
     },
     {
-      name: 'Japan Cancer Society, KIST',
-      summary: '10-kilometer walkathon with 500+ participants and more than Y50,000 raised.',
+      title: 'Founder and President, KIST Key Club',
+      meta: 'K. International School Tokyo · Sep 2024 - Present',
+      summary: 'Scaled the club to 40+ members and 5 executives, raised over ¥200,000, and built service projects with Kiwanis Children\'s Fund and Aktion Club.',
+      href: '/portfolio/#kist-key-club',
     },
     {
-      name: 'Recycling Initiative, KIST',
-      summary: 'Tripled membership to 60 and improved recycling efficiency by 40%.',
+      title: 'Researcher, Lumiere Education',
+      meta: 'Jun 2025 - Present',
+      summary: 'Authored a top 5% proposal on emoji semiotics and a narrative review on cognitive aging.',
+      href: '/writing/#publications',
+    },
+    {
+      title: 'President, Japan Cancer Society, KIST',
+      meta: 'Sep 2024 - Present',
+      summary: 'Organized a 10-kilometer interschool walkathon with 500+ participants and additional donation drives.',
+      href: '/portfolio/#japan-cancer-society-kist',
+    },
+    {
+      title: 'President, Recycling Initiative, KIST',
+      meta: 'Aug 2024 - Present',
+      summary: 'Tripled membership to 60 and introduced Quality Inspector roles that improved oversight and recycling efficiency by 40%.',
+      href: '/portfolio/#recycling-initiative-kist',
+    },
+  ],
+  awards: [
+    {
+      group: 'Academic distinction',
+      items: [
+        {
+          title: 'University of Cambridge offer',
+          meta: '2026',
+          summary: 'Incoming BA (Hons) student in Human, Social, and Political Sciences.',
+          href: cambridgeUrl,
+        },
+        {
+          title: 'Predicted IB 45/45',
+          meta: 'K. International School Tokyo',
+          summary: 'Top predicted score in the diploma programme.',
+          href: '/about/#education',
+        },
+        {
+          title: 'SAT 1550 · DET 160 · UCAT 2410 Band 2',
+          meta: 'Admissions testing',
+          summary: 'High-testing profile across language and admissions exams.',
+          href: '/about/#education',
+        },
+        {
+          title: 'KIST Honor Roll and International Research Olympiad Honor Roll',
+          meta: '2023–2025',
+          summary: 'Academic distinction across school years and research performance.',
+          href: '/about/#education',
+        },
+      ],
+    },
+    {
+      group: 'Leadership and service',
+      items: [
+        {
+          title: 'Founder and President, Kiwanis Voice Club of Nippon',
+          meta: 'Kiwanis International',
+          summary: 'Built the first Voice Club representing Japan and coordinated service across youth, alumni, and stakeholders.',
+          href: '/portfolio/#kiwanis-voice-club-of-nippon',
+        },
+        {
+          title: 'Founder and President, KIST Key Club',
+          meta: 'K. International School Tokyo',
+          summary: 'Scaled the service organization to 40+ members, 5 executives, and ¥200,000+ raised.',
+          href: '/portfolio/#kist-key-club',
+        },
+        {
+          title: 'President, Japan Cancer Society, KIST',
+          meta: 'K. International School Tokyo',
+          summary: 'Organized a 10-kilometer walkathon with 500+ participants and support drives for community needs.',
+          href: '/portfolio/#japan-cancer-society-kist',
+        },
+        {
+          title: 'President, Recycling Initiative, KIST',
+          meta: 'K. International School Tokyo',
+          summary: 'Tripled membership and improved recycling oversight efficiency by 40%.',
+          href: '/portfolio/#recycling-initiative-kist',
+        },
+      ],
+    },
+    {
+      group: 'Research',
+      items: [
+        {
+          title: 'Top 5% Lumiere proposal',
+          meta: 'Lumiere Research Programme',
+          summary: 'Cross-cultural communication research on ambiguous emojis across Japanese and Chinese users.',
+          href: '/writing/#publications',
+        },
+        {
+          title: 'Scheduled for publication in NHSJS',
+          meta: 'Preprint DOI 10.20944/preprints202509.0729.v1',
+          summary: 'Emoji semiotics study using Hofstede dimensions and generational analysis.',
+          href: 'https://doi.org/10.20944/preprints202509.0729.v1',
+        },
+        {
+          title: 'Cognitive aging review',
+          meta: 'Sci Set Journal of Medical Clinical Case Studies',
+          summary: 'Narrative review integrating six decades of the Seattle Longitudinal Study with contemporary advances.',
+          href: '/writing/#publications',
+        },
+      ],
+    },
+  ],
+  projects: [
+    {
+      group: 'Product',
+      items: [
+        {
+          title: 'ElevateOS',
+          meta: 'Active',
+          summary: 'AI-enabled education platform for IB, AP, SAT, and admissions workflows.',
+          href: elevateosUrl,
+          id: 'elevateos',
+        },
+        {
+          title: 'Pulse Manila 2026',
+          meta: 'Active',
+          summary: 'Mobile convention companion for schedules, venues, and updates under live event conditions.',
+          href: '/blog/pulse-manila-2026/',
+          id: 'pulse-manila-2026',
+        },
+        {
+          title: 'Katalyst',
+          meta: 'Active',
+          summary: 'Coordination layer for continuity, handoffs, and institutional memory in youth service networks.',
+          href: '/blog/katalyst/',
+          id: 'katalyst',
+        },
+        {
+          title: 'OpenClaw',
+          meta: 'System',
+          summary: 'WhatsApp-based execution agent system running on VPS, local gateway, and systemd.',
+          href: '/portfolio/#openclaw',
+          id: 'openclaw',
+        },
+      ],
+    },
+    {
+      group: 'Service',
+      items: [
+        {
+          title: 'Kiwanis Voice Club of Nippon',
+          meta: 'Founding initiative',
+          summary: 'First Voice Club representing Japan within the Kiwanis network.',
+          href: '/portfolio/#kiwanis-voice-club-of-nippon',
+          id: 'kiwanis-voice-club-of-nippon',
+        },
+        {
+          title: 'KIST Key Club',
+          meta: 'Founding initiative',
+          summary: 'School service organization focused on health, caregiving, food insecurity, and youth service.',
+          href: '/portfolio/#kist-key-club',
+          id: 'kist-key-club',
+        },
+        {
+          title: 'Japan Cancer Society, KIST',
+          meta: 'Service project',
+          summary: '10-kilometer interschool walkathon and donation drives.',
+          href: '/portfolio/#japan-cancer-society-kist',
+          id: 'japan-cancer-society-kist',
+        },
+        {
+          title: 'Recycling Initiative, KIST',
+          meta: 'Service project',
+          summary: 'Quality Inspector roles and membership growth for better oversight.',
+          href: '/portfolio/#recycling-initiative-kist',
+          id: 'recycling-initiative-kist',
+        },
+      ],
+    },
+    {
+      group: 'Infrastructure and research',
+      items: [
+        {
+          title: 'Stand Tall',
+          meta: 'Prototype',
+          summary: 'Assistive wheelchair add-on designed to reduce caregiver strain and improve mobility transitions.',
+          href: '/portfolio/#stand-tall',
+          id: 'stand-tall',
+        },
+        {
+          title: 'Crystal Century',
+          meta: 'Production work',
+          summary: 'Live e-commerce platform work and recovery planning under hosting constraints.',
+          href: crystalcenturyUrl,
+          id: 'crystal-century',
+        },
+        {
+          title: 'Think College Level',
+          meta: 'Portfolio hub',
+          summary: 'Personal site for projects, writing, and contact links.',
+          href: siteUrl,
+          id: 'think-college-level',
+        },
+        {
+          title: 'Semiconductor supply-chain concept paper',
+          meta: 'Research',
+          summary: 'Concept paper on supply-chain resilience using big data analytics and quantum-enhanced blockchain.',
+          href: '/writing/#publications',
+          id: 'semiconductor-supply-chain',
+        },
+      ],
+    },
+  ],
+  publications: [
+    {
+      title:
+        'Hofstede’s Dimensions and Generational Effects on Ambiguous Emoji Semiotics: Cross-Cultural Analysis of Japanese and Chinese Digital Communication',
+      meta: '2025',
+      summary: 'Preprint scheduled for publication in NHSJS.',
+      href: 'https://doi.org/10.20944/preprints202509.0729.v1',
+    },
+    {
+      title:
+        'Unraveling Cognitive Aging: A Comprehensive Narrative Review Integrating Six Decades of the Seattle Longitudinal Study with Contemporary Advances',
+      meta: '2025',
+      summary: 'Narrative review on education, occupational complexity, and digital engagement in cognition.',
+    },
+    {
+      title: 'Semiconductor supply-chain resilience concept paper',
+      meta: '2025',
+      summary: 'Draft exploring big data analytics and quantum-enhanced blockchain for resilience planning.',
     },
   ],
   posts: [
@@ -181,16 +350,24 @@ export const site = {
       ],
     },
   ],
-  contactIntro: 'LinkedIn is the fastest route. WhatsApp works for a quick reply.',
+  contactIntro:
+    'LinkedIn is the fastest route. WhatsApp works for a quick reply. Email is fine for anything longer.',
   contactLinks: [
     { label: 'Think College Level', href: siteUrl },
-    { label: 'GitHub', href: githubUrl },
     { label: 'LinkedIn', href: linkedinUrl },
+    { label: 'GitHub', href: githubUrl },
     { label: 'Wantedly', href: wantedlyUrl },
+    { label: 'Email', href: emailUrl },
     { label: 'Facebook', href: facebookUrl },
     { label: 'Instagram', href: instagramUrl },
     { label: 'ElevateOS', href: elevateosUrl },
     { label: 'Crystal Century', href: crystalcenturyUrl },
+    { label: 'WhatsApp', href: whatsappUrl },
+  ],
+  footerLinks: [
+    { label: 'LinkedIn', href: linkedinUrl },
+    { label: 'GitHub', href: githubUrl },
+    { label: 'Email', href: emailUrl },
     { label: 'WhatsApp', href: whatsappUrl },
   ],
   linkGroups: [
@@ -198,9 +375,10 @@ export const site = {
       group: 'Core / Professional',
       items: [
         { label: 'Think College Level', href: siteUrl },
-        { label: 'GitHub', href: githubUrl },
         { label: 'LinkedIn', href: linkedinUrl },
+        { label: 'GitHub', href: githubUrl },
         { label: 'Wantedly', href: wantedlyUrl },
+        { label: 'Email', href: emailUrl },
       ],
     },
     {

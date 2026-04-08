@@ -2,11 +2,12 @@
 
 Cambridge (HSPS) Offer Holder | President of Kiwanis Voice Club of Nippon | CEO of ElevateOS | Lumiere Scholar
 
-Howard Chan's projects, writing, and contact links.
+Howard Chan's profile, awards, projects, writing, and contact links.
 
 ## Pages
 - Home: https://thinkcollegelevel.com/
 - About: https://thinkcollegelevel.com/about/
+- Awards: https://thinkcollegelevel.com/awards/
 - Projects: https://thinkcollegelevel.com/portfolio/
 - Writing: https://thinkcollegelevel.com/blog/
 - Contact: https://thinkcollegelevel.com/contact/
@@ -18,9 +19,10 @@ Howard Chan's projects, writing, and contact links.
 
 ## Links
 - Think College Level: https://thinkcollegelevel.com
+- LinkedIn: https://www.linkedin.com/in/howardchan2008/
 - GitHub: https://github.com/imjusthoward/
-- LinkedIn: https://www.linkedin.com/in/chakhanghoward-chan
 - Wantedly: https://www.wantedly.com/id/chakhang_chan
+- Email: mailto:chakhanghowardchan2008@gmail.com
 - Facebook: https://www.facebook.com/imjusthoward
 - Instagram: https://www.instagram.com/imjusthoward/
 - ElevateOS: https://elevateos.org
@@ -32,7 +34,9 @@ Howard Chan's projects, writing, and contact links.
 - Pulse Manila 2026
 - Katalyst
 - OpenClaw
+- Stand Tall
 - Crystal Century
+- Think College Level
 
 ## Service
 - Kiwanis Voice Club of Nippon
