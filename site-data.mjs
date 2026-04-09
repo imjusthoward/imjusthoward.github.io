@@ -21,7 +21,7 @@ export const site = {
   tagline:
     'Cambridge (HSPS) Offer Holder | President of Kiwanis Voice Club of Nippon | CEO of ElevateOS | Lumiere Scholar',
   description:
-    "Howard Chan's profile, awards, projects, research, service, and contact links.",
+    "Howard Chan's profile, awards, publications, projects, and contact links.",
   location: 'Sumida-ku, Tokyo, Japan',
   logo: {
     src: '/assets/media/hc-logo.png',
@@ -29,32 +29,16 @@ export const site = {
   },
   heroHeadline: 'Howard Chan',
   homeSummary:
-    'Tokyo-based, multilingual systems builder focused on service leadership, research, and product execution. Incoming HSPS offer holder at Peterhouse, University of Cambridge.',
-  aboutParagraphs: [
-    'I am Chak Hang (Howard) Chan, a Tokyo-based builder interested in politics, international systems, AI, service, and entrepreneurship.',
-    'I build projects at the intersection of technology and real-world coordination: Kiwanis Voice Club of Nippon, Pulse Manila 2026, ElevateOS, and related systems work.',
-    'My research has focused on cross-cultural communication and cognitive systems, including a top-5% Lumiere project scheduled for publication in NHSJS.',
-    'Long term, I want to build technology that works in real social and international settings, not only in theory.',
+    'Tokyo-based, multilingual builder focused on service leadership, research, and product execution. Incoming HSPS offer holder at Peterhouse, University of Cambridge.',
+  homeParagraphs: [
+    'I am Chak Hang (Howard) Chan, a Tokyo-based builder and incoming HSPS offer holder at Peterhouse, University of Cambridge. I work across politics, international systems, AI, service, and entrepreneurship, and I care about how institutions move when the constraints are real.',
+    'My work sits at the intersection of leadership and execution. I have founded and led Kiwanis Voice Club of Nippon and KIST Key Club, and I keep coming back to the same problem: making coordination clearer, handoffs cleaner, and useful work easier to repeat.',
   ],
-  currentWork: [
-    {
-      title: 'ElevateOS',
-      meta: 'Product',
-      summary: 'AI-enabled education platform serving about 100 students and tutors in Japan.',
-      href: elevateosUrl,
-    },
-    {
-      title: 'Kiwanis Voice Club of Nippon',
-      meta: 'Service',
-      summary: 'First Voice Club representing Japan; coordinates youth service, alumni mentorship, and continuity.',
-      href: '/portfolio/#kiwanis-voice-club-of-nippon',
-    },
-    {
-      title: 'Pulse Manila 2026',
-      meta: 'Project',
-      summary: 'Mobile event companion for schedules, venues, and live updates.',
-      href: pulseUrl,
-    },
+  aboutParagraphs: [
+    'I am Chak Hang (Howard) Chan, a Tokyo-based builder and incoming HSPS offer holder at Peterhouse, University of Cambridge. I work across politics, international systems, AI, service, and entrepreneurship, and I care most about how institutions and teams actually move when the constraints are real.',
+    'My work sits at the intersection of leadership and execution. I have founded and led Kiwanis Voice Club of Nippon and KIST Key Club, and I keep coming back to the same problem: making coordination clearer, handoffs cleaner, and useful work easier to repeat.',
+    'On the product side, I build systems for education, events, and operational continuity. The pattern is always the same: reduce friction, improve information flow, and make something durable enough for people to actually use in live conditions.',
+    'My research focuses on cross-cultural communication and cognitive systems, including Lumiere work scheduled for publication in NHSJS, a cognitive aging review, and a semiconductor supply-chain concept paper. Long term, I want to build technology that works in social and international settings, not just in theory.',
   ],
   education: [
     {
@@ -78,7 +62,7 @@ export const site = {
       href: '/portfolio/#kiwanis-voice-club-of-nippon',
     },
     {
-      title: 'Founder and CEO, ElevateOS',
+      title: 'Founder and CEO, AI-enabled education platform',
       meta: 'Jan 2026 - Present',
       summary: 'Leading the product and execution layer for an AI-enabled education platform used by about 100 students and tutors in Japan.',
       href: elevateosUrl,
@@ -96,7 +80,7 @@ export const site = {
       href: '/writing/#publications',
     },
     {
-      title: 'Founder and Editor-in-Chief, Think College Level',
+      title: 'Founder and Editor-in-Chief, personal portfolio and writing site',
       meta: 'Jun 2024 - Present',
       summary: 'Portfolio and writing site for projects, research, and links.',
       href: siteUrl,
@@ -138,14 +122,24 @@ export const site = {
   ],
   skills: [
     {
+      title: 'Leadership',
+      meta: 'Core strengths',
+      summary: 'Nonprofit Leadership, Organizational Strategy, Youth Leadership Development, Community Outreach, International Service Coordination.',
+    },
+    {
+      title: 'Product and systems',
+      meta: 'Core strengths',
+      summary: 'AI Product Design, EdTech Development, Platform Architecture, Product Strategy, Software Development.',
+    },
+    {
+      title: 'Research',
+      meta: 'Core strengths',
+      summary: 'Academic Research, Cross-Cultural Analysis, Research Skills, Publications, Generational Differences, Cultural Diversity.',
+    },
+    {
       title: 'Languages',
       meta: 'Spoken',
       summary: 'English, Cantonese, Mandarin, Japanese.',
-    },
-    {
-      title: 'Stack',
-      meta: 'Tools',
-      summary: 'TypeScript, Next.js / React, PostgreSQL / SQL, Git / GitHub, Python, Prisma, NextAuth, OpenAI, Stripe, Cloud Run, Figma, Notion, Google Workspace.',
     },
   ],
   awards: [
@@ -174,6 +168,12 @@ export const site = {
           title: 'KIST Honor Roll and Recognition',
           meta: '2023–2025',
           summary: 'Honor Roll across 2023–2025, Certificate of Recognition 2023–2024, and International Research Olympiad Honor Roll 2025.',
+          href: '/about/#education',
+        },
+        {
+          title: 'Additional admissions offers',
+          meta: 'Cycle 2025',
+          summary: 'HKU, HKUST, Berkeley, UCLA, UCSD, Edinburgh, King’s, and UCL.',
           href: '/about/#education',
         },
       ],
@@ -264,7 +264,7 @@ export const site = {
   ],
   projects: [
     {
-      group: 'Product',
+      group: 'Products',
       items: [
         {
           title: 'ElevateOS',
@@ -274,7 +274,7 @@ export const site = {
           id: 'elevateos',
         },
         {
-          title: 'Pulse Manila 2026',
+          title: 'Kiwanis Pulse @ Manila Convention 2026',
           meta: 'Active',
           summary: 'Mobile convention companion for schedules, venues, and live updates under ASPAC Manila 2026 conditions.',
           href: pulseUrl,
@@ -284,15 +284,8 @@ export const site = {
           title: 'Katalyst',
           meta: 'Active',
           summary: 'Long-term continuity and coordination layer for youth-led service networks.',
-          href: '/blog/katalyst/',
+          href: '/portfolio/#katalyst',
           id: 'katalyst',
-        },
-        {
-          title: 'OpenClaw',
-          meta: 'System',
-          summary: 'WhatsApp-based execution agent system running on VPS, local gateway, and systemd.',
-          href: '/portfolio/#openclaw',
-          id: 'openclaw',
         },
       ],
     },
@@ -300,44 +293,30 @@ export const site = {
       group: 'Service',
       items: [
         {
-          title: 'Kiwanis Voice Club of Nippon',
-          meta: 'Founding initiative',
-          summary: 'First Voice Club representing Japan within the Kiwanis network.',
-          href: '/portfolio/#kiwanis-voice-club-of-nippon',
-          id: 'kiwanis-voice-club-of-nippon',
-        },
-        {
-          title: 'KIST Key Club',
-          meta: 'Founding initiative',
-          summary: 'School service organization focused on health, caregiving, food insecurity, and youth service.',
-          href: '/portfolio/#kist-key-club',
-          id: 'kist-key-club',
-        },
-        {
-          title: 'Japan Cancer Society, KIST',
+          title: 'Mottainai Initiative',
           meta: 'Service project',
-          summary: '10-kilometer interschool walkathon with 500+ participants and donation drives.',
-          href: '/portfolio/#japan-cancer-society-kist',
-          id: 'japan-cancer-society-kist',
+          summary: 'Food-waste initiative focused on edible but visually rejected produce and local community use.',
+          href: '/portfolio/#mottainai-initiative',
+          id: 'mottainai-initiative',
         },
         {
-          title: 'Recycling Initiative, KIST',
-          meta: 'Service project',
-          summary: 'Quality Inspector roles and membership growth for better oversight.',
-          href: '/portfolio/#recycling-initiative-kist',
-          id: 'recycling-initiative-kist',
+          title: 'Stand Tall Project',
+          meta: 'Assistive design',
+          summary: 'Wheelchair add-on designed to reduce caregiver burden and improve transfers for elderly users in care-home settings.',
+          href: '/portfolio/#stand-tall',
+          id: 'stand-tall',
         },
       ],
     },
     {
-      group: 'Infrastructure and research',
+      group: 'Operations',
       items: [
         {
-          title: 'Stand Tall',
-          meta: 'Prototype',
-          summary: 'Assistive wheelchair add-on designed to reduce caregiver strain and improve mobility transitions.',
-          href: '/portfolio/#stand-tall',
-          id: 'stand-tall',
+          title: 'OpenClaw',
+          meta: 'System',
+          summary: 'WhatsApp-based execution agent system running on VPS, local gateway, and systemd.',
+          href: '/portfolio/#openclaw',
+          id: 'openclaw',
         },
         {
           title: 'Crystal Century',
@@ -345,20 +324,6 @@ export const site = {
           summary: 'Live e-commerce platform supporting over US$50,000 in transactions across Europe and the United States.',
           href: crystalcenturyUrl,
           id: 'crystal-century',
-        },
-        {
-          title: 'Think College Level',
-          meta: 'Portfolio hub',
-          summary: 'Personal site for projects, research, writing, and contact links.',
-          href: siteUrl,
-          id: 'think-college-level',
-        },
-        {
-          title: 'Semiconductor supply-chain concept paper',
-          meta: 'Research',
-          summary: 'Concept paper on supply-chain resilience using big data analytics and quantum-enhanced blockchain.',
-          href: '/writing/#publications',
-          id: 'semiconductor-supply-chain',
         },
       ],
     },
@@ -369,63 +334,73 @@ export const site = {
         'Hofstede’s Dimensions and Generational Effects on Ambiguous Emoji Semiotics: Cross-Cultural Analysis of Japanese and Chinese Digital Communication',
       meta: '2025',
       summary: 'Top-5% Lumiere project scheduled for publication in NHSJS. DOI: 10.20944/preprints202509.0729.v1.',
-      href: 'https://doi.org/10.20944/preprints202509.0729.v1',
+      href: '/blog/emoji-semiotics/',
     },
     {
       title:
         'Unraveling Cognitive Aging: A Comprehensive Narrative Review Integrating Six Decades of the Seattle Longitudinal Study with Contemporary Advances',
       meta: '2025',
       summary: 'Narrative review on education, occupational complexity, and digital engagement in cognition.',
+      href: '/blog/cognitive-aging/',
     },
     {
       title: 'Semiconductor supply-chain resilience concept paper',
       meta: '2025',
       summary: 'Draft exploring big data analytics and quantum-enhanced blockchain for resilience planning.',
+      href: '/blog/supply-chain-resilience/',
     },
   ],
   posts: [
     {
-      slug: 'elevateos',
-      title: 'ElevateOS',
+      slug: 'emoji-semiotics',
+      title:
+        'Hofstede’s Dimensions and Generational Effects on Ambiguous Emoji Semiotics: Cross-Cultural Analysis of Japanese and Chinese Digital Communication',
       date: 'April 6, 2026',
       dateIso: '2026-04-06',
       readTime: '4 min read',
-      summary: 'An education platform for tutoring, worksheets, and admissions support for about 100 students and tutors in Japan.',
+      summary: 'Top-5% Lumiere research scheduled for publication in NHSJS.',
       body: [
-        'ElevateOS keeps tutoring work, worksheet generation, and admissions support in one place.',
-        'Students, parents, and tutors use it to move through sessions quickly.',
-        'It keeps study work organized across handoffs and follow-up.',
+        'This paper examines how ambiguous emojis shift meaning across Japanese and Chinese digital communication.',
+        'The project treats interpretation as a cultural and generational problem, not just a symbol problem, and uses Hofstede’s dimensions to frame the comparison.',
+        'The goal is to show how small digital signals can reveal larger patterns in communication, context, and social expectation.',
       ],
     },
     {
-      slug: 'pulse-manila-2026',
-      title: 'Pulse Manila 2026',
+      slug: 'cognitive-aging',
+      title:
+        'Unraveling Cognitive Aging: A Comprehensive Narrative Review Integrating Six Decades of the Seattle Longitudinal Study with Contemporary Advances',
       date: 'April 6, 2026',
       dateIso: '2026-04-06',
       readTime: '4 min read',
-      summary: 'A mobile event companion for schedules, venues, and live updates.',
+      summary: 'Narrative review on education, occupational complexity, and digital engagement in cognition.',
       body: [
-        'Pulse gives attendees a fast way to see schedules, sessions, venues, and updates at a live convention.',
-        'It works well on mobile during a live convention.',
-        'It keeps event navigation simple when people need information quickly.',
+        'This review synthesizes six decades of findings from the Seattle Longitudinal Study with newer work on education, occupational complexity, and digital engagement.',
+        'The paper is framed as a bridge between long-run cognitive aging research and contemporary questions about learning, work, and everyday mental maintenance.',
+        'It is designed to be readable, synthesis-heavy, and useful as a reference point for broader cognitive systems thinking.',
       ],
     },
     {
-      slug: 'katalyst',
-      title: 'Katalyst',
+      slug: 'supply-chain-resilience',
+      title: 'Semiconductor supply-chain resilience concept paper',
       date: 'April 6, 2026',
       dateIso: '2026-04-06',
       readTime: '4 min read',
-      summary: 'A coordination layer for youth service projects and continuity.',
+      summary: 'Draft exploring big data analytics and quantum-enhanced blockchain for resilience planning.',
       body: [
-        'Katalyst keeps youth service work, project handoffs, and continuity in one place.',
-        'It keeps transitions clear and tasks visible between rounds of work.',
-        'It supports Kiwanis and related service work without adding overhead.',
+        'This concept paper explores how semiconductor supply chains can be made more resilient under geopolitical and operational pressure.',
+        'It uses big data analytics and quantum-enhanced blockchain as a way to think about visibility, traceability, and planning under uncertainty.',
+        'The aim is not novelty for its own sake, but a more durable approach to coordination in a strategically important industry.',
       ],
     },
   ],
   contactIntro:
     'LinkedIn is the fastest route. WhatsApp works for a quick reply. Email is fine for anything longer.',
+  homeLinks: [
+    { label: 'LinkedIn', href: linkedinUrl },
+    { label: 'GitHub', href: githubUrl },
+    { label: 'Wantedly', href: wantedlyUrl },
+    { label: 'Email', href: emailUrl },
+  ],
   contactLinks: [
     { label: 'Think College Level', href: siteUrl },
     { label: 'LinkedIn', href: linkedinUrl },
@@ -462,7 +437,7 @@ export const site = {
       group: 'Live / Projects',
       items: [
         { label: 'ElevateOS', href: elevateosUrl },
-        { label: 'Pulse Manila 2026', href: pulseUrl },
+        { label: 'Kiwanis Pulse @ Manila Convention 2026', href: pulseUrl },
         { label: 'Crystal Century', href: crystalcenturyUrl },
       ],
     },

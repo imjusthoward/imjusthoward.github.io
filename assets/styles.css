@@ -7,7 +7,7 @@
   --line: rgba(0, 0, 0, 0.16);
   --serif: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --max: 1040px;
+  --max: 1180px;
 }
 
 * {
@@ -25,7 +25,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--sans);
-  line-height: 1.45;
+  line-height: 1.42;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -88,16 +88,18 @@ ul {
 .site-header-inner,
 .page-main,
 .site-footer-inner {
-  width: min(calc(100% - 32px), var(--max));
+  width: min(calc(100% - 24px), var(--max));
   margin: 0 auto;
 }
 
 .site-header-inner {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 14px 0 12px;
+  width: calc(100% - 24px);
+  max-width: none;
+  padding: 10px 0 8px;
 }
 
 .brand {
@@ -143,7 +145,6 @@ ul {
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 8px 18px;
-  padding-top: 5px;
 }
 
 .site-nav a {
@@ -157,37 +158,42 @@ ul {
 }
 
 .page-main {
-  padding: 14px 0 18px;
+  padding: 10px 0 14px;
 }
 
 .page-article {
-  max-width: 940px;
+  width: 100%;
 }
 
 .page-intro {
-  margin: 4px 0 10px;
+  margin: 0 0 8px;
 }
 
 .page-intro h1 {
   margin: 0;
-  font-size: clamp(2.45rem, 6vw, 4.6rem);
-  line-height: 0.92;
+  font-size: clamp(2.15rem, 4.8vw, 4.1rem);
+  line-height: 0.94;
   letter-spacing: -0.06em;
   font-weight: 700;
   font-family: var(--serif);
 }
 
+.page-post .page-intro h1 {
+  font-size: clamp(1.9rem, 3.9vw, 3.15rem);
+  line-height: 0.98;
+}
+
 .intro-subtitle {
-  margin-top: 8px;
-  max-width: 72ch;
+  margin-top: 6px;
+  max-width: 70ch;
   color: var(--muted);
-  font-size: 0.98rem;
+  font-size: 0.96rem;
   line-height: 1.45;
 }
 
 .page-section {
-  margin-top: 12px;
-  padding-top: 10px;
+  margin-top: 10px;
+  padding-top: 8px;
   border-top: 1px solid var(--line);
 }
 
@@ -293,7 +299,7 @@ ul {
 }
 
 .site-footer-inner {
-  padding: 12px 0 20px;
+  padding: 10px 0 16px;
   color: var(--muted);
   font-size: 0.9rem;
 }
@@ -315,6 +321,7 @@ ul {
 @media (max-width: 860px) {
   .site-header-inner {
     flex-direction: column;
+    align-items: flex-start;
   }
 
   .site-nav {
@@ -334,7 +341,8 @@ ul {
   }
 
   .site-header-inner {
-    padding: 10px 0 10px;
+    width: calc(100% - 18px);
+    padding: 9px 0 8px;
   }
 
   .brand-mark {
@@ -342,19 +350,19 @@ ul {
   }
 
   .page-main {
-    padding: 12px 0 16px;
+    padding: 10px 0 12px;
   }
 
   .page-intro {
-    margin-top: 2px;
+    margin-top: 0;
   }
 
   .page-intro h1 {
-    font-size: clamp(2.1rem, 11vw, 3.2rem);
+    font-size: clamp(2rem, 10vw, 3.3rem);
   }
 
   .page-section {
-    margin-top: 10px;
+    margin-top: 9px;
     padding-top: 8px;
   }
 

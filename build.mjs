@@ -9,8 +9,8 @@ const navItems = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about/' },
   { label: 'Awards', href: '/awards/' },
+  { label: 'Publications', href: '/blog/' },
   { label: 'Projects', href: '/portfolio/' },
-  { label: 'Writing', href: '/blog/' },
   { label: 'Contact', href: '/contact/' },
 ];
 
@@ -50,8 +50,8 @@ const pages = [
   {
     path: '/blog/',
     file: path.join('blog', 'index.html'),
-    title: `Writing · ${site.name}`,
-    description: 'Publications and short notes.',
+    title: `Publications · ${site.name}`,
+    description: 'Research publications and notes.',
     bodyClass: 'page-blog',
     render: renderBlogIndex,
   },
@@ -285,19 +285,14 @@ function renderLinkGroups(groups) {
 }
 
 function renderHome() {
-  const intro = renderIntro(site.heroHeadline, site.tagline);
-
-  const sections = [
-    renderSection('About Me', renderProse([site.homeSummary])),
-    renderSection('Current Work', renderEntries(site.currentWork)),
-  ];
+  const intro = renderIntro(site.heroHeadline, site.homeSummary);
 
   return renderPage({
     title: site.name,
     description: site.description,
     canonicalPath: '/',
     bodyClass: 'page-home',
-    content: `<article class="page-article">${intro}${sections.join('')}</article>`,
+    content: `<article class="page-article">${intro}${renderProse(site.homeParagraphs)}${renderLinkRow(site.homeLinks)}</article>`,
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
@@ -312,22 +307,14 @@ function renderHome() {
 }
 
 function renderAbout() {
-  const intro = renderIntro(site.heroHeadline, 'Tokyo-based incoming HSPS offer holder at Peterhouse, University of Cambridge.');
-
-  const sections = [
-    renderSection('About Me', renderProse(site.aboutParagraphs)),
-    renderSection('Education', renderEntries(site.education), 'education'),
-    renderSection('Experience', renderEntries(site.experience), 'experience'),
-    renderSection('Service', renderEntries(site.service), 'service'),
-    renderSection('Skills', renderEntries(site.skills), 'skills'),
-  ];
+  const intro = renderIntro('About Me', 'Tokyo-based incoming HSPS offer holder at Peterhouse, University of Cambridge.');
 
   return renderPage({
     title: `About · ${site.name}`,
     description: 'About Howard Chan.',
     canonicalPath: '/about/',
     bodyClass: 'page-about',
-    content: `<article class="page-article">${intro}${sections.join('')}</article>`,
+    content: `<article class="page-article">${intro}${renderProse(site.aboutParagraphs)}${renderLinkRow(site.homeLinks)}</article>`,
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
@@ -366,7 +353,7 @@ function renderAwards() {
 }
 
 function renderProjects() {
-  const intro = renderIntro('Projects', 'Product, service, infrastructure, and research.');
+  const intro = renderIntro('Projects', 'Product, service, and operations.');
 
   const sections = site.projects.map((group) =>
     renderSection(group.group, renderEntries(group.items), group.group.toLowerCase().replace(/[^a-z0-9]+/g, '-'))
@@ -374,7 +361,7 @@ function renderProjects() {
 
   return renderPage({
     title: `Projects · ${site.name}`,
-    description: 'Projects, service work, and research.',
+    description: 'Projects, service work, and operations.',
     canonicalPath: '/portfolio/',
     bodyClass: 'page-portfolio',
     content: `<article class="page-article">${intro}${sections.join('')}</article>`,
@@ -383,42 +370,26 @@ function renderProjects() {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
       name: `${site.name} Projects`,
-      description: 'Projects, service work, and research.',
+      description: 'Projects, service work, and operations.',
     },
   });
 }
 
 function renderBlogIndex() {
-  const intro = renderIntro('Writing', 'Publications and short notes.');
-
-  const sections = [
-    renderSection('Publications', renderEntries(site.publications), 'publications'),
-    renderSection(
-      'Notes',
-      renderEntries(
-        site.posts.map((post) => ({
-          title: post.title,
-          meta: `${post.date} · ${post.readTime}`,
-          summary: post.summary,
-          href: `/blog/${post.slug}/`,
-        }))
-      ),
-      'notes'
-    ),
-  ];
+  const intro = renderIntro('Publications', 'Research publications and notes.');
 
   return renderPage({
-    title: `Writing · ${site.name}`,
-    description: 'Publications and short notes.',
+    title: `Publications · ${site.name}`,
+    description: 'Research publications and notes.',
     canonicalPath: '/blog/',
     bodyClass: 'page-blog',
-    content: `<article class="page-article">${intro}${sections.join('')}</article>`,
+    content: `<article class="page-article">${intro}${renderSection('Publications', renderEntries(site.publications), 'publications')}</article>`,
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
-      '@type': 'Blog',
-      name: `${site.name} Writing`,
-      description: 'Publications and short notes.',
+      '@type': 'CollectionPage',
+      name: `${site.name} Publications`,
+      description: 'Research publications and notes.',
     },
   });
 }
@@ -426,18 +397,16 @@ function renderBlogIndex() {
 function renderPost(post) {
   const intro = renderIntro(post.title, post.summary);
 
-  const sections = [renderSection('Note', renderProse(post.body), 'note')];
-
   return renderPage({
     title: `${post.title} · ${site.name}`,
     description: post.summary,
     canonicalPath: `/blog/${post.slug}/`,
     bodyClass: 'page-post',
-    content: `<article class="page-article">${intro}${sections.join('')}</article>`,
+    content: `<article class="page-article">${intro}${renderSection('Abstract', renderProse(post.body), 'abstract')}</article>`,
     ogType: 'article',
     jsonLd: {
       '@context': 'https://schema.org',
-      '@type': 'BlogPosting',
+      '@type': 'ScholarlyArticle',
       headline: post.title,
       datePublished: post.dateIso || today,
       author: { '@type': 'Person', name: site.fullName || site.author },
@@ -474,7 +443,7 @@ function renderContact() {
 }
 
 function renderNotFound() {
-  const intro = renderIntro('Page not found', 'Use Home, About, Awards, Projects, Writing, or Contact.');
+  const intro = renderIntro('Page not found', 'Use Home, About, Awards, Publications, Projects, or Contact.');
 
   const sections = [
     renderSection(
@@ -516,8 +485,8 @@ function renderLlms() {
     ['Home', '/'],
     ['About', '/about/'],
     ['Awards', '/awards/'],
+    ['Publications', '/blog/'],
     ['Projects', '/portfolio/'],
-    ['Writing', '/blog/'],
     ['Contact', '/contact/'],
   ];
 
@@ -533,10 +502,10 @@ ${pagesList.map(([label, route]) => `- ${label}: ${site.url}${route === '/' ? '/
 ## About
 - ${site.aboutParagraphs.join(' ')}
 
-## Writing
+## Publications
 ${site.posts.map((post) => `- ${post.title}: ${site.url}/blog/${post.slug}/`).join('\n')}
 
-  ## Volunteer Service
+## Volunteer Service
 ${site.service.map((item) => `- ${item.title}: ${item.summary}`).join('\n')}
 
 ## Skills
@@ -552,9 +521,8 @@ ${site.contactLinks.map((link) => `- ${link.label}: ${link.href}`).join('\n')}
 - OpenClaw
 - Stand Tall
 - Crystal Century
-- Think College Level
 
-  ## Leadership
+## Leadership
 - Kiwanis Voice Club of Nippon
 - KIST Key Club
 - Japan Cancer Society, KIST

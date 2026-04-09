@@ -8,27 +8,29 @@ Howard Chan's profile, awards, projects, research, service, and contact links.
 - Home: https://thinkcollegelevel.com/
 - About: https://thinkcollegelevel.com/about/
 - Awards: https://thinkcollegelevel.com/awards/
+- Publications: https://thinkcollegelevel.com/blog/
 - Projects: https://thinkcollegelevel.com/portfolio/
-- Writing: https://thinkcollegelevel.com/blog/
 - Contact: https://thinkcollegelevel.com/contact/
 
 ## About
-- I am Chak Hang (Howard) Chan, a Tokyo-based builder interested in politics, international systems, AI, service, and entrepreneurship. I build projects at the intersection of technology and real-world coordination: Kiwanis Voice Club of Nippon, Pulse Manila 2026, ElevateOS, and related systems work. My research has focused on cross-cultural communication and cognitive systems, including a top-5% Lumiere project scheduled for publication in NHSJS. Long term, I want to build technology that works in real social and international settings, not only in theory.
+- I am Chak Hang (Howard) Chan, a Tokyo-based builder and incoming HSPS offer holder at Peterhouse, University of Cambridge. I work across politics, international systems, AI, service, and entrepreneurship, and I care most about how institutions and teams actually move when the constraints are real. My work sits at the intersection of leadership and execution. I have founded and led Kiwanis Voice Club of Nippon and KIST Key Club, and I keep coming back to the same problem: making coordination clearer, handoffs cleaner, and useful work easier to repeat. On the product side, I build systems for education, events, and operational continuity. The pattern is always the same: reduce friction, improve information flow, and make something durable enough for people to actually use in live conditions. My research focuses on cross-cultural communication and cognitive systems, including Lumiere work scheduled for publication in NHSJS, a cognitive aging review, and a semiconductor supply-chain concept paper. Long term, I want to build technology that works in social and international settings, not just in theory.
 
-## Writing
-- ElevateOS: https://thinkcollegelevel.com/blog/elevateos/
-- Pulse Manila 2026: https://thinkcollegelevel.com/blog/pulse-manila-2026/
-- Katalyst: https://thinkcollegelevel.com/blog/katalyst/
+## Publications
+- Hofstede’s Dimensions and Generational Effects on Ambiguous Emoji Semiotics: Cross-Cultural Analysis of Japanese and Chinese Digital Communication: https://thinkcollegelevel.com/blog/emoji-semiotics/
+- Unraveling Cognitive Aging: A Comprehensive Narrative Review Integrating Six Decades of the Seattle Longitudinal Study with Contemporary Advances: https://thinkcollegelevel.com/blog/cognitive-aging/
+- Semiconductor supply-chain resilience concept paper: https://thinkcollegelevel.com/blog/supply-chain-resilience/
 
-  ## Volunteer Service
+## Volunteer Service
 - Salvation Army SKY Family and Child Development Centre: Gardening and pest removal with SEN children, plus day-to-day support work.
 - HKSKH Lok Man Kwok Fong Hin Comprehensive Service Centre: Board-game activities with dementia patients and a five-day Tokyo tour plan tailored to participant ability.
 - Shirahige Nursing Home, Sumida-ku: Meals, mobility support, and recreational activities with residents.
 - Tokyo / Japan Red Cross: Wheelchair sports event leadership and disability-centered volunteer work.
 
 ## Skills
+- Leadership: Nonprofit Leadership, Organizational Strategy, Youth Leadership Development, Community Outreach, International Service Coordination.
+- Product and systems: AI Product Design, EdTech Development, Platform Architecture, Product Strategy, Software Development.
+- Research: Academic Research, Cross-Cultural Analysis, Research Skills, Publications, Generational Differences, Cultural Diversity.
 - Languages: English, Cantonese, Mandarin, Japanese.
-- Stack: TypeScript, Next.js / React, PostgreSQL / SQL, Git / GitHub, Python, Prisma, NextAuth, OpenAI, Stripe, Cloud Run, Figma, Notion, Google Workspace.
 
 ## Links
 - Think College Level: https://thinkcollegelevel.com
@@ -51,9 +53,8 @@ Howard Chan's profile, awards, projects, research, service, and contact links.
 - OpenClaw
 - Stand Tall
 - Crystal Century
-- Think College Level
 
-  ## Leadership
+## Leadership
 - Kiwanis Voice Club of Nippon
 - KIST Key Club
 - Japan Cancer Society, KIST
