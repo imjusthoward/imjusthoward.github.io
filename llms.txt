@@ -2,7 +2,7 @@
 
 Cambridge (HSPS) Offer Holder | President of Kiwanis Voice Club of Nippon | CEO of ElevateOS | Lumiere Scholar
 
-Howard Chan's profile, education, awards, projects, research, activities, and contact links.
+Howard Chan's profile, education, awards, projects, research, and contact links.
 
 ## Pages
 - Home: https://thinkcollegelevel.com/
@@ -29,29 +29,6 @@ Howard Chan's profile, education, awards, projects, research, activities, and co
 - HarvardX MCB63X Principles of Biochemistry: Biochemistry coursework completed through HarvardX.
 - Johns Hopkins CTY AP Biology: Advanced biology coursework completed through Johns Hopkins CTY.
 - HKUST Dual Program in gifted education: Additional gifted-programme coursework referenced in application materials.
-
-## Affiliations
-- Kiwanis International: Service network and national leadership platform.
-- Key Club International: Student service organization and leadership network.
-- IEEE Hong Kong Section Education Chapter: Education chapter service and coordination.
-
-## Activities
-### Conference and committee service
-- Organizing Committee Member, SEGA 2025: International Workshop on Smart Education in the Age of Generative AI.
-- Technical Program Committee Member, IEEE SmartEdu 2026: Smart education conference program service.
-- Technical Program Committee Member, IEEE Frontiers in Education: Program committee service across three editions.
-- Technical Program Committee Member, IEEE EDUCON: Program committee service across two editions.
-- Technical Program Committee Member, ICRCV: International Conference on Robotics and Computer Vision service.
-- Technical Program Committee Member, ICCAE: International Conference on Computer and Automation Engineering.
-- Technical Program Committee Member, IC&C / ICICC / ICCCC: International conference service across three editions.
-- Technical Program Committee Member, ACAI: Algorithms, Computing and Artificial Intelligence program service.
-- Technical Program Committee Member, MLNLP: Machine Learning and Natural Language Processing program service.
-- Technical Program Committee Member, TALE: Teaching, Assessment, and Learning for Engineering program service.
-- Technical Program Committee Member, ISCIPT: International Symposium on Computer and Information Processing Technology.
-
-### Editorial and review work
-- Session Chair: Conference session leadership across multiple international events.
-- Journal Reviewer: Active and Passive Electronic Components; Analog Integrated Circuits and Signal Processing; Applied Sciences; Circuits, Systems and Signal Processing; Energies; IEEE Access; IEEE JSSC; IEEE JETCAS; IEEE Sensors Journal; IEEE TBioCAS; IEEE TCAS I/II; IEEE TIE; IEEE TPEL; IEEE TVLSI; IET Circuits, Devices & Systems; International Journal of Electronics; Journal of Circuits, Systems, and Computers; Microelectronics Journal; Microelectronics Reliability; Sustainability.
 
 ## Awards
 ### Academic recognition

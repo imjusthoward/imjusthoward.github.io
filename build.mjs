@@ -308,16 +308,13 @@ function renderHome() {
 
 function renderAbout() {
   const intro = renderIntro('About Me', 'Tokyo-based incoming HSPS offer holder at Peterhouse, University of Cambridge.');
-  const activitySections = site.activities.map((group) =>
-    renderSection(group.group, renderEntries(group.items), group.group.toLowerCase().replace(/[^a-z0-9]+/g, '-'))
-  );
 
   return renderPage({
     title: `About · ${site.name}`,
     description: 'About Howard Chan.',
     canonicalPath: '/about/',
     bodyClass: 'page-about',
-    content: `<article class="page-article">${intro}${renderProse(site.aboutParagraphs)}${renderSection('Professional Experience', renderEntries(site.experience), 'experience')}${renderSection('Education', renderEntries(site.education), 'education')}${renderSection('Professional Affiliations', renderEntries(site.affiliations), 'affiliations')}${activitySections.join('')}${renderLinkRow(site.homeLinks)}</article>`,
+    content: `<article class="page-article">${intro}${renderProse(site.aboutParagraphs)}${renderSection('Professional Experience', renderEntries(site.experience), 'experience')}${renderSection('Education', renderEntries(site.education), 'education')}${renderLinkRow(site.homeLinks)}</article>`,
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
@@ -497,7 +494,7 @@ function renderLlms() {
 
 ${site.tagline}
 
-Howard Chan's profile, education, awards, projects, research, activities, and contact links.
+Howard Chan's profile, education, awards, projects, research, and contact links.
 
 ## Pages
 ${pagesList.map(([label, route]) => `- ${label}: ${site.url}${route === '/' ? '/' : route}`).join('\n')}
@@ -510,14 +507,6 @@ ${site.experience.map((item) => `- ${item.title}: ${item.summary}`).join('\n')}
 
 ## Education
 ${site.education.map((item) => `- ${item.title}: ${item.summary}`).join('\n')}
-
-## Affiliations
-${site.affiliations.map((item) => `- ${item.title}: ${item.summary}`).join('\n')}
-
-## Activities
-${site.activities
-  .map((group) => `### ${group.group}\n${group.items.map((item) => `- ${item.title}: ${item.summary}`).join('\n')}`)
-  .join('\n\n')}
 
 ## Awards
 ${site.awards
