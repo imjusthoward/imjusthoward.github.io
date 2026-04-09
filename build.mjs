@@ -292,7 +292,7 @@ function renderHome() {
     description: site.description,
     canonicalPath: '/',
     bodyClass: 'page-home',
-    content: `<article class="page-article">${intro}${renderProse(site.homeParagraphs)}${renderLinkRow(site.homeLinks)}</article>`,
+    content: `<article class="page-article">${intro}${renderSection('About Me', renderProse(site.homeParagraphs), 'about-me')}${renderLinkRow(site.homeLinks)}</article>`,
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
@@ -308,13 +308,16 @@ function renderHome() {
 
 function renderAbout() {
   const intro = renderIntro('About Me', 'Tokyo-based incoming HSPS offer holder at Peterhouse, University of Cambridge.');
+  const activitySections = site.activities.map((group) =>
+    renderSection(group.group, renderEntries(group.items), group.group.toLowerCase().replace(/[^a-z0-9]+/g, '-'))
+  );
 
   return renderPage({
     title: `About · ${site.name}`,
     description: 'About Howard Chan.',
     canonicalPath: '/about/',
     bodyClass: 'page-about',
-    content: `<article class="page-article">${intro}${renderProse(site.aboutParagraphs)}${renderLinkRow(site.homeLinks)}</article>`,
+    content: `<article class="page-article">${intro}${renderProse(site.aboutParagraphs)}${renderSection('Professional Experience', renderEntries(site.experience), 'experience')}${renderSection('Education', renderEntries(site.education), 'education')}${renderSection('Professional Affiliations', renderEntries(site.affiliations), 'affiliations')}${activitySections.join('')}${renderLinkRow(site.homeLinks)}</article>`,
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
@@ -330,7 +333,7 @@ function renderAbout() {
 }
 
 function renderAwards() {
-  const intro = renderIntro('Awards', 'Academic distinction, leadership, research, and certifications.');
+  const intro = renderIntro('Awards', 'Academic recognition, research recognition, and competition recognition.');
 
   const sections = site.awards.map((group, index) =>
     renderSection(group.group, renderEntries(group.items), index === 0 ? 'academic-distinction' : '')
@@ -338,7 +341,7 @@ function renderAwards() {
 
   return renderPage({
     title: `Awards · ${site.name}`,
-    description: 'Academic distinction, leadership, research, and certifications.',
+    description: 'Academic recognition, research recognition, and competition recognition.',
     canonicalPath: '/awards/',
     bodyClass: 'page-awards',
     content: `<article class="page-article">${intro}${sections.join('')}</article>`,
@@ -347,13 +350,13 @@ function renderAwards() {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
       name: `${site.name} Awards`,
-      description: 'Academic distinction, leadership, research, and certifications.',
+      description: 'Academic recognition, research recognition, and competition recognition.',
     },
   });
 }
 
 function renderProjects() {
-  const intro = renderIntro('Projects', 'Product, service, and operations.');
+  const intro = renderIntro('Projects', 'Product, service, and systems.');
 
   const sections = site.projects.map((group) =>
     renderSection(group.group, renderEntries(group.items), group.group.toLowerCase().replace(/[^a-z0-9]+/g, '-'))
@@ -361,7 +364,7 @@ function renderProjects() {
 
   return renderPage({
     title: `Projects · ${site.name}`,
-    description: 'Projects, service work, and operations.',
+    description: 'Projects, service, and systems.',
     canonicalPath: '/portfolio/',
     bodyClass: 'page-portfolio',
     content: `<article class="page-article">${intro}${sections.join('')}</article>`,
@@ -370,17 +373,17 @@ function renderProjects() {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
       name: `${site.name} Projects`,
-      description: 'Projects, service work, and operations.',
+      description: 'Projects, service, and systems.',
     },
   });
 }
 
 function renderBlogIndex() {
-  const intro = renderIntro('Publications', 'Research publications and notes.');
+  const intro = renderIntro('Publications', 'Research publications.');
 
   return renderPage({
     title: `Publications · ${site.name}`,
-    description: 'Research publications and notes.',
+    description: 'Research publications.',
     canonicalPath: '/blog/',
     bodyClass: 'page-blog',
     content: `<article class="page-article">${intro}${renderSection('Publications', renderEntries(site.publications), 'publications')}</article>`,
@@ -389,7 +392,7 @@ function renderBlogIndex() {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
       name: `${site.name} Publications`,
-      description: 'Research publications and notes.',
+      description: 'Research publications.',
     },
   });
 }
@@ -494,7 +497,7 @@ function renderLlms() {
 
 ${site.tagline}
 
-Howard Chan's profile, awards, projects, research, service, and contact links.
+Howard Chan's profile, education, awards, projects, research, activities, and contact links.
 
 ## Pages
 ${pagesList.map(([label, route]) => `- ${label}: ${site.url}${route === '/' ? '/' : route}`).join('\n')}
@@ -502,14 +505,27 @@ ${pagesList.map(([label, route]) => `- ${label}: ${site.url}${route === '/' ? '/
 ## About
 - ${site.aboutParagraphs.join(' ')}
 
+## Experience
+${site.experience.map((item) => `- ${item.title}: ${item.summary}`).join('\n')}
+
+## Education
+${site.education.map((item) => `- ${item.title}: ${item.summary}`).join('\n')}
+
+## Affiliations
+${site.affiliations.map((item) => `- ${item.title}: ${item.summary}`).join('\n')}
+
+## Activities
+${site.activities
+  .map((group) => `### ${group.group}\n${group.items.map((item) => `- ${item.title}: ${item.summary}`).join('\n')}`)
+  .join('\n\n')}
+
+## Awards
+${site.awards
+  .map((group) => `### ${group.group}\n${group.items.map((item) => `- ${item.title}: ${item.summary}`).join('\n')}`)
+  .join('\n\n')}
+
 ## Publications
 ${site.posts.map((post) => `- ${post.title}: ${site.url}/blog/${post.slug}/`).join('\n')}
-
-## Volunteer Service
-${site.service.map((item) => `- ${item.title}: ${item.summary}`).join('\n')}
-
-## Skills
-${site.skills.map((item) => `- ${item.title}: ${item.summary}`).join('\n')}
 
 ## Links
 ${site.contactLinks.map((link) => `- ${link.label}: ${link.href}`).join('\n')}
@@ -518,16 +534,9 @@ ${site.contactLinks.map((link) => `- ${link.label}: ${link.href}`).join('\n')}
 - ElevateOS
 - Pulse Manila 2026
 - Katalyst
-- OpenClaw
 - Stand Tall
 - Crystal Century
-
-## Leadership
-- Kiwanis Voice Club of Nippon
-- KIST Key Club
-- Japan Cancer Society, KIST
-- Recycling Initiative, KIST
-`;
+`; 
 }
 
 function renderSitemap() {

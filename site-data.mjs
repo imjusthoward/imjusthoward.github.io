@@ -21,7 +21,7 @@ export const site = {
   tagline:
     'Cambridge (HSPS) Offer Holder | President of Kiwanis Voice Club of Nippon | CEO of ElevateOS | Lumiere Scholar',
   description:
-    "Howard Chan's profile, awards, publications, projects, and contact links.",
+    "Howard Chan's profile, education, awards, publications, projects, and contact links.",
   location: 'Sumida-ku, Tokyo, Japan',
   logo: {
     src: '/assets/media/hc-logo.png',
@@ -29,122 +29,174 @@ export const site = {
   },
   heroHeadline: 'Howard Chan',
   homeSummary:
-    'Tokyo-based, multilingual builder focused on service leadership, research, and product execution. Incoming HSPS offer holder at Peterhouse, University of Cambridge.',
+    'Tokyo-based, multilingual builder focused on politics, international systems, AI, service, and entrepreneurship. Incoming HSPS offer holder at Peterhouse, University of Cambridge.',
   homeParagraphs: [
-    'I am Chak Hang (Howard) Chan, a Tokyo-based builder and incoming HSPS offer holder at Peterhouse, University of Cambridge. I work across politics, international systems, AI, service, and entrepreneurship, and I care about how institutions move when the constraints are real.',
-    'My work sits at the intersection of leadership and execution. I have founded and led Kiwanis Voice Club of Nippon and KIST Key Club, and I keep coming back to the same problem: making coordination clearer, handoffs cleaner, and useful work easier to repeat.',
+    'I am Chak Hang (Howard) Chan, a Tokyo-based incoming HSPS offer holder at Peterhouse, University of Cambridge. I work across politics, international systems, AI, service, and entrepreneurship, and I care about how institutions behave when the constraints are real rather than abstract.',
+    'My work is built around coordination: making decisions easier to read, handoffs easier to manage, and systems easier to use under pressure. That shows up in service leadership, product work, and research synthesis, where the useful output is something people can actually rely on.',
+    'My research focuses on cross-cultural communication and cognitive systems, including a top-5% Lumiere project scheduled for publication in NHSJS, a cognitive aging review, and a semiconductor supply-chain concept paper. Long term, I want to use institutional thinking and entrepreneurial execution to build technology that works in real social and international settings.',
   ],
   aboutParagraphs: [
-    'I am Chak Hang (Howard) Chan, a Tokyo-based builder and incoming HSPS offer holder at Peterhouse, University of Cambridge. I work across politics, international systems, AI, service, and entrepreneurship, and I care most about how institutions and teams actually move when the constraints are real.',
-    'My work sits at the intersection of leadership and execution. I have founded and led Kiwanis Voice Club of Nippon and KIST Key Club, and I keep coming back to the same problem: making coordination clearer, handoffs cleaner, and useful work easier to repeat.',
-    'On the product side, I build systems for education, events, and operational continuity. The pattern is always the same: reduce friction, improve information flow, and make something durable enough for people to actually use in live conditions.',
-    'My research focuses on cross-cultural communication and cognitive systems, including Lumiere work scheduled for publication in NHSJS, a cognitive aging review, and a semiconductor supply-chain concept paper. Long term, I want to build technology that works in social and international settings, not just in theory.',
-  ],
-  education: [
-    {
-      title: 'Peterhouse, University of Cambridge',
-      meta: 'BA (Hons) · HSPS · Offer holder, 2026',
-      summary: 'Official offer dated 2026-01-28; conditions: 42 points overall, 7,7,6 in three Higher Level subjects, and IELTS 8.0.',
-      href: cambridgeUrl,
-    },
-    {
-      title: 'K. International School Tokyo',
-      meta: 'IB Diploma · Predicted 45/45',
-      summary: 'Biology HL, English A HL, Chemistry HL, Mathematics AA SL, Japanese ab initio SL, Economics SL; TOK A, EE B, core 3; SAT 1550, DET 160, UCAT 2410 Band 2.',
-      href: '/awards/#academic-distinction',
-    },
+    'I am Chak Hang (Howard) Chan, a Tokyo-based builder and incoming HSPS offer holder at Peterhouse, University of Cambridge. I care about the point where politics, international systems, AI, service, and entrepreneurship meet real-world execution.',
+    'Across the work I do, the common thread is coordination. I like problems where a better system makes the work easier to repeat, easier to hand off, and more useful in practice. That is why I keep building across service leadership, research, and product systems.',
   ],
   experience: [
     {
       title: 'Founder and President, Kiwanis Voice Club of Nippon',
       meta: 'Kiwanis International · Jan 2026 - Present',
-      summary: 'Founded the first Voice Club representing Japan and coordinates youth service, alumni mentorship, continuity planning, and stakeholder alignment.',
-      href: '/portfolio/#kiwanis-voice-club-of-nippon',
-    },
-    {
-      title: 'Founder and CEO, AI-enabled education platform',
-      meta: 'Jan 2026 - Present',
-      summary: 'Leading the product and execution layer for an AI-enabled education platform used by about 100 students and tutors in Japan.',
-      href: elevateosUrl,
+      summary: 'Founded the first Voice Club representing Japan and coordinates youth service, continuity, and stakeholder alignment.',
     },
     {
       title: 'Founder and Immediate Past President, KIST Key Club',
-      meta: 'K. International School Tokyo · Sep 2024 - Present',
-      summary: 'Built the club to 40+ members and 5 executives, with more than ¥200,000 raised through service work.',
-      href: '/portfolio/#kist-key-club',
+      meta: 'Key Club International · Sep 2024 - Present',
+      summary: 'Built the club to 40+ members and 5 executives, with service across health, caregiving, food insecurity, and youth service.',
     },
     {
       title: 'Researcher, Lumiere Education',
       meta: 'Jun 2025 - Present',
-      summary: 'Cross-cultural emoji semiotics and cognitive aging research; top-5% Lumiere work scheduled for NHSJS publication.',
-      href: '/writing/#publications',
+      summary: 'Cross-cultural communication and cognitive systems research; top-5% work scheduled for publication in NHSJS.',
     },
     {
-      title: 'Founder and Editor-in-Chief, personal portfolio and writing site',
-      meta: 'Jun 2024 - Present',
-      summary: 'Portfolio and writing site for projects, research, and links.',
-      href: siteUrl,
+      title: 'Publications Specialist, Independent and collaborative research',
+      meta: 'Jul 2024 - Present',
+      summary: 'Research writing on emoji semiotics, cognitive aging, and semiconductor supply-chain resilience.',
     },
     {
       title: 'President, Japan Cancer Society, KIST',
       meta: 'Sep 2024 - Present',
-      summary: 'Organized a 10-kilometer walkathon with 500+ participants and raised more than ¥50,000; also led a 1,000+ item clothing drive.',
-      href: '/portfolio/#japan-cancer-society-kist',
+      summary: 'Organized a 10-kilometer walkathon with 500+ participants and led donation drives for cancer awareness and support.',
     },
     {
       title: 'President, Recycling Initiative, KIST',
       meta: 'Aug 2024 - Present',
       summary: 'Tripled membership to 60 and introduced Quality Inspector roles that improved oversight and recycling efficiency by 40%.',
-      href: '/portfolio/#recycling-initiative-kist',
     },
   ],
-  service: [
+  education: [
     {
-      title: 'Salvation Army SKY Family and Child Development Centre',
-      meta: 'Service',
-      summary: 'Gardening and pest removal with SEN children, plus day-to-day support work.',
+      title: 'Peterhouse, University of Cambridge',
+      meta: 'BA (Hons) · HSPS · 2026–2029',
+      summary: 'Official offer dated 2026-01-28; conditions: 42 points overall, 7,7,6 in three Higher Level subjects, and IELTS 8.0.',
+      href: cambridgeUrl,
     },
     {
-      title: 'HKSKH Lok Man Kwok Fong Hin Comprehensive Service Centre',
-      meta: 'Service',
-      summary: 'Board-game activities with dementia patients and a five-day Tokyo tour plan tailored to participant ability.',
+      title: 'K. International School Tokyo',
+      meta: 'IB Diploma Programme · 2022–2026',
+      summary: 'Biology HL, English A HL, Chemistry HL, Mathematics AA SL, Japanese ab initio SL, Economics SL; predicted 45/45, SAT 1550, DET 160, UCAT 2410 Band 2.',
     },
     {
-      title: 'Shirahige Nursing Home, Sumida-ku',
-      meta: 'Service',
-      summary: 'Meals, mobility support, and recreational activities with residents.',
+      title: 'HarvardX MCB63X Principles of Biochemistry',
+      meta: 'Supplementary academic programme',
+      summary: 'Biochemistry coursework completed through HarvardX.',
     },
     {
-      title: 'Tokyo / Japan Red Cross',
-      meta: 'Service',
-      summary: 'Wheelchair sports event leadership and disability-centered volunteer work.',
+      title: 'Johns Hopkins CTY AP Biology',
+      meta: 'Supplementary academic programme',
+      summary: 'Advanced biology coursework completed through Johns Hopkins CTY.',
+    },
+    {
+      title: 'HKUST Dual Program in gifted education',
+      meta: 'Supplementary academic programme',
+      summary: 'Additional gifted-programme coursework referenced in application materials.',
     },
   ],
-  skills: [
+  affiliations: [
     {
-      title: 'Leadership',
-      meta: 'Core strengths',
-      summary: 'Nonprofit Leadership, Organizational Strategy, Youth Leadership Development, Community Outreach, International Service Coordination.',
+      title: 'Kiwanis International',
+      meta: 'Founder and President, Kiwanis Voice Club of Nippon',
+      summary: 'Service network and national leadership platform.',
     },
     {
-      title: 'Product and systems',
-      meta: 'Core strengths',
-      summary: 'AI Product Design, EdTech Development, Platform Architecture, Product Strategy, Software Development.',
+      title: 'Key Club International',
+      meta: 'Founder and Immediate Past President, KIST Key Club',
+      summary: 'Student service organization and leadership network.',
     },
     {
-      title: 'Research',
-      meta: 'Core strengths',
-      summary: 'Academic Research, Cross-Cultural Analysis, Research Skills, Publications, Generational Differences, Cultural Diversity.',
+      title: 'IEEE Hong Kong Section Education Chapter',
+      meta: 'Secretary, 2021–2022',
+      summary: 'Education chapter service and coordination.',
+    },
+  ],
+  activities: [
+    {
+      group: 'Conference and committee service',
+      items: [
+        {
+          title: 'Organizing Committee Member, SEGA 2025',
+          meta: 'IEEE Smart World Congress (SWC 2025)',
+          summary: 'International Workshop on Smart Education in the Age of Generative AI.',
+        },
+        {
+          title: 'Technical Program Committee Member, IEEE SmartEdu 2026',
+          meta: 'IEEE',
+          summary: 'Smart education conference program service.',
+        },
+        {
+          title: 'Technical Program Committee Member, IEEE Frontiers in Education',
+          meta: 'FIE 2026, 2025, 2024',
+          summary: 'Program committee service across three editions.',
+        },
+        {
+          title: 'Technical Program Committee Member, IEEE EDUCON',
+          meta: 'EDUCON 2026, 2025',
+          summary: 'Program committee service across two editions.',
+        },
+        {
+          title: 'Technical Program Committee Member, ICRCV',
+          meta: '2026, 2022',
+          summary: 'International Conference on Robotics and Computer Vision service.',
+        },
+        {
+          title: 'Technical Program Committee Member, ICCAE',
+          meta: '2023',
+          summary: 'International Conference on Computer and Automation Engineering.',
+        },
+        {
+          title: 'Technical Program Committee Member, IC&C / ICICC / ICCCC',
+          meta: '2023, 2022, 2021',
+          summary: 'International conference service across three editions.',
+        },
+        {
+          title: 'Technical Program Committee Member, ACAI',
+          meta: '2022',
+          summary: 'Algorithms, Computing and Artificial Intelligence program service.',
+        },
+        {
+          title: 'Technical Program Committee Member, MLNLP',
+          meta: '2022',
+          summary: 'Machine Learning and Natural Language Processing program service.',
+        },
+        {
+          title: 'Technical Program Committee Member, TALE',
+          meta: '2022, 2019',
+          summary: 'Teaching, Assessment, and Learning for Engineering program service.',
+        },
+        {
+          title: 'Technical Program Committee Member, ISCIPT',
+          meta: '2019',
+          summary: 'International Symposium on Computer and Information Processing Technology.',
+        },
+      ],
     },
     {
-      title: 'Languages',
-      meta: 'Spoken',
-      summary: 'English, Cantonese, Mandarin, Japanese.',
+      group: 'Editorial and review work',
+      items: [
+        {
+          title: 'Session Chair',
+          meta: 'ICCAE 2022, ICICC 2022, APCCAS 2014',
+          summary: 'Conference session leadership across multiple international events.',
+        },
+        {
+          title: 'Journal Reviewer',
+          meta: 'Selected titles',
+          summary:
+            'Active and Passive Electronic Components; Analog Integrated Circuits and Signal Processing; Applied Sciences; Circuits, Systems and Signal Processing; Energies; IEEE Access; IEEE JSSC; IEEE JETCAS; IEEE Sensors Journal; IEEE TBioCAS; IEEE TCAS I/II; IEEE TIE; IEEE TPEL; IEEE TVLSI; IET Circuits, Devices & Systems; International Journal of Electronics; Journal of Circuits, Systems, and Computers; Microelectronics Journal; Microelectronics Reliability; Sustainability.',
+        },
+      ],
     },
   ],
   awards: [
     {
-      group: 'Academic distinction',
+      group: 'Academic recognition',
       items: [
         {
           title: 'Peterhouse, University of Cambridge offer',
@@ -176,88 +228,76 @@ export const site = {
           summary: 'HKU, HKUST, Berkeley, UCLA, UCSD, Edinburgh, King’s, and UCL.',
           href: '/about/#education',
         },
-      ],
-    },
-    {
-      group: 'Leadership and service',
-      items: [
         {
-          title: 'Founder and President, Kiwanis Voice Club of Nippon',
-          meta: 'Kiwanis International',
-          summary: 'Built the first Voice Club representing Japan and coordinated service across youth, alumni, and stakeholders.',
-          href: '/portfolio/#kiwanis-voice-club-of-nippon',
+          title: 'Certificate of Distinction in the Annual Avogadro Exam',
+          meta: 'University of Waterloo',
+          summary: 'Annual chemistry competition recognition.',
+          href: '/about/#education',
         },
         {
-          title: 'Founder and Immediate Past President, KIST Key Club',
-          meta: 'K. International School Tokyo',
-          summary: 'Scaled the service organization to 40+ members, 5 executives, and ¥200,000+ raised.',
-          href: '/portfolio/#kist-key-club',
-        },
-        {
-          title: 'President, Japan Cancer Society, KIST',
-          meta: 'K. International School Tokyo',
-          summary: 'Organized a 10-kilometer walkathon with 500+ participants and support drives for community needs.',
-          href: '/portfolio/#japan-cancer-society-kist',
-        },
-        {
-          title: 'President, Recycling Initiative, KIST',
-          meta: 'K. International School Tokyo',
-          summary: 'Tripled membership and improved recycling oversight efficiency by 40%.',
-          href: '/portfolio/#recycling-initiative-kist',
+          title: 'Edexcel IGCSE Certificate of Excellence',
+          meta: 'Pearson',
+          summary: 'Excellence recognition across IGCSE results.',
+          href: '/about/#education',
         },
       ],
     },
     {
-      group: 'Research',
+      group: 'Research recognition',
       items: [
         {
           title: 'Top 5% Lumiere proposal',
           meta: 'Lumiere Research Programme',
           summary: 'Cross-cultural communication research on ambiguous emojis across Japanese and Chinese users.',
-          href: '/writing/#publications',
+          href: '/blog/emoji-semiotics/',
         },
         {
           title: 'Emoji semiotics preprint',
-          meta: 'Preprint DOI 10.20944/preprints202509.0729.v1',
-          summary: 'Emoji semiotics study using Hofstede dimensions and generational analysis.',
+          meta: 'DOI 10.20944/preprints202509.0729.v1',
+          summary: 'Preprint on Hofstede dimensions and generational effects in Japanese and Chinese digital communication.',
           href: 'https://doi.org/10.20944/preprints202509.0729.v1',
         },
         {
           title: 'Cognitive aging review',
           meta: 'Sci Set Journal of Medical Clinical Case Studies',
           summary: 'Narrative review integrating six decades of the Seattle Longitudinal Study with contemporary advances.',
-          href: '/writing/#publications',
+          href: '/blog/cognitive-aging/',
         },
         {
           title: 'Semiconductor supply-chain concept paper',
           meta: 'Research',
           summary: 'Concept paper on supply-chain resilience using big data analytics and quantum-enhanced blockchain.',
-          href: '/writing/#publications',
+          href: '/blog/supply-chain-resilience/',
         },
       ],
     },
     {
-      group: 'Certifications and courses',
+      group: 'Competition recognition',
       items: [
         {
-          title: 'Certificate of Distinction in the Annual Avogadro Exam',
-          meta: 'Academic',
-          summary: 'Annual chemistry competition recognition.',
+          title: 'Harvard College Debate Union Regional Rounds Japan 2026',
+          meta: 'Group F Winner',
+          summary: 'Certificate of Achievement for debate competition performance.',
         },
         {
-          title: 'Edexcel IGCSE Certificate of Excellence',
-          meta: 'Academic',
-          summary: 'Excellence recognition across IGCSE results.',
+          title: 'Best Delegate, ASIJ MUN 2025',
+          meta: 'Recognition',
+          summary: 'Model United Nations recognition.',
         },
         {
-          title: 'HarvardX MCB63X Principles of Biochemistry',
-          meta: 'Course',
-          summary: 'Biochemistry coursework completed through HarvardX.',
+          title: 'Diplomatic Commendation, JMMUN 2024',
+          meta: 'Recognition',
+          summary: 'Model United Nations recognition.',
         },
         {
-          title: 'Johns Hopkins CTY AP Biology',
-          meta: 'Course',
-          summary: 'Advanced biology coursework completed through Johns Hopkins CTY.',
+          title: 'KPASS Junior Varsity Debate 2025',
+          meta: 'Individual and Team 2nd Place',
+          summary: 'Debate competition recognition.',
+        },
+        {
+          title: 'High School Wrestling',
+          meta: '4th place, Kanto Mainland Finals',
+          summary: 'Athletic competition recognition.',
         },
       ],
     },
@@ -309,15 +349,8 @@ export const site = {
       ],
     },
     {
-      group: 'Operations',
+      group: 'Systems',
       items: [
-        {
-          title: 'OpenClaw',
-          meta: 'System',
-          summary: 'WhatsApp-based execution agent system running on VPS, local gateway, and systemd.',
-          href: '/portfolio/#openclaw',
-          id: 'openclaw',
-        },
         {
           title: 'Crystal Century',
           meta: 'Production work',

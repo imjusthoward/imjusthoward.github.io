@@ -2,7 +2,7 @@
 
 Cambridge (HSPS) Offer Holder | President of Kiwanis Voice Club of Nippon | CEO of ElevateOS | Lumiere Scholar
 
-Howard Chan's profile, awards, projects, research, service, and contact links.
+Howard Chan's profile, education, awards, projects, research, activities, and contact links.
 
 ## Pages
 - Home: https://thinkcollegelevel.com/
@@ -13,24 +13,73 @@ Howard Chan's profile, awards, projects, research, service, and contact links.
 - Contact: https://thinkcollegelevel.com/contact/
 
 ## About
-- I am Chak Hang (Howard) Chan, a Tokyo-based builder and incoming HSPS offer holder at Peterhouse, University of Cambridge. I work across politics, international systems, AI, service, and entrepreneurship, and I care most about how institutions and teams actually move when the constraints are real. My work sits at the intersection of leadership and execution. I have founded and led Kiwanis Voice Club of Nippon and KIST Key Club, and I keep coming back to the same problem: making coordination clearer, handoffs cleaner, and useful work easier to repeat. On the product side, I build systems for education, events, and operational continuity. The pattern is always the same: reduce friction, improve information flow, and make something durable enough for people to actually use in live conditions. My research focuses on cross-cultural communication and cognitive systems, including Lumiere work scheduled for publication in NHSJS, a cognitive aging review, and a semiconductor supply-chain concept paper. Long term, I want to build technology that works in social and international settings, not just in theory.
+- I am Chak Hang (Howard) Chan, a Tokyo-based builder and incoming HSPS offer holder at Peterhouse, University of Cambridge. I care about the point where politics, international systems, AI, service, and entrepreneurship meet real-world execution. Across the work I do, the common thread is coordination. I like problems where a better system makes the work easier to repeat, easier to hand off, and more useful in practice. That is why I keep building across service leadership, research, and product systems.
+
+## Experience
+- Founder and President, Kiwanis Voice Club of Nippon: Founded the first Voice Club representing Japan and coordinates youth service, continuity, and stakeholder alignment.
+- Founder and Immediate Past President, KIST Key Club: Built the club to 40+ members and 5 executives, with service across health, caregiving, food insecurity, and youth service.
+- Researcher, Lumiere Education: Cross-cultural communication and cognitive systems research; top-5% work scheduled for publication in NHSJS.
+- Publications Specialist, Independent and collaborative research: Research writing on emoji semiotics, cognitive aging, and semiconductor supply-chain resilience.
+- President, Japan Cancer Society, KIST: Organized a 10-kilometer walkathon with 500+ participants and led donation drives for cancer awareness and support.
+- President, Recycling Initiative, KIST: Tripled membership to 60 and introduced Quality Inspector roles that improved oversight and recycling efficiency by 40%.
+
+## Education
+- Peterhouse, University of Cambridge: Official offer dated 2026-01-28; conditions: 42 points overall, 7,7,6 in three Higher Level subjects, and IELTS 8.0.
+- K. International School Tokyo: Biology HL, English A HL, Chemistry HL, Mathematics AA SL, Japanese ab initio SL, Economics SL; predicted 45/45, SAT 1550, DET 160, UCAT 2410 Band 2.
+- HarvardX MCB63X Principles of Biochemistry: Biochemistry coursework completed through HarvardX.
+- Johns Hopkins CTY AP Biology: Advanced biology coursework completed through Johns Hopkins CTY.
+- HKUST Dual Program in gifted education: Additional gifted-programme coursework referenced in application materials.
+
+## Affiliations
+- Kiwanis International: Service network and national leadership platform.
+- Key Club International: Student service organization and leadership network.
+- IEEE Hong Kong Section Education Chapter: Education chapter service and coordination.
+
+## Activities
+### Conference and committee service
+- Organizing Committee Member, SEGA 2025: International Workshop on Smart Education in the Age of Generative AI.
+- Technical Program Committee Member, IEEE SmartEdu 2026: Smart education conference program service.
+- Technical Program Committee Member, IEEE Frontiers in Education: Program committee service across three editions.
+- Technical Program Committee Member, IEEE EDUCON: Program committee service across two editions.
+- Technical Program Committee Member, ICRCV: International Conference on Robotics and Computer Vision service.
+- Technical Program Committee Member, ICCAE: International Conference on Computer and Automation Engineering.
+- Technical Program Committee Member, IC&C / ICICC / ICCCC: International conference service across three editions.
+- Technical Program Committee Member, ACAI: Algorithms, Computing and Artificial Intelligence program service.
+- Technical Program Committee Member, MLNLP: Machine Learning and Natural Language Processing program service.
+- Technical Program Committee Member, TALE: Teaching, Assessment, and Learning for Engineering program service.
+- Technical Program Committee Member, ISCIPT: International Symposium on Computer and Information Processing Technology.
+
+### Editorial and review work
+- Session Chair: Conference session leadership across multiple international events.
+- Journal Reviewer: Active and Passive Electronic Components; Analog Integrated Circuits and Signal Processing; Applied Sciences; Circuits, Systems and Signal Processing; Energies; IEEE Access; IEEE JSSC; IEEE JETCAS; IEEE Sensors Journal; IEEE TBioCAS; IEEE TCAS I/II; IEEE TIE; IEEE TPEL; IEEE TVLSI; IET Circuits, Devices & Systems; International Journal of Electronics; Journal of Circuits, Systems, and Computers; Microelectronics Journal; Microelectronics Reliability; Sustainability.
+
+## Awards
+### Academic recognition
+- Peterhouse, University of Cambridge offer: BA (Hons) HSPS offer dated 2026-01-28; conditions: 42 points overall, 7,7,6 in three Higher Level subjects, and IELTS 8.0.
+- Predicted IB 45/45: Official transcript shows six subjects predicted at 7, with TOK A, EE B, and core points 3.
+- SAT 1550 · DET 160 · UCAT 2410 Band 2: Strong testing profile across language and admissions exams.
+- KIST Honor Roll and Recognition: Honor Roll across 2023–2025, Certificate of Recognition 2023–2024, and International Research Olympiad Honor Roll 2025.
+- Additional admissions offers: HKU, HKUST, Berkeley, UCLA, UCSD, Edinburgh, King’s, and UCL.
+- Certificate of Distinction in the Annual Avogadro Exam: Annual chemistry competition recognition.
+- Edexcel IGCSE Certificate of Excellence: Excellence recognition across IGCSE results.
+
+### Research recognition
+- Top 5% Lumiere proposal: Cross-cultural communication research on ambiguous emojis across Japanese and Chinese users.
+- Emoji semiotics preprint: Preprint on Hofstede dimensions and generational effects in Japanese and Chinese digital communication.
+- Cognitive aging review: Narrative review integrating six decades of the Seattle Longitudinal Study with contemporary advances.
+- Semiconductor supply-chain concept paper: Concept paper on supply-chain resilience using big data analytics and quantum-enhanced blockchain.
+
+### Competition recognition
+- Harvard College Debate Union Regional Rounds Japan 2026: Certificate of Achievement for debate competition performance.
+- Best Delegate, ASIJ MUN 2025: Model United Nations recognition.
+- Diplomatic Commendation, JMMUN 2024: Model United Nations recognition.
+- KPASS Junior Varsity Debate 2025: Debate competition recognition.
+- High School Wrestling: Athletic competition recognition.
 
 ## Publications
 - Hofstede’s Dimensions and Generational Effects on Ambiguous Emoji Semiotics: Cross-Cultural Analysis of Japanese and Chinese Digital Communication: https://thinkcollegelevel.com/blog/emoji-semiotics/
 - Unraveling Cognitive Aging: A Comprehensive Narrative Review Integrating Six Decades of the Seattle Longitudinal Study with Contemporary Advances: https://thinkcollegelevel.com/blog/cognitive-aging/
 - Semiconductor supply-chain resilience concept paper: https://thinkcollegelevel.com/blog/supply-chain-resilience/
-
-## Volunteer Service
-- Salvation Army SKY Family and Child Development Centre: Gardening and pest removal with SEN children, plus day-to-day support work.
-- HKSKH Lok Man Kwok Fong Hin Comprehensive Service Centre: Board-game activities with dementia patients and a five-day Tokyo tour plan tailored to participant ability.
-- Shirahige Nursing Home, Sumida-ku: Meals, mobility support, and recreational activities with residents.
-- Tokyo / Japan Red Cross: Wheelchair sports event leadership and disability-centered volunteer work.
-
-## Skills
-- Leadership: Nonprofit Leadership, Organizational Strategy, Youth Leadership Development, Community Outreach, International Service Coordination.
-- Product and systems: AI Product Design, EdTech Development, Platform Architecture, Product Strategy, Software Development.
-- Research: Academic Research, Cross-Cultural Analysis, Research Skills, Publications, Generational Differences, Cultural Diversity.
-- Languages: English, Cantonese, Mandarin, Japanese.
 
 ## Links
 - Think College Level: https://thinkcollegelevel.com
@@ -50,12 +99,5 @@ Howard Chan's profile, awards, projects, research, service, and contact links.
 - ElevateOS
 - Pulse Manila 2026
 - Katalyst
-- OpenClaw
 - Stand Tall
 - Crystal Century
-
-## Leadership
-- Kiwanis Voice Club of Nippon
-- KIST Key Club
-- Japan Cancer Society, KIST
-- Recycling Initiative, KIST
