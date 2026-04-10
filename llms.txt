@@ -1,80 +1,85 @@
-# Think College Level
+# Howard Chan
 
-Cambridge (HSPS) Offer Holder | President of Kiwanis Voice Club of Nippon | CEO of ElevateOS | Lumiere Scholar
+HSPS-trained institutional thinker. Technical builder. Product-minded executor.
 
-Howard Chan's profile, education, awards, projects, research, and contact links.
+Howard Chan's public profile, projects, research, awards & certifications, and contact links.
 
 ## Pages
 - Home: https://thinkcollegelevel.com/
 - About: https://thinkcollegelevel.com/about/
-- Awards: https://thinkcollegelevel.com/awards/
-- Publications: https://thinkcollegelevel.com/blog/
-- Projects: https://thinkcollegelevel.com/portfolio/
+- Projects: https://thinkcollegelevel.com/projects/
+- Research: https://thinkcollegelevel.com/research/
+- Awards & Certifications: https://thinkcollegelevel.com/awards-certifications/
 - Contact: https://thinkcollegelevel.com/contact/
 
 ## About
-- I am Chak Hang (Howard) Chan, a Tokyo-based builder and incoming HSPS offer holder at Peterhouse, University of Cambridge. I care about the point where politics, international systems, AI, service, and entrepreneurship meet real-world execution. Across the work I do, the common thread is coordination. I like problems where a better system makes the work easier to repeat, easier to hand off, and more useful in practice. That is why I keep building across service leadership, research, and product systems.
+- I am Chak Hang (Howard) Chan, a Tokyo-based builder and incoming HSPS student at Peterhouse, University of Cambridge. I am interested in how institutions behave under pressure, how incentives shape decisions, and how technical systems can reduce friction in the real world. Across the work I do, the common thread is coordination. I like problems where a better system makes the work easier to repeat, easier to hand off, and easier to trust. That is why my projects sit across service leadership, research, and product infrastructure rather than in one narrow lane. Long term, I want to build at the point where institutions, incentives, and technical systems meet, whether through company-building and venture or through early-career finance paths that sharpen commercial judgment and execution.
 
-## Experience
-- Founder and President, Kiwanis Voice Club of Nippon: Founded the first Voice Club representing Japan and coordinates youth service, continuity, and stakeholder alignment.
+## Professional Experience
+- Founder and President, Kiwanis Voice Club of Nippon: Founded the first Voice Club representing Japan and built youth service, continuity, and stakeholder coordination across health, education, caregiving, and community resilience.
 - Founder and Immediate Past President, KIST Key Club: Built the club to 40+ members and 5 executives, with service across health, caregiving, food insecurity, and youth service.
-- Researcher, Lumiere Education: Cross-cultural communication and cognitive systems research; top-5% work scheduled for publication in NHSJS.
-- Publications Specialist, Independent and collaborative research: Research writing on emoji semiotics, cognitive aging, and semiconductor supply-chain resilience.
+- Researcher, Lumiere Education: Top-5% Lumiere project on ambiguous emoji interpretation across Japanese and Chinese users, with publication support toward NHSJS.
+- Independent Researcher: Research writing on emoji semiotics, cognitive aging, and semiconductor supply-chain resilience.
 - President, Japan Cancer Society, KIST: Organized a 10-kilometer walkathon with 500+ participants and led donation drives for cancer awareness and support.
 - President, Recycling Initiative, KIST: Tripled membership to 60 and introduced Quality Inspector roles that improved oversight and recycling efficiency by 40%.
 
 ## Education
-- Peterhouse, University of Cambridge: Official offer dated 2026-01-28; conditions: 42 points overall, 7,7,6 in three Higher Level subjects, and IELTS 8.0.
-- K. International School Tokyo: Biology HL, English A HL, Chemistry HL, Mathematics AA SL, Japanese ab initio SL, Economics SL; predicted 45/45, SAT 1550, DET 160, UCAT 2410 Band 2.
+- Peterhouse, University of Cambridge: Incoming undergraduate.
+- K. International School Tokyo: Biology HL, English A HL, Chemistry HL, Mathematics AA SL, Japanese ab initio SL, Economics SL.
 - HarvardX MCB63X Principles of Biochemistry: Biochemistry coursework completed through HarvardX.
 - Johns Hopkins CTY AP Biology: Advanced biology coursework completed through Johns Hopkins CTY.
 - HKUST Dual Program in gifted education: Additional gifted-programme coursework referenced in application materials.
 
-## Awards
-### Academic recognition
-- Peterhouse, University of Cambridge offer: BA (Hons) HSPS offer dated 2026-01-28; conditions: 42 points overall, 7,7,6 in three Higher Level subjects, and IELTS 8.0.
-- Predicted IB 45/45: Official transcript shows six subjects predicted at 7, with TOK A, EE B, and core points 3.
+## Projects
+### Products
+- ElevateOS: AI-enabled education platform that unifies tutoring operations, worksheet generation, past-paper simulation, admissions support, and parent-facing execution into one system for IB, AP, SAT, and counseling workflows.
+- Kiwanis Pulse @ Manila Convention 2026: Mobile convention companion that surfaces schedules, venue navigation, sessions, and announcements in a format attendees can use instantly on their phones.
+- Katalyst: Centralized volunteering backend and coordination platform for service organisations, designed to support institutional memory, operational continuity, and cross-branch collaboration.
+
+### Civic initiatives
+- Mottainai Initiative: Food-waste initiative that redirects edible but visually rejected produce into usable food and community action.
+- Stand Tall Project: Assistive wheelchair add-on designed to reduce caregiver strain and improve transfers for elderly users in care-home settings.
+
+### Infrastructure
+- Crystal Century: Live commerce and recovery work focused on stability, trust, and dependable revenue flow across European and US markets.
+
+## Research
+- Hofstede’s Dimensions and Generational Effects on Ambiguous Emoji Semiotics: Cross-Cultural Analysis of Japanese and Chinese Digital Communication (Preprint · 2025): Preprint on ambiguous emoji interpretation across Japanese and Chinese digital communication.
+- Unraveling Cognitive Aging: A Comprehensive Narrative Review Integrating Six Decades of the Seattle Longitudinal Study with Contemporary Advances (Research review · 2025): Narrative review on education, occupational complexity, and digital engagement in cognition.
+- Semiconductor supply-chain resilience concept paper (Concept paper · 2025): Concept paper on resilience planning using big data analytics and quantum-enhanced blockchain.
+
+## Awards & Certifications
+### Academic profile
+- Peterhouse, University of Cambridge offer: Offer to enter in 2026.
+- IB predicted 45/45: Official transcript shows all six subjects predicted at 7.
 - SAT 1550 · DET 160 · UCAT 2410 Band 2: Strong testing profile across language and admissions exams.
-- KIST Honor Roll and Recognition: Honor Roll across 2023–2025, Certificate of Recognition 2023–2024, and International Research Olympiad Honor Roll 2025.
-- Additional admissions offers: HKU, HKUST, Berkeley, UCLA, UCSD, Edinburgh, King’s, and UCL.
-- Certificate of Distinction in the Annual Avogadro Exam: Annual chemistry competition recognition.
-- Edexcel IGCSE Certificate of Excellence: Excellence recognition across IGCSE results.
 
-### Research recognition
-- Top 5% Lumiere proposal: Cross-cultural communication research on ambiguous emojis across Japanese and Chinese users.
-- Emoji semiotics preprint: Preprint on Hofstede dimensions and generational effects in Japanese and Chinese digital communication.
-- Cognitive aging review: Narrative review integrating six decades of the Seattle Longitudinal Study with contemporary advances.
-- Semiconductor supply-chain concept paper: Concept paper on supply-chain resilience using big data analytics and quantum-enhanced blockchain.
-
-### Competition recognition
+### Recognition
 - Harvard College Debate Union Regional Rounds Japan 2026: Certificate of Achievement for debate competition performance.
 - Best Delegate, ASIJ MUN 2025: Model United Nations recognition.
 - Diplomatic Commendation, JMMUN 2024: Model United Nations recognition.
 - KPASS Junior Varsity Debate 2025: Debate competition recognition.
+- Certificate of Distinction in the Annual Avogadro Exam: Annual chemistry competition recognition.
+- Edexcel IGCSE Certificate of Excellence: Excellence recognition across IGCSE results.
+- Honor Roll, International Research Olympiad 2025: Academic recognition tied to the research profile.
 - High School Wrestling: Athletic competition recognition.
 
-## Publications
-- Hofstede’s Dimensions and Generational Effects on Ambiguous Emoji Semiotics: Cross-Cultural Analysis of Japanese and Chinese Digital Communication: https://thinkcollegelevel.com/blog/emoji-semiotics/
-- Unraveling Cognitive Aging: A Comprehensive Narrative Review Integrating Six Decades of the Seattle Longitudinal Study with Contemporary Advances: https://thinkcollegelevel.com/blog/cognitive-aging/
-- Semiconductor supply-chain resilience concept paper: https://thinkcollegelevel.com/blog/supply-chain-resilience/
+### Certifications
+- Claude Code in Action: Technical certification for Claude Code workflows.
+- MCB63X: Principles of Biochemistry: Biochemistry coursework certification.
+- English Proficiency Certificate, 160 / CEFR C2: English proficiency certification valid through Aug 2027.
+- The Complete AI Guide: Learn ChatGPT, Generative AI & More: Applied AI course completion.
+- Investing In Stocks The Complete Course!: Markets and investing course completion.
+- Stock Market Investing for Beginners: Introductory investing course completion.
 
 ## Links
-- Think College Level: https://thinkcollegelevel.com
-- LinkedIn: https://www.linkedin.com/in/howardchan2008/
-- LinkedIn (previous): https://www.linkedin.com/in/chakhanghoward-chan/
 - GitHub: https://github.com/imjusthoward/
 - Wantedly: https://www.wantedly.com/id/chakhang_chan
+- LinkedIn: https://www.linkedin.com/in/howardchan2008/
 - Email: mailto:chakhanghowardchan2008@gmail.com
-- Facebook: https://www.facebook.com/imjusthoward
-- Instagram: https://www.instagram.com/imjusthoward/
 - ElevateOS: https://elevateos.org
-- Pulse Manila 2026: https://pulse-kiwanis-309064718968.us-west1.run.app/
+- Kiwanis Pulse @ Manila Convention 2026: https://pulse-kiwanis-2026-309064718968.us-west1.run.app/
 - Crystal Century: https://crystalcentury.com
 - WhatsApp: https://wa.me/85293442294
-
-## Projects
-- ElevateOS
-- Pulse Manila 2026
-- Katalyst
-- Stand Tall
-- Crystal Century
+- Facebook: https://www.facebook.com/imjusthoward
+- Instagram: https://www.instagram.com/imjusthoward/

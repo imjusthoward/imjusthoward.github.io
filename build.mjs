@@ -8,13 +8,13 @@ const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Tokyo' }).forma
 const navItems = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about/' },
-  { label: 'Awards', href: '/awards/' },
-  { label: 'Publications', href: '/blog/' },
-  { label: 'Projects', href: '/portfolio/' },
+  { label: 'Projects', href: '/projects/' },
+  { label: 'Research', href: '/research/' },
+  { label: 'Awards & Certifications', href: '/awards-certifications/' },
   { label: 'Contact', href: '/contact/' },
 ];
 
-const pages = [
+const canonicalPages = [
   {
     path: '/',
     file: 'index.html',
@@ -27,39 +27,39 @@ const pages = [
     path: '/about/',
     file: path.join('about', 'index.html'),
     title: `About · ${site.name}`,
-    description: 'About Chak Hang (Howard) Chan.',
+    description: 'About Howard Chan.',
     bodyClass: 'page-about',
     render: renderAbout,
   },
   {
-    path: '/awards/',
-    file: path.join('awards', 'index.html'),
-    title: `Awards · ${site.name}`,
-    description: 'Academic distinction, leadership, research, and certifications.',
-    bodyClass: 'page-awards',
-    render: renderAwards,
-  },
-  {
-    path: '/portfolio/',
-    file: path.join('portfolio', 'index.html'),
+    path: '/projects/',
+    file: path.join('projects', 'index.html'),
     title: `Projects · ${site.name}`,
-    description: 'Product, service, infrastructure, and research.',
-    bodyClass: 'page-portfolio',
+    description: 'Products, civic initiatives, and infrastructure.',
+    bodyClass: 'page-projects',
     render: renderProjects,
   },
   {
-    path: '/blog/',
-    file: path.join('blog', 'index.html'),
-    title: `Publications · ${site.name}`,
-    description: 'Research publications and notes.',
-    bodyClass: 'page-blog',
-    render: renderBlogIndex,
+    path: '/research/',
+    file: path.join('research', 'index.html'),
+    title: `Research · ${site.name}`,
+    description: 'Research on communication, cognition, and institutional systems.',
+    bodyClass: 'page-research',
+    render: renderResearchIndex,
+  },
+  {
+    path: '/awards-certifications/',
+    file: path.join('awards-certifications', 'index.html'),
+    title: `Awards & Certifications · ${site.name}`,
+    description: 'Academic profile, recognition, and certifications.',
+    bodyClass: 'page-awards',
+    render: renderAwards,
   },
   {
     path: '/contact/',
     file: path.join('contact', 'index.html'),
     title: `Contact · ${site.name}`,
-    description: 'Links and direct contact routes.',
+    description: 'GitHub, Wantedly, LinkedIn, email, project links, and social links.',
     bodyClass: 'page-contact',
     render: renderContact,
   },
@@ -73,29 +73,61 @@ const pages = [
   },
 ];
 
-const postPages = site.posts.map((post) => ({
-  path: `/blog/${post.slug}/`,
-  file: path.join('blog', post.slug, 'index.html'),
-  title: `${post.title} · ${site.name}`,
-  description: post.summary,
+const researchPages = site.research.map((item) => ({
+  path: `/research/${item.slug}/`,
+  file: path.join('research', item.slug, 'index.html'),
+  title: `${item.title} · ${site.name}`,
+  description: item.summary,
   bodyClass: 'page-post',
-  render: () => renderPost(post),
+  render: () => renderResearchArticle(item),
+}));
+
+const legacyRedirectPages = [
+  {
+    path: '/portfolio/',
+    file: path.join('portfolio', 'index.html'),
+    title: `Projects · ${site.name}`,
+    target: '/projects/',
+  },
+  {
+    path: '/blog/',
+    file: path.join('blog', 'index.html'),
+    title: `Research · ${site.name}`,
+    target: '/research/',
+  },
+  {
+    path: '/awards/',
+    file: path.join('awards', 'index.html'),
+    title: `Awards & Certifications · ${site.name}`,
+    target: '/awards-certifications/',
+  },
+];
+
+const legacyResearchRedirects = site.research.map((item) => ({
+  path: `/blog/${item.slug}/`,
+  file: path.join('blog', item.slug, 'index.html'),
+  title: `${item.title} · ${site.name}`,
+  target: `/research/${item.slug}/`,
 }));
 
 await main();
 
 async function main() {
+  await cleanupGeneratedRoutes();
   await cleanupMediaAssets();
 
-  for (const page of [...pages, ...postPages]) {
+  for (const page of [...canonicalPages, ...researchPages]) {
     await writeOutput(page.file, page.render(page));
+  }
+
+  for (const page of [...legacyRedirectPages, ...legacyResearchRedirects]) {
+    await writeOutput(page.file, renderRedirect(page.title, page.target));
   }
 
   await writeOutput('robots.txt', renderRobots());
   await writeOutput('llms.txt', renderLlms());
   await writeOutput('sitemap.xml', renderSitemap());
   await writeOutput('CNAME', 'thinkcollegelevel.com\n');
-  await cleanupLegacyPostPages();
 }
 
 function esc(input = '') {
@@ -214,6 +246,44 @@ function renderPage({
 `;
 }
 
+function renderRedirect(title, targetPath) {
+  const targetUrl = urlFor(targetPath);
+  return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="0; url=${attr(targetUrl)}">
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="${attr(targetUrl)}">
+  <title>${esc(title)}</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #fff;
+      color: #000;
+    }
+    main {
+      max-width: 42rem;
+      margin: 0 auto;
+      padding: 2rem 1.25rem;
+    }
+    a {
+      color: inherit;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p>Redirecting to <a href="${attr(targetUrl)}">${esc(title)}</a>.</p>
+    <script>location.replace(${JSON.stringify(targetUrl)});</script>
+  </main>
+</body>
+</html>
+`;
+}
+
 function renderIntro(title, subtitle) {
   return `
     <header class="page-intro">
@@ -236,6 +306,23 @@ function renderSection(title, body, id) {
 
 function renderProse(paragraphs) {
   return `<div class="prose">${paragraphs.map((paragraph) => `<p>${esc(paragraph)}</p>`).join('')}</div>`;
+}
+
+function renderPillars(items) {
+  return `
+    <div class="pillar-grid">
+      ${items
+        .map(
+          (item) => `
+            <article class="pillar">
+              <h3>${esc(item.title)}</h3>
+              <p>${esc(item.summary)}</p>
+            </article>
+          `
+        )
+        .join('')}
+    </div>
+  `;
 }
 
 function renderEntries(items) {
@@ -297,7 +384,7 @@ function renderHome() {
     description: site.description,
     canonicalPath: '/',
     bodyClass: 'page-home',
-    content: `<article class="page-article">${intro}${renderSection('About Me', renderProse(site.homeParagraphs), 'about-me')}${renderLinkRow(site.homeLinks)}</article>`,
+    content: `<article class="page-article">${intro}${renderProse(site.homeParagraphs)}${renderPillars(site.homePillars)}${renderLinkRow(site.homeLinks)}</article>`,
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
@@ -312,14 +399,18 @@ function renderHome() {
 }
 
 function renderAbout() {
-  const intro = renderIntro('About Me', 'Tokyo-based incoming HSPS offer holder at Peterhouse, University of Cambridge.');
+  const intro = renderIntro('About Me');
 
   return renderPage({
     title: `About · ${site.name}`,
     description: 'About Howard Chan.',
     canonicalPath: '/about/',
     bodyClass: 'page-about',
-    content: `<article class="page-article">${intro}${renderProse(site.aboutParagraphs)}${renderSection('Professional Experience', renderEntries(site.experience), 'experience')}${renderSection('Education', renderEntries(site.education), 'education')}${renderLinkRow(site.homeLinks)}</article>`,
+    content: `<article class="page-article">${intro}${renderProse(site.aboutParagraphs)}${renderSection(
+      'Professional Experience',
+      renderEntries(site.experience),
+      'experience'
+    )}${renderSection('Education', renderEntries(site.education), 'education')}${renderLinkRow(site.homeLinks)}</article>`,
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
@@ -334,29 +425,6 @@ function renderAbout() {
   });
 }
 
-function renderAwards() {
-  const intro = renderIntro('Awards', 'Academic recognition, research recognition, and competition recognition.');
-
-  const sections = site.awards.map((group, index) =>
-    renderSection(group.group, renderEntries(group.items), index === 0 ? 'academic-distinction' : '')
-  );
-
-  return renderPage({
-    title: `Awards · ${site.name}`,
-    description: 'Academic recognition, research recognition, and competition recognition.',
-    canonicalPath: '/awards/',
-    bodyClass: 'page-awards',
-    content: `<article class="page-article">${intro}${sections.join('')}</article>`,
-    ogType: 'website',
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'CollectionPage',
-      name: `${site.name} Awards`,
-      description: 'Academic recognition, research recognition, and competition recognition.',
-    },
-  });
-}
-
 function renderProjects() {
   const intro = renderIntro('Projects', 'Products, civic initiatives, and infrastructure built to work in real conditions.');
 
@@ -366,48 +434,48 @@ function renderProjects() {
 
   return renderPage({
     title: `Projects · ${site.name}`,
-    description: 'Projects, service, and systems.',
-    canonicalPath: '/portfolio/',
-    bodyClass: 'page-portfolio',
+    description: 'Products, civic initiatives, and infrastructure.',
+    canonicalPath: '/projects/',
+    bodyClass: 'page-projects',
     content: `<article class="page-article">${intro}${sections.join('')}</article>`,
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
       name: `${site.name} Projects`,
-      description: 'Projects, service, and systems.',
+      description: 'Products, civic initiatives, and infrastructure.',
     },
   });
 }
 
-function renderBlogIndex() {
-  const intro = renderIntro('Publications', 'Research publications.');
+function renderResearchIndex() {
+  const intro = renderIntro('Research', 'Research on communication, cognition, and institutional systems.');
 
   return renderPage({
-    title: `Publications · ${site.name}`,
-    description: 'Research publications.',
-    canonicalPath: '/blog/',
-    bodyClass: 'page-blog',
-    content: `<article class="page-article">${intro}${renderSection('Publications', renderEntries(site.publications), 'publications')}</article>`,
+    title: `Research · ${site.name}`,
+    description: 'Research on communication, cognition, and institutional systems.',
+    canonicalPath: '/research/',
+    bodyClass: 'page-research',
+    content: `<article class="page-article">${intro}${renderEntries(site.research)}</article>`,
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
-      name: `${site.name} Publications`,
-      description: 'Research publications.',
+      name: `${site.name} Research`,
+      description: 'Research on communication, cognition, and institutional systems.',
     },
   });
 }
 
-function renderPost(post) {
+function renderResearchArticle(post) {
   const intro = renderIntro(post.title, post.summary);
 
   return renderPage({
     title: `${post.title} · ${site.name}`,
     description: post.summary,
-    canonicalPath: `/blog/${post.slug}/`,
+    canonicalPath: `/research/${post.slug}/`,
     bodyClass: 'page-post',
-    content: `<article class="page-article">${intro}${renderSection('Abstract', renderProse(post.body), 'abstract')}</article>`,
+    content: `<article class="page-article">${intro}${renderSection('Notes', renderProse(post.body), 'notes')}</article>`,
     ogType: 'article',
     jsonLd: {
       '@context': 'https://schema.org',
@@ -416,7 +484,30 @@ function renderPost(post) {
       datePublished: post.dateIso || today,
       author: { '@type': 'Person', name: site.fullName || site.author },
       description: post.summary,
-      mainEntityOfPage: `${site.url}/blog/${post.slug}/`,
+      mainEntityOfPage: `${site.url}/research/${post.slug}/`,
+    },
+  });
+}
+
+function renderAwards() {
+  const intro = renderIntro('Awards & Certifications', 'Academic profile, recognition, and certifications.');
+
+  const sections = site.awardsCertifications.map((group, index) =>
+    renderSection(group.group, renderEntries(group.items), index === 0 ? 'academic-profile' : group.group.toLowerCase().replace(/[^a-z0-9]+/g, '-'))
+  );
+
+  return renderPage({
+    title: `Awards & Certifications · ${site.name}`,
+    description: 'Academic profile, recognition, and certifications.',
+    canonicalPath: '/awards-certifications/',
+    bodyClass: 'page-awards',
+    content: `<article class="page-article">${intro}${sections.join('')}</article>`,
+    ogType: 'website',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: `${site.name} Awards and Certifications`,
+      description: 'Academic profile, recognition, and certifications.',
     },
   });
 }
@@ -424,16 +515,12 @@ function renderPost(post) {
 function renderContact() {
   const intro = renderIntro('Contact', site.contactIntro);
 
-  const sections = [
-    renderSection('Links', renderLinkGroups(site.linkGroups), 'links'),
-  ];
-
   return renderPage({
     title: `Contact · ${site.name}`,
-    description: 'LinkedIn, WhatsApp, GitHub, Wantedly, ElevateOS, Pulse Manila 2026, Crystal Century, Facebook, Instagram, and email.',
+    description: 'GitHub, Wantedly, LinkedIn, email, project links, and social links.',
     canonicalPath: '/contact/',
     bodyClass: 'page-contact',
-    content: `<article class="page-article">${intro}${sections.join('')}</article>`,
+    content: `<article class="page-article">${intro}${renderLinkGroups(site.linkGroups)}</article>`,
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
@@ -448,10 +535,14 @@ function renderContact() {
 }
 
 function renderNotFound() {
-  const intro = renderIntro('Page not found', 'Use Home, About, Awards, Publications, Projects, or Contact.');
+  const intro = renderIntro('Page not found', 'Use Home, About, Projects, Research, Awards & Certifications, or Contact.');
 
-  const sections = [
-    renderSection(
+  return renderPage({
+    title: `Not found · ${site.name}`,
+    description: 'The page you were looking for is not here.',
+    canonicalPath: '/404/',
+    bodyClass: 'page-404',
+    content: `<article class="page-article">${intro}${renderSection(
       'Pages',
       renderLinkGroups([
         {
@@ -459,15 +550,7 @@ function renderNotFound() {
           items: navItems,
         },
       ])
-    ),
-  ];
-
-  return renderPage({
-    title: `Not found · ${site.name}`,
-    description: 'The page you were looking for is not here.',
-    canonicalPath: '/404/',
-    bodyClass: 'page-404',
-    content: `<article class="page-article">${intro}${sections.join('')}</article>`,
+    )}</article>`,
     ogType: 'website',
     metaRobots: 'noindex,follow',
     jsonLd: {
@@ -486,62 +569,64 @@ Sitemap: ${site.url}/sitemap.xml
 }
 
 function renderLlms() {
-  const pagesList = [
-    ['Home', '/'],
-    ['About', '/about/'],
-    ['Awards', '/awards/'],
-    ['Publications', '/blog/'],
-    ['Projects', '/portfolio/'],
-    ['Contact', '/contact/'],
-  ];
-
   return `# ${site.name}
 
 ${site.tagline}
 
-Howard Chan's profile, education, awards, projects, research, and contact links.
+Howard Chan's public profile, projects, research, awards & certifications, and contact links.
 
 ## Pages
-${pagesList.map(([label, route]) => `- ${label}: ${site.url}${route === '/' ? '/' : route}`).join('\n')}
+- Home: ${site.url}/
+- About: ${site.url}/about/
+- Projects: ${site.url}/projects/
+- Research: ${site.url}/research/
+- Awards & Certifications: ${site.url}/awards-certifications/
+- Contact: ${site.url}/contact/
 
 ## About
 - ${site.aboutParagraphs.join(' ')}
 
-## Experience
+## Professional Experience
 ${site.experience.map((item) => `- ${item.title}: ${item.summary}`).join('\n')}
 
 ## Education
 ${site.education.map((item) => `- ${item.title}: ${item.summary}`).join('\n')}
 
-## Awards
-${site.awards
-  .map((group) => `### ${group.group}\n${group.items.map((item) => `- ${item.title}: ${item.summary}`).join('\n')}`)
+## Projects
+${site.projects
+  .map(
+    (group) =>
+      `### ${group.group}\n${group.items
+        .map((item) => `- ${item.title}: ${item.summary}`)
+        .join('\n')}`
+  )
   .join('\n\n')}
 
-## Publications
-${site.posts.map((post) => `- ${post.title}: ${site.url}/blog/${post.slug}/`).join('\n')}
+## Research
+${site.research.map((item) => `- ${item.title} (${item.meta}): ${item.summary}`).join('\n')}
+
+## Awards & Certifications
+${site.awardsCertifications
+  .map(
+    (group) =>
+      `### ${group.group}\n${group.items.map((item) => `- ${item.title}: ${item.summary}`).join('\n')}`
+  )
+  .join('\n\n')}
 
 ## Links
 ${site.contactLinks.map((link) => `- ${link.label}: ${link.href}`).join('\n')}
-
-## Projects
-- ElevateOS
-- Pulse Manila 2026
-- Katalyst
-- Stand Tall
-- Crystal Century
-`; 
+`;
 }
 
 function renderSitemap() {
   const entries = [
     '/',
     '/about/',
-    '/awards/',
-    '/portfolio/',
-    '/blog/',
+    '/projects/',
+    '/research/',
+    '/awards-certifications/',
     '/contact/',
-    ...site.posts.map((post) => `/blog/${post.slug}/`),
+    ...site.research.map((post) => `/research/${post.slug}/`),
   ];
 
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -550,20 +635,20 @@ ${entries
   .map(
     (route) =>
       `  <url><loc>${site.url}${route === '/' ? '/' : route}</loc><lastmod>${today}</lastmod><changefreq>${
-        route.startsWith('/blog/') && route !== '/blog/' ? 'monthly' : 'weekly'
+        route.startsWith('/research/') && route !== '/research/' ? 'monthly' : 'weekly'
       }</changefreq><priority>${
         route === '/'
           ? '1.0'
-          : route === '/blog/'
+          : route === '/research/'
             ? '0.9'
-            : route === '/portfolio/'
-              ? '0.8'
-              : route === '/awards/'
-                ? '0.7'
+            : route === '/projects/'
+              ? '0.85'
+              : route === '/awards-certifications/'
+                ? '0.75'
                 : route === '/about/'
-                  ? '0.6'
+                  ? '0.65'
                   : route === '/contact/'
-                    ? '0.5'
+                    ? '0.55'
                     : '0.7'
       }</priority></url>`
   )
@@ -592,6 +677,12 @@ async function cleanupMediaAssets() {
   );
 }
 
+async function cleanupGeneratedRoutes() {
+  const routeDirs = ['about', 'projects', 'research', 'awards-certifications', 'contact', 'portfolio', 'blog', 'awards'];
+
+  await Promise.all(routeDirs.map((dir) => rm(path.join(root, dir), { recursive: true, force: true })));
+}
+
 async function writeOutput(relativePath, content) {
   const target = path.join(root, relativePath);
   const normalized = String(content).replace(/[ \t]+$/gm, '');
@@ -607,25 +698,4 @@ async function writeOutput(relativePath, content) {
     }
   }
   await writeFile(target, normalized, 'utf8');
-}
-
-async function cleanupLegacyPostPages() {
-  const blogRoot = path.join(root, 'blog');
-  const keep = new Set(['index.html', ...site.posts.map((post) => post.slug)]);
-
-  let entries;
-  try {
-    entries = await readdir(blogRoot, { withFileTypes: true });
-  } catch (error) {
-    if (error?.code === 'ENOENT') {
-      return;
-    }
-    throw error;
-  }
-
-  await Promise.all(
-    entries
-      .filter((entry) => entry.isDirectory() && !keep.has(entry.name))
-      .map((entry) => rm(path.join(blogRoot, entry.name), { recursive: true, force: true }))
-  );
 }
