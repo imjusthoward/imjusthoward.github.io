@@ -251,6 +251,11 @@ function renderEntries(items) {
               </div>
               ${item.org ? `<p class="entry-org">${esc(item.org)}</p>` : ''}
               ${item.summary ? `<p class="entry-summary">${esc(item.summary)}</p>` : ''}
+              ${
+                Array.isArray(item.details) && item.details.length
+                  ? `<ul class="entry-points">${item.details.map((point) => `<li>${esc(point)}</li>`).join('')}</ul>`
+                  : ''
+              }
             </article>
           `
         )
@@ -353,7 +358,7 @@ function renderAwards() {
 }
 
 function renderProjects() {
-  const intro = renderIntro('Projects', 'Product, service, and systems.');
+  const intro = renderIntro('Projects', 'Products, civic initiatives, and infrastructure built to work in real conditions.');
 
   const sections = site.projects.map((group) =>
     renderSection(group.group, renderEntries(group.items), group.group.toLowerCase().replace(/[^a-z0-9]+/g, '-'))

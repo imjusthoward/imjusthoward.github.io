@@ -265,6 +265,17 @@ ul {
   color: var(--text);
 }
 
+.entry-points {
+  margin: 0.45rem 0 0;
+  padding-left: 1.05rem;
+  max-width: 74ch;
+  color: var(--muted);
+}
+
+.entry-points li + li {
+  margin-top: 0.28rem;
+}
+
 .link-groups {
   display: grid;
   gap: 10px;
